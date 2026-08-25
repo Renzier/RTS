@@ -1,0 +1,545 @@
+Unity Editor version:    6000.4.1f1 (8535861f39e1)
+Branch:                  6000.4/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.5.2 (Build 25F84)
+Darwin version:          25.5.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        36864 MB
+Date:                    2026-08-12T02:29:02Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-douglasgordy" at "2026-08-12T02:29:02.215279Z"
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/MacOS/Unity
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker2
+-projectPath
+/Users/douglasgordy/Documents/Anachron
+-logFile
+Logs/AssetImportWorker2.log
+-srvPort
+52368
+-licensingIpc
+LicenseClient-douglasgordy
+-force-metal
+-job-worker-count
+5
+-background-job-worker-count
+8
+-gc-helper-count
+1
+-name AssetImport
+Successfully changed project path to: /Users/douglasgordy/Documents/Anachron
+/Users/douglasgordy/Documents/Anachron
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Player connection [8284085632]  Target information:
+
+Player connection [8284085632]  * "[IP] 192.168.50.179 [Port] 0 [Flags] 2 [Guid] 494076863 [EditorId] 494076863 [Version] 1048832 [Id] OSXEditor(0,Mac.DigitslADHD) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8284085632] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8284085632] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 5
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 2.08 ms, found 1 plugins.
+Initialize engine version: 6000.4.1f1 (8535861f39e1)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/douglasgordy/Documents/Anachron/Assets
+Forcing GfxDevice: Metal
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M3 Pro (high power)
+Metal devices available: 1
+0: Apple M3 Pro (high power)
+Using device Apple M3 Pro (high power)
+Initializing Metal device caps: Apple M3 Pro
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56600
+CodeReloadManager initialized
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-douglasgordy"
+[Licensing::IpcConnector] LicenseClient-douglasgordy channel disconnected successfully.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-douglasgordy-6000.4.1" at "2026-08-12T02:29:02.865481Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              188934349df54fa190dd145dfb8b16ce
+  Correlation Id:          dfb128b00dddd08f15ed44bb29f84c30
+  External correlation Id: 9006975712022482850
+  Machine Id:              DhQucniMTNkDsExfEgZyXoXt+x8=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-douglasgordy-6000.4.1" (connect: 0.00s, validation: 0.00s, handshake: 0.56s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-douglasgordy-6000.4.1-notifications" at "2026-08-12T02:29:03.425598Z"
+[Licensing::Module] Licensing Background thread has ended after 1.21s
+[Licensing::Module] Licensing is initialized (took 0.71s).
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 20067581430876-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Register platform support module: /Applications/Unity/Hub/Editor/6000.4.1f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 0.708621 seconds.
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.217 seconds
+Domain Reload Profiling: 1163ms
+	BeginReloadAssembly (48ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (738ms)
+	LoadAllAssembliesAndSetupDomain (125ms)
+		LoadAssemblies (48ms)
+		AnalyzeDomain (120ms)
+			TypeCache.Refresh (119ms)
+				TypeCache.ScanAssembly (109ms)
+	FinalizeReload (218ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (27ms)
+			BeforeProcessingInitializeOnLoad (49ms)
+			ProcessInitializeOnLoadAttributes (58ms)
+			ProcessInitializeOnLoadMethodAttributes (43ms)
+[CoreBusinessMetrics] Unexpected thread when updating session info.
+========================================================================
+Worker process is ready to serve import requests
+Import Worker Mode flag is 0x00
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-Editor.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly PhotonWebSocket.dll at Library/ScriptAssemblies/PhotonWebSocket.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.Editor.Tests.dll at Library/ScriptAssemblies/Unity.AI.Navigation.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.LegacyOffMeshLink.Tests.dll at Library/ScriptAssemblies/Unity.AI.Navigation.LegacyOffMeshLink.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.Tests.dll at Library/ScriptAssemblies/Unity.AI.Navigation.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.Tests.EditorInPlaymode.dll at Library/ScriptAssemblies/Unity.AI.Navigation.Tests.EditorInPlaymode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Performance.Profile-Analyzer.EditorTests.dll at Library/ScriptAssemblies/Unity.Performance.Profile-Analyzer.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Settings.Tests.dll at Library/ScriptAssemblies/Unity.Settings.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TestTools.CodeCoverage.Editor.Compatibility.dll at Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.Compatibility.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.418 seconds
+Domain Reload Profiling: 804ms
+	BeginReloadAssembly (71ms)
+		DisableScriptedObjects (3ms)
+		CreateAndSetChildDomain (13ms)
+	RebuildCommonClasses (23ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (243ms)
+		LoadAssemblies (137ms)
+		AnalyzeDomain (135ms)
+			TypeCache.Refresh (117ms)
+				TypeCache.ScanAssembly (104ms)
+			BuildScriptInfoCaches (13ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (418ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (4ms)
+			BeforeProcessingInitializeOnLoad (67ms)
+			ProcessInitializeOnLoadAttributes (238ms)
+			ProcessInitializeOnLoadMethodAttributes (30ms)
+Launching external process: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.03 seconds
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 3656 unused Assets / (1.2 MB). Loaded Objects now: 4258.
+Memory consumption went from 91.8 MB to 90.6 MB.
+Total: 5.279667 ms (FindLiveObjects: 0.248708 ms CreateObjectMapping: 0.079750 ms MarkObjects: 4.342542 ms  DeleteObjects: 0.608458 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 15378.893356 seconds.
+  path: Assets/QuantumUser/readme_phase1.md
+  importAddress: Guid(26c8c03f4fc94420181a531c962ee960) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/readme_phase1.md using Guid(26c8c03f4fc94420181a531c962ee960) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '4b194f789fbfd26010e1cfa2a291dc60') in 0.020820292 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=94e5512a920b9f57e6edb3a99a6fac70 DependenciesID=f745d0025848930eeb25ea6e1aa1bdb9 StaticDependenciesID=d2e8ceb727041606ce57b3ec14296af4 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000079 seconds.
+  path: Assets/QuantumUser/View/AnachronCommandIntentDebugView.cs
+  importAddress: Guid(ac36b185b38d4ad0992593716144967d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronCommandIntentDebugView.cs using Guid(ac36b185b38d4ad0992593716144967d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'e89bb4ec34de1bbe7a0a61855fb5afae') in 0.010487375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=929b2b2a76cc733f1f85fde30c14130f DependenciesID=5f810c69a0870810e556ca99bc9ef668 StaticDependenciesID=fc9af1557c64b35ebdade2b8dc237dbf 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000122 seconds.
+  path: Assets/QuantumUser/Simulation/AnachronUnits.qtn
+  importAddress: Guid(d460fed0c4e2d420594d41685cffabef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/AnachronUnits.qtn using Guid(d460fed0c4e2d420594d41685cffabef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '02f4fa2ccb46d22ce4ee4929c71a5480') in 0.003294375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=32be233ce9ae108ed1001e509f735d74 DependenciesID=e1e404e0126ded99e48661cdb8a3ed51 StaticDependenciesID=eb929aff4a58fcc2eb396b0cd1e07c44 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000098 seconds.
+  path: Assets/QuantumUser/Simulation/MoveCommandResult.cs
+  importAddress: Guid(09381683e73e74eb2a3f70246e689dd0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/MoveCommandResult.cs using Guid(09381683e73e74eb2a3f70246e689dd0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'e7efc81922f9cf4c06ddd7778e36cb38') in 0.001165834 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=151bcbbf661a024bf9115cafd290b8c0 DependenciesID=679be99454ec38d73e5f967958ed527e StaticDependenciesID=6796037ca2b6db50a0f2c8fe10090538 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000084 seconds.
+  path: Assets/QuantumUser/View/AnachronGatherIntentDebugView.cs
+  importAddress: Guid(ef2c8ff3074124c6d9eca6ad04743f39) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronGatherIntentDebugView.cs using Guid(ef2c8ff3074124c6d9eca6ad04743f39) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd67881796be41e63339cb788af6f008b') in 0.001146834 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3fc1d3c68dde226be1bac86cb123276f DependenciesID=5357019c094e3a4894b662eee51d7034 StaticDependenciesID=946babf2d0ff5b48fc031933273c7a1c 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000082 seconds.
+  path: Assets/QuantumUser/Simulation/AnachronPrototypeScenario.cs
+  importAddress: Guid(707e50b61a87341f8811abd1903e0319) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/AnachronPrototypeScenario.cs using Guid(707e50b61a87341f8811abd1903e0319) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c498f7674081b83c6dbe04622cb05881') in 0.001311209 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fa1668c7f9c6e08153199f94d2c1a504 DependenciesID=a03cf2149491d6ac7b25f09466da5598 StaticDependenciesID=e043e9706c1fff6cf3a7c6fc73fbbb37 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000081 seconds.
+  path: Assets/QuantumUser/View/AnachronSelectablePrimitiveView.cs
+  importAddress: Guid(5f5c54a5edb34c5aac7a4257cc924d19) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronSelectablePrimitiveView.cs using Guid(5f5c54a5edb34c5aac7a4257cc924d19) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5ae152d597c8900f348dc5d6673d70e4') in 0.001155584 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f5c9f5abeb93f7fbf3c7db98f5b01d0b DependenciesID=d10ef83f6e8a5b3df62dfe83281c84a1 StaticDependenciesID=8009135a78ab5a7ac373fd5c0a540cdf 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000095 seconds.
+  path: Assets/QuantumUser/View/Generated/QPrototypeWorkerResourceCarry.cs
+  importAddress: Guid(af7927c99c63d4f138b79da1d446d7cf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/Generated/QPrototypeWorkerResourceCarry.cs using Guid(af7927c99c63d4f138b79da1d446d7cf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1be178a60fe9438d56bdb9f8d2caf508') in 0.001022542 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b439990ca72bc944e1d24434140555a3 DependenciesID=d0aaac4d599b29531b8d966ff3d207de StaticDependenciesID=f031bda901cc22646514e86b25a33cb0 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000071 seconds.
+  path: Assets/QuantumUser/View/AnachronQuantumInput.cs
+  importAddress: Guid(e9c312934dd244c8aaa93d3ab0f0b8da) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronQuantumInput.cs using Guid(e9c312934dd244c8aaa93d3ab0f0b8da) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '645c15a136d509fce776eaeb90f238d1') in 0.000899041 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=84785d4d9fe06bb4f602c35507d54be0 DependenciesID=4c84604d8ba3792decba161b54c40b9e StaticDependenciesID=6f1ca0af0ef244a80d99a9be6a1c26c6 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/QuantumUser/View/Generated/QPrototypeResourceDropoff.cs
+  importAddress: Guid(bfc8f49a7f1c44bb494c71c34684a984) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/Generated/QPrototypeResourceDropoff.cs using Guid(bfc8f49a7f1c44bb494c71c34684a984) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ccdfc6c661b0086fe93913790c3de2a9') in 0.000974708 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=68f809e5bf0ce5da124df08d75917425 DependenciesID=4efe70e3bf7e188511dc11a3a3971bff StaticDependenciesID=1a1804123efa8c6e614f1c8e87fc7b34 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000058 seconds.
+  path: Assets/QuantumUser/View/AnachronPlayerStateDebugOverlay.cs
+  importAddress: Guid(6295f569645c94373bec515bfbdd367e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronPlayerStateDebugOverlay.cs using Guid(6295f569645c94373bec515bfbdd367e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '253acfecf746207b22b8fb538ad3ce74') in 0.000870083 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f6450747ff0d3261f5185f4f7e21ec53 DependenciesID=bec922cd5c857dc9da32fb232d06db86 StaticDependenciesID=dcdaf0dc751805f5480e0b888b79b571 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/QuantumUser/Simulation/MainBaseDefeatSystem.cs
+  importAddress: Guid(edbe2290d45a84fce9d746c3af8e424c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/MainBaseDefeatSystem.cs using Guid(edbe2290d45a84fce9d746c3af8e424c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5211cc2cc1f6d9cde00ac038939dc595') in 0.000929875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f4d778773714524553b839e25c4b7f96 DependenciesID=218c1acd4575705072d826a82fa7815c StaticDependenciesID=19ce48df11b5ff01f3fd103152732bd2 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000062 seconds.
+  path: Assets/QuantumUser/View/Generated/QPrototypeGatherIntent.cs
+  importAddress: Guid(a3cd3bdc3f318452289eac45611d31a8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/Generated/QPrototypeGatherIntent.cs using Guid(a3cd3bdc3f318452289eac45611d31a8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'e8bc92deaf11d94bbdfe61f2f148a4dc') in 0.000864583 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=24ad7680fe7ec6da18be77ee9f670889 DependenciesID=04a678ae99af57ce5f5333af56820de3 StaticDependenciesID=4133151e295845ac054cb634182e165a 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000068 seconds.
+  path: Assets/QuantumUser/Simulation/WorkerGatherSystem.cs
+  importAddress: Guid(85a51a5d297af4bdba976d91af0034bb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/WorkerGatherSystem.cs using Guid(85a51a5d297af4bdba976d91af0034bb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '40e66579377cd57533bd0c648752402e') in 0.000902958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=66e895cbd8ed415100c7a62b973b8eec DependenciesID=16f620b8ca0f127a40bbcd22d6fb0708 StaticDependenciesID=48b29ad4ba171bfd56b85868977f5120 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000066 seconds.
+  path: Assets/QuantumUser/View/AnachronEconomyPrimitiveView.cs
+  importAddress: Guid(b01a899413d9e4553b2a00ee44daad87) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronEconomyPrimitiveView.cs using Guid(b01a899413d9e4553b2a00ee44daad87) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ab2a3670e1f0bf5cf20364b8b811932b') in 0.000920917 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c4407efba0ed3f1a89446b506cc799d3 DependenciesID=973357e63f634256917760f7eb0d1cf4 StaticDependenciesID=7b8da86a7f458c52019ab24992852113 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000113 seconds.
+  path: Assets/QuantumUser/Simulation/WorkerDepositSystem.cs
+  importAddress: Guid(2d80c55a4798340a4b0ad2f44d252505) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/WorkerDepositSystem.cs using Guid(2d80c55a4798340a4b0ad2f44d252505) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '9414aa2ee220f77822f05e684ac0ad60') in 0.000872958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=30a1272e8c3f012865021a5035de5c1d DependenciesID=97fa20cab9736001f3760173df680386 StaticDependenciesID=bc39988c82e29540a315a0f855ae6b69 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000090 seconds.
+  path: Assets/QuantumUser/Simulation/Generated/Quantum.CodeGen.Core.cs
+  importAddress: Guid(ae50e7885826f48b5b2ad7612e15b578) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/Generated/Quantum.CodeGen.Core.cs using Guid(ae50e7885826f48b5b2ad7612e15b578) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '84bc5210097b083babfc5b617375dd00') in 0.00104475 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1929e1417cf5bdbdccfded834d38e1e7 DependenciesID=be127a20196a1ac9f19e72da255ca54a StaticDependenciesID=892e153c95eff450440f753b601bb425 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000072 seconds.
+  path: Assets/QuantumUser/View/Generated/Quantum.CodeGen.UnityPrototypeAdapters.cs
+  importAddress: Guid(ca60c63dd4c21416b97cd0253978553f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/Generated/Quantum.CodeGen.UnityPrototypeAdapters.cs using Guid(ca60c63dd4c21416b97cd0253978553f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3f1a4cb375f14cf1aea8cfd3719d6e57') in 0.001010291 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7cc04678c312546117395fcb43b0250a DependenciesID=2a17e6840c8a02799393977bd8a15856 StaticDependenciesID=8c2661986994705922f15fca329b5d20 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/QuantumUser/Resources/QuantumMap.asset
+  importAddress: Guid(f9ab38b2b7a9441aaadb1d484673a865) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Resources/QuantumMap.asset using Guid(f9ab38b2b7a9441aaadb1d484673a865) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '4d445c9affc257e9ffe550f1914ad0e3') in 0.014947209 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=01d5404d3a8e6ea3dbac39a1a49ea81d DependenciesID=cee0971f770dc69245015c268975ede6 StaticDependenciesID=e0244eb2b24c84346c03080a87da7805 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 3648 unused Assets / (1.0 MB). Loaded Objects now: 4262.
+Memory consumption went from 91.6 MB to 90.6 MB.
+Total: 5.155416 ms (FindLiveObjects: 0.191792 ms CreateObjectMapping: 0.074291 ms MarkObjects: 4.333417 ms  DeleteObjects: 0.555541 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 3649 unused Assets / (1.2 MB). Loaded Objects now: 4263.
+Memory consumption went from 91.3 MB to 90.1 MB.
+Total: 5.098375 ms (FindLiveObjects: 0.193208 ms CreateObjectMapping: 0.067958 ms MarkObjects: 4.242834 ms  DeleteObjects: 0.594042 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 323.276951 seconds.
+  path: Assets/QuantumUser/View/AnachronQuantumInput.cs
+  importAddress: Guid(e9c312934dd244c8aaa93d3ab0f0b8da) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronQuantumInput.cs using Guid(e9c312934dd244c8aaa93d3ab0f0b8da) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '91c801b4d22f55c87d98a5496ebed3ad') in 0.001547375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=edb8ddcb941e984c52cb7e330c6abef6 DependenciesID=efaa0dfc0e0884da96984572df610ae1 StaticDependenciesID=a59d0a4d1efdd0c1f696431e66f3a117 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/QuantumUser/readme_phase1.md
+  importAddress: Guid(26c8c03f4fc94420181a531c962ee960) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/readme_phase1.md using Guid(26c8c03f4fc94420181a531c962ee960) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '78aabf4354ee125071e2dc5b3b32af75') in 0.00107475 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ace3ac9999ee64ea48cad6a7c53fe037 DependenciesID=6ea21a44d65da74592dd0cbd23afcdf4 StaticDependenciesID=a5b91d0889b6109b9c129e226c5db0d5 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000057 seconds.
+  path: Assets/QuantumUser/Simulation/AnachronUnits.qtn
+  importAddress: Guid(d460fed0c4e2d420594d41685cffabef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/AnachronUnits.qtn using Guid(d460fed0c4e2d420594d41685cffabef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6b4507232ef2fee456e404fe2c464c92') in 0.001695792 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=032b0a85222718b04124c869be97ee0d DependenciesID=fbb2ccee310cfbca5254b3ca5910742a StaticDependenciesID=eba1104056c2fa79dacd30e220be33c8 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000110 seconds.
+  path: Assets/QuantumUser/Simulation/TechUpgradeSystem.cs
+  importAddress: Guid(c7cd020eee82148febc1cf43823ed12a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/TechUpgradeSystem.cs using Guid(c7cd020eee82148febc1cf43823ed12a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ae006f33f48c4d63e71341b9841e23d4') in 0.001554375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b61cab6591c98a4132f1623025758200 DependenciesID=7a70062461c21b81040dd08583ef78a5 StaticDependenciesID=9ebdf0e1f360b428bc9bbefbf053c4a8 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/QuantumUser/View/AnachronPrototypeHud.cs
+  importAddress: Guid(9c28c0df6f6744c09c136635769aa55e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/View/AnachronPrototypeHud.cs using Guid(9c28c0df6f6744c09c136635769aa55e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '200286b756ee58bd9e762f77c3773b88') in 0.001073833 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ca908a701e080f4caed9791ad7475d13 DependenciesID=9db57bd935c16d3e5d73266351e6068b StaticDependenciesID=4c64bb97131840995c8d5edf1ebba244 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/QuantumUser/Simulation/Generated/Quantum.CodeGen.Core.cs
+  importAddress: Guid(ae50e7885826f48b5b2ad7612e15b578) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/QuantumUser/Simulation/Generated/Quantum.CodeGen.Core.cs using Guid(ae50e7885826f48b5b2ad7612e15b578) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '20244827cfffb275ef406dc92f5fafdd') in 0.001387375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=cd261ec71c82bbf8aa79de703a922102 DependenciesID=a76ed52d033963a8340d6b8e75881260 StaticDependenciesID=5ac1f6949b5465d2f9e6dbd184d3dac9 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+Thread 0x177b47000 may have been prematurely finalized
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-Editor.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly PhotonWebSocket.dll at Library/ScriptAssemblies/PhotonWebSocket.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.Editor.Tests.dll at Library/ScriptAssemblies/Unity.AI.Navigation.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.LegacyOffMeshLink.Tests.dll at Library/ScriptAssemblies/Unity.AI.Navigation.LegacyOffMeshLink.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.Tests.dll at Library/ScriptAssemblies/Unity.AI.Navigation.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.AI.Navigation.Tests.EditorInPlaymode.dll at Library/ScriptAssemblies/Unity.AI.Navigation.Tests.EditorInPlaymode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Performance.Profile-Analyzer.EditorTests.dll at Library/ScriptAssemblies/Unity.Performance.Profile-Analyzer.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Settings.Tests.dll at Library/ScriptAssemblies/Unity.Settings.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TestTools.CodeCoverage.Editor.Compatibility.dll at Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.Compatibility.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.427 seconds
+Domain Reload Profiling: 821ms
+	BeginReloadAssembly (103ms)
+		DisableScriptedObjects (3ms)
+		CreateAndSetChildDomain (31ms)
+	RebuildCommonClasses (26ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (219ms)
+		LoadAssemblies (143ms)
+		AnalyzeDomain (108ms)
+			TypeCache.Refresh (14ms)
+				TypeCache.ScanAssembly (7ms)
+			BuildScriptInfoCaches (88ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (428ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (4ms)
+			BeforeProcessingInitializeOnLoad (70ms)
+			ProcessInitializeOnLoadAttributes (239ms)
+			ProcessInitializeOnLoadMethodAttributes (31ms)
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 3657 unused Assets / (0.9 MB). Loaded Objects now: 4263.
+Memory consumption went from 104.9 MB to 104.0 MB.
+Total: 5.022000 ms (FindLiveObjects: 0.198625 ms CreateObjectMapping: 0.074583 ms MarkObjects: 4.147250 ms  DeleteObjects: 0.601208 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting

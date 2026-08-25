@@ -1,0 +1,25 @@
+attempt to write a readonly database
+attempt to write a readonly database
+Unity Editor version:    6000.4.1f1 (8535861f39e1)
+Branch:                  6000.4/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6.2 (Build 25G83)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        36864 MB
+Date:                    2026-08-23T22:31:42Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+No explicit failure code handling for error of type 1
+[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-douglasgordy channel (error code: 0x80000000) .
+[Licensing::IpcConnector] Error: Connection to channel: "LicenseClient-douglasgordy" failed; code: "0x80000000"
+[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-douglasgordy channel (error code: 0x80000000) .
+No explicit failure code handling for error of type 1
+[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-douglasgordy-6000.4.1 channel (error code: 0x80000000) .
+[Licensing::IpcConnector] Error: Connection to channel: "LicenseClient-douglasgordy-6000.4.1" failed; code: "0x80000000"
+[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-douglasgordy-6000.4.1 channel (error code: 0x80000000) .
+[Licensing::Module] Error: Licensing initialization failed after 0.00s
+2026-08-23 16:31:42.793 Unity[37141:1901815] Failure on line 688 in function id scheduleApplicationNotification(LSNotificationCode, NSWorkspaceNotificationCenter *): noErr == _LSModifyNotification(notificationID, 1, &code, 0, NULL, NULL, NULL)
+2026-08-23 16:31:42.866 Unity[37141:1901817] Connection Invalid error for service com.apple.hiservices-xpcservice.
+2026-08-23 16:31:42.866 Unity[37141:1901815] Error received in message reply handler: Connection invalid

@@ -1,0 +1,38 @@
+input {
+    button Select;
+    button Command;
+    button AdditiveSelect;
+    button DragSelect;
+
+    FPVector2 PointerScreen;
+    FPVector2 DragStartScreen;
+    FPVector2 DragEndScreen;
+    FPVector2 PointerWorld;
+    FPVector2 DragStartWorld;
+    FPVector2 DragEndWorld;
+
+    Int32 CommandIntent;
+    Int32 UpgradeIntent;
+}
+
+global {
+    Int32 LastInputPlayer;
+    Int32 LastCommandIntent;
+    Int32 LastUpgradeIntent;
+
+    Boolean LastSelectHeld;
+    Boolean LastCommandHeld;
+    Boolean LastAdditiveSelectHeld;
+    Boolean LastDragSelectHeld;
+
+    FPVector2 LastPointerScreen;
+    FPVector2 LastDragStartScreen;
+    FPVector2 LastDragEndScreen;
+    FPVector2 LastPointerWorld;
+    FPVector2 LastDragStartWorld;
+    FPVector2 LastDragEndWorld;
+
+    Boolean HasMoveCommandIntent;
+    Int32 MoveCommandPlayer;
+    FPVector2 MoveCommandTargetWorld;
+}

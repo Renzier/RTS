@@ -1,0 +1,27 @@
+# Next Chat Prompt
+
+Use this prompt to start a fresh Codex task without spending many tokens:
+
+```text
+We are working in `/Users/douglasgordy/Documents/Anachron`, a Unity 6 + Photon Quantum RTS prototype named Anachron.
+
+First read these files, in this order:
+1. `handoff/PROJECT_STATE.md`
+2. `handoff/SOURCE_MAP.md`
+3. `handoff/KILNFALL_GAME_DIRECTION.md`
+4. `handoff/KILNFALL_SOURCE_REGISTRY.md`
+5. `handoff/FIRST_HAND_REVIEW_NOTES.md`
+6. `handoff/ONLINE_SYNC_PLAN.md`
+7. `handoff/KILNFALL_SPRINT_PLAN.md`
+8. `handoff/SMOKE_TEST_CHECKLIST.md`
+9. `phase3_progress.md`
+10. `# RTS Master Project Document For Anachron`
+
+Important architecture rule: all gameplay logic belongs in `Assets/QuantumUser/Simulation` using Quantum deterministic APIs (`FP`, `FPVector2`, `FPVector3`). Unity view scripts in `Assets/QuantumUser/View` only display state or submit input. Do not move gameplay decisions into MonoBehaviours.
+
+Current phase: Phase 3. Faction identity/stats/labels/primitive silhouettes/construction visuals are in, the current ground scenario presents as `Ashenspar Quill-Waist`, runtime-only Ashenspar landmarks and a view-only central Quill-waist objective marker are in the view layer, the upper resource pair has been aligned near shard ridge landmarks, the map is larger, worker production works, and worker-built support buildings have build-mode-gated placement preview, grid preview, placement status feedback, validation, timed construction, builder assignment, cancellation/refunds, timed deconstruction, and completed-building collision/avoidance handling. Ardent Concord buildings now have a small passive mend. A reusable smoke-test checklist exists at `handoff/SMOKE_TEST_CHECKLIST.md`. The project direction is shifting toward Kilnfall: a four-domain RTS across ground, air, ocean, and orbit, with early prototype factions mapped from Tech/Fantasy/Hybrid to Ardent Concord/Wrought/Gharn.
+
+Likely next step: follow `handoff/KILNFALL_SPRINT_PLAN.md`, starting with Sprint 17 unless the user chooses a different sprint. Recent sprints should be smoke-tested in Unity, including Sprint 16 passive Ardent Concord building mend. Keep each sprint small and verify with `handoff/SMOKE_TEST_CHECKLIST.md` before moving to the next.
+
+Before editing, inspect the relevant simulation and view files listed in `handoff/SOURCE_MAP.md`. If `.qtn` schema changes, run Quantum CodeGen before expecting Unity to compile.
+```

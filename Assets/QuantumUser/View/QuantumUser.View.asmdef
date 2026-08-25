@@ -1,0 +1,17 @@
+{
+  "name": "QuantumUser.View",
+  "rootNamespace": "",
+  "references": [
+    "Quantum.Unity",
+    "Quantum.Simulation"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

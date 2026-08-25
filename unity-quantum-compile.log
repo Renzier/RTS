@@ -1,0 +1,412 @@
+Unity Editor version:    6000.4.1f1 (8535861f39e1)
+Branch:                  6000.4/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.5.2 (Build 25F84)
+Darwin version:          25.5.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        36864 MB
+Date:                    2026-08-10T00:41:03Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Channel LicenseClient-douglasgordy doesn't exist
+Launching external process: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Helpers/UnityLicensingClient.app/Contents/MacOS/Unity.Licensing.Client
+[Licensing::Module] Successfully launched the LicensingClient (PId: 16623)
+Launching external process: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-quit
+-projectPath
+/Users/douglasgordy/Documents/Anachron
+-logFile
+/Users/douglasgordy/Documents/Anachron/unity-quantum-compile.log
+Successfully changed project path to: /Users/douglasgordy/Documents/Anachron
+/Users/douglasgordy/Documents/Anachron
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Player connection [8273026432]  Target information:
+
+Player connection [8273026432]  * "[IP] 192.168.50.179 [Port] 55504 [Flags] 2 [Guid] 1687988605 [EditorId] 1687988605 [Version] 1048832 [Id] OSXEditor(0,Mac.DigitslADHD) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8273026432] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8273026432] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-douglasgordy" at "2026-08-10T00:41:03.735063Z"
+[Package Manager] Connected to IPC stream "Upm-16622" after 0.1 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              ea9eee4c1f33411bb9097553f7f98d7c
+  Correlation Id:          6af880662c1aa22a35e363a17a818784
+  External correlation Id: 7843032073553873729
+  Machine Id:              DhQucniMTNkDsExfEgZyXoXt+x8=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-douglasgordy" (connect: 0.17s, validation: 0.02s, handshake: 0.26s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-douglasgordy-notifications" at "2026-08-10T00:41:04.009593Z"
+[Licensing::Module] Connected to LicensingClient (PId: 16623, launch time: 0.00, total connection time: 0.44s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 20067581430876-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.45s
+[Licensing::Module] Licensing is initialized (took 0.17s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 6000.4.1f1 (8535861f39e1)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/douglasgordy/Documents/Anachron/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M3 Pro (high power)
+Metal devices available: 1
+0: Apple M3 Pro (high power)
+Using device Apple M3 Pro (high power)
+Initializing Metal device caps: Apple M3 Pro
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56622
+CodeReloadManager initialized
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: /Applications/Unity/Hub/Editor/6000.4.1f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 0.001795 seconds.
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.214 seconds
+Domain Reload Profiling: 440ms
+	BeginReloadAssembly (47ms)
+		CreateAndSetChildDomain (8ms)
+	RebuildCommonClasses (22ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (28ms)
+	LoadAllAssembliesAndSetupDomain (118ms)
+		LoadAssemblies (40ms)
+		AnalyzeDomain (113ms)
+			TypeCache.Refresh (112ms)
+				TypeCache.ScanAssembly (104ms)
+	FinalizeReload (215ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (26ms)
+			BeforeProcessingInitializeOnLoad (46ms)
+			ProcessInitializeOnLoadAttributes (58ms)
+			ProcessInitializeOnLoadMethodAttributes (44ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 23 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.collab-proxy@2.8.2 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.collab-proxy@c854d1f7d97f)
+    com.unity.ide.vscode@1.2.5 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.ide.vscode@82e68656b7bd)
+    com.unity.inputsystem@1.14.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.inputsystem@7fe8299111a7)
+    com.unity.visualscripting@1.9.7 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.visualscripting@6279e2b7c485)
+    com.unity.ide.visualstudio@2.0.27 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.ide.visualstudio@dc1ddd4f09b6)
+    com.unity.ide.rider@3.0.40 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.ide.rider@e4950c6d131b)
+    com.unity.editorcoroutines@1.0.1 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.editorcoroutines@54394ed3283c)
+    com.unity.performance.profile-analyzer@1.3.4 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.performance.profile-analyzer@418130329099)
+    com.unity.testtools.codecoverage@1.3.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.testtools.codecoverage@19a841221620)
+    com.unity.settings-manager@2.1.1 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.settings-manager@0b8638c5ce86)
+  Built-in packages:
+    com.unity.feature.development@1.0.2 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.feature.development@767aadbc6eb7)
+    com.unity.modules.animation@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.animation)
+    com.unity.modules.audio@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.audio)
+    com.unity.test-framework@1.6.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.test-framework@76560ee600cb)
+    com.unity.textmeshpro@5.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.textmeshpro@53f43edfd2e0)
+    com.unity.ugui@2.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.ugui@d8a2716f3013)
+    com.unity.modules.jsonserialize@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.modules.ui@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.ui)
+    com.unity.modules.imgui@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.ext.nunit@2.0.5 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.ext.nunit@d8c07649098d)
+    com.unity.modules.uielements@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.uielements)
+    com.unity.modules.hierarchycore@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.hierarchycore)
+    com.unity.modules.physics@1.0.0 (location: /Users/douglasgordy/Documents/Anachron/Library/PackageCache/com.unity.modules.physics)
+[Package Manager] com.unity.ide.vscode is deprecated: Visual Studio Code package is not supported anymore. You can continue to use it, but we won't provide any update anymore.
+[Package Manager] com.unity.textmeshpro is deprecated: This package is no longer supported. TextMeshPro functionalities are now included in the com.unity.ugui package. To continue using them, consider adding it to your project dependencies.
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.00 seconds
+[ScriptCompilation] Requested script compilation because: Assembly Definition File(s) changed
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/ilpp.sock-5310b0a821bdc8aa1c2dce04a41ef2cd
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/douglasgordy/Documents/Anachron
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 15.4916ms
+Starting: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/200b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /Users/douglasgordy/Documents/Anachron
+DisplayProgressbar: Compiling Scripts
+ExitCode: 4 Duration: 1s659ms
+Rebuilding DAG because FileSignature timestamp changed: Library/Bee/200b0aE-inputdata.json
+*** Tundra requires additional run (1.64 seconds), 1 items updated, 477 evaluated
+Starting: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/Scripting/netcorerun/netcorerun "/Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/BuildPipeline/ScriptCompilationBuildProgram.exe" "Library/Bee/200b0aE.dag.json" "Library/Bee/200b0aE-inputdata.json" "Library/Bee/buildprogram0.traceevents"
+WorkingDir: /Users/douglasgordy/Documents/Anachron
+ExitCode: 0 Duration: 0s505ms
+Starting: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/200b0aE.dag" --continue-on-failure --dagfilejson="Library/Bee/200b0aE.dag.json" --profile="Library/Bee/backend2.traceevents" ScriptAssemblies
+WorkingDir: /Users/douglasgordy/Documents/Anachron
+ExitCode: 0 Duration: 2s275ms
+Finished compiling graph: 468 nodes, 6911 flattened edges (6405 ToBuild, 74 ToUse), maximum node priority 321
+[           0s] Delete 16 artifact files that are no longer in use. (like Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.rsp)
+[285/465    0s] WriteText Library/Bee/artifacts/200b0aE.dag/Quantum.Simulation.rsp
+[299/465    0s] WriteText Library/Bee/artifacts/200b0aE.dag/QuantumUser.View.rsp
+[453/465    0s] Csc Library/Bee/artifacts/200b0aE.dag/Quantum.Simulation.dll (+2 others)
+[454/465    0s] CopyFiles Library/ScriptAssemblies/Quantum.Simulation.dll
+[455/465    0s] CopyFiles Library/ScriptAssemblies/Quantum.Simulation.pdb
+[456/465    0s] Csc Library/Bee/artifacts/200b0aE.dag/Quantum.Unity.dll (+2 others)
+[457/465    0s] CopyFiles Library/ScriptAssemblies/Quantum.Unity.pdb
+[458/465    0s] CopyFiles Library/ScriptAssemblies/Quantum.Unity.dll
+[459/465    0s] Csc Library/Bee/artifacts/200b0aE.dag/QuantumUser.View.dll (+2 others)
+[460/465    0s] Csc Library/Bee/artifacts/200b0aE.dag/Quantum.Unity.Editor.dll (+2 others)
+[461/465    0s] CopyFiles Library/ScriptAssemblies/QuantumUser.View.dll
+[462/465    0s] CopyFiles Library/ScriptAssemblies/QuantumUser.View.pdb
+[463/465    0s] CopyFiles Library/ScriptAssemblies/Quantum.Unity.Editor.pdb
+[464/465    0s] CopyFiles Library/ScriptAssemblies/Quantum.Unity.Editor.dll
+*** Tundra build success (2.26 seconds), 14 items updated, 465 evaluated
+AssetDatabase: script compilation time: 4.786955s
+Begin MonoManager ReloadAssembly
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-Editor.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp.dll at Library/ScriptAssemblies/Assembly-CSharp.dll not valid. Loading of assembly skipped.
+Assembly PhotonWebSocket.dll at Library/ScriptAssemblies/PhotonWebSocket.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Performance.Profile-Analyzer.EditorTests.dll at Library/ScriptAssemblies/Unity.Performance.Profile-Analyzer.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Settings.Tests.dll at Library/ScriptAssemblies/Unity.Settings.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TestTools.CodeCoverage.Editor.Compatibility.dll at Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.Compatibility.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Assets/Photon/Quantum/Runtime/QuantumUnityRuntime.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Start importing Packages/com.unity.modules.animation using Guid(1158e311a3101950348dcecb1bebc42d) (DefaultImporter) -> (Import Result ID: 'f4d780ee8b30609fee94f90d9ce10396') in 0.007759792 seconds [static dependencies only]. Details - ImportResultOutputID=b507f80f0cc676852c0f5b6778d9d32f DependenciesID=a09920416b945ad7e4f27a42decc713c StaticDependenciesID=7ec93f2895cba90e66ee2521ede9f4e3 
+Start importing Packages/com.unity.modules.audio using Guid(2d6ba5cbe47e6ad3c87474c56174d4e0) (DefaultImporter) -> (Import Result ID: '5cf24c524012639b84138e73719e11e5') in 0.000484625 seconds [static dependencies only]. Details - ImportResultOutputID=daf1976afa7be36892563d13cb0be07b DependenciesID=7ef93e55127e0348fc0760b97a4ac0ae StaticDependenciesID=9900d88e7b498206e853b21ac07c211a 
+Start importing Assets/QuantumUser/View/QuantumUser.View.asmdef using Guid(304d8a944f183426cacbb352ad00b2cc) (AssemblyDefinitionImporter) -> (Import Result ID: 'd1745838ea5393dd82f4f7c7dfff2416') in 0.0007745 seconds [static dependencies only]. Details - ImportResultOutputID=158c342bbda9d65ac2992bf517e089ba DependenciesID=d8b5d07f5fde65707676fbb43603ae10 StaticDependenciesID=193006349a6fa99d60e64484426f5216 
+Start importing Assets/QuantumUser/Simulation/Quantum.Simulation.asmref using Guid(2788d9e9f7fc446ec9a179cf939c1c4a) (AssemblyDefinitionReferenceImporter) -> (Import Result ID: '0a2a7562862edfeadc5bc02be1847f07') in 0.000892542 seconds [static dependencies only]. Details - ImportResultOutputID=92b453789b0718d8fb56ece65e93366f DependenciesID=806f1688e048c16c3061e789c02a0104 StaticDependenciesID=625be91673fbd348804a089708054621 
+Start importing Packages/com.unity.modules.audio/package.ModuleCompilationTrigger using Guid(042dc296246916648e55a43d0eeb2036) (DefaultImporter) -> (Import Result ID: '8d3395c36808ba4fe442e67e26f3cbcf') in 0.023882 seconds [static dependencies only]. Details - ImportResultOutputID=79b92d092a7e938d3fd7c03ba6e7e14e DependenciesID=f7b170e910d68bd5f74239722e73cf43 StaticDependenciesID=470f92d8aee7cd5dacbb8f1098dc1ba5 
+Start importing Packages/com.unity.modules.animation/package.ModuleCompilationTrigger using Guid(db8e609a39b9b231fccc54e5fa4cbd1b) (DefaultImporter) -> (Import Result ID: '4ab4a569f69ab2eb48e9932410aa44ed') in 0.000488292 seconds [static dependencies only]. Details - ImportResultOutputID=adaa6e5ddb640ae1aa4881621783c278 DependenciesID=00e01bf5c9f3532ce101d1c0ff0244e0 StaticDependenciesID=a92dc4e3be805f4cb7701dd3b2b3a733 
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.432 seconds
+Domain Reload Profiling: 921ms
+	BeginReloadAssembly (197ms)
+		DisableScriptedObjects (5ms)
+		CreateAndSetChildDomain (136ms)
+	RebuildCommonClasses (22ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (34ms)
+	LoadAllAssembliesAndSetupDomain (226ms)
+		LoadAssemblies (128ms)
+		AnalyzeDomain (129ms)
+			TypeCache.Refresh (111ms)
+				TypeCache.ScanAssembly (102ms)
+			BuildScriptInfoCaches (13ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (432ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (14ms)
+			BeforeProcessingInitializeOnLoad (75ms)
+			ProcessInitializeOnLoadAttributes (237ms)
+			ProcessInitializeOnLoadMethodAttributes (27ms)
+Start importing Assets/Photon/Quantum/QuantumEditorConfig.editorconfig using Guid(75e0e9147a27e104793ee4599d92216a) (ScriptedImporter) -> (Import Result ID: '39d29c7e4d172d126ae092a441f45aa0') in 0.003046625 seconds [static dependencies only]. Details - ImportResultOutputID=e0fedcfa3b434cf0ea3388f6e2c38187 DependenciesID=e89447300f30a3839273ac524e9f6ca6 StaticDependenciesID=cdcb6ee764b5feafa932ff73f18a109c 
+Start importing Assets/Photon/Quantum/Runtime/RuntimeAssets/QuantumMachineId.quantum-id using Guid(498c2ba40c34da841b0bbfab91cfd57f) (ScriptedImporter) -> (Import Result ID: 'bde6312c0637132513ee34c3ab14dea6') in 0.000882541 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=404b413c2d858c74c989ad507b5677d8 DependenciesID=e229ad08a82e542e09f38d2e4ab6e7e3 StaticDependenciesID=cc18dab55d0c7fb6df7d9cebb7fa2d7a 
+Start importing Packages/com.unity.modules.audio/package.json using Guid(e9df95f53f1c1d0c9199e235d6c42b50) (PackageManifestImporter) -> (Import Result ID: 'e2a865339776f1eb9e7f2487541b327f') in 0.000515333 seconds [static dependencies only]. Details - ImportResultOutputID=9d0660fca02a9e6ba97ec5348d93e48e DependenciesID=a5567adf4d0191c4944b3dd565084511 StaticDependenciesID=5ee2bc52eb304ea43832077f1c7ec976 
+Start importing Packages/com.unity.modules.animation/package.json using Guid(7ef8348b8ea834d7e1bc214b07f7fb87) (PackageManifestImporter) -> (Import Result ID: '9bc236b3afc70cb6a991744356c20973') in 0.000306041 seconds [static dependencies only]. Details - ImportResultOutputID=1a97486a098e1a0001b98c04bc990569 DependenciesID=c2aba1706575c47cac9c9dbd64d80bc8 StaticDependenciesID=90b92e8d941b0dc46f76eb68fd3fadb4 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabGCProfiler.prefab using Guid(80add7c001df6074c8f2d4a2b88e8707) (PrefabImporter) -> (Import Result ID: 'fd330945571d8c66c17f03bcb5d14aeb') in 0.059124084 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=95a3f6e93afded51e366af4073fac478 DependenciesID=72a9868ede1484ff8c30204aabc72ffb StaticDependenciesID=976cb957449d76527646493617602c0c 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabNetworkActivityProfiler.prefab using Guid(11a6dd7e02ce19146b8cadfccf40da0a) (PrefabImporter) -> (Import Result ID: 'c36c93fa33277a70314866d9deff4154') in 0.003650125 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9c572a0559b5f169518736bd0c1125b8 DependenciesID=bcf0d881711c405b91ebd65a867d2e26 StaticDependenciesID=b67d065d3bc9a0ace30937d72cf62a27 
+Start importing Assets/Photon/Quantum/Runtime/StartUI/QuantumStartUI.prefab using Guid(f2cb881c6a9772246bd6e3c119cf6f35) (PrefabImporter) -> (Import Result ID: '73c71d8ead2125f3dcf50c9e45cf2096') in 0.023679792 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=54c2651485a44460f9f002df96773062 DependenciesID=5a66459e2a9c692f919e4719743a7fdb StaticDependenciesID=cac868eaf9c26c91cddc74a4ac66f0d9 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabRenderTimeProfiler.prefab using Guid(1526589c1e911524ab962985e8eecd9a) (PrefabImporter) -> (Import Result ID: '790ec4ac708855d475743a20cecc54fa') in 0.004138583 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=20e89e97e2bd0399d2e9e70811ed168f DependenciesID=f75e2d55814616697e7b663cea18b804 StaticDependenciesID=4b433401e18d3edd413bb1e8025fe27e 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabSimulationTimeProfiler.prefab using Guid(b5dff54291e5b4748873203353355c29) (PrefabImporter) -> (Import Result ID: '3e0904c5ee29e2f317a5e68b12d4a5fc') in 0.003363375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=06a030ca30787c8cad996ad69f6ef8c2 DependenciesID=837299f262502b55ae5bbb3b3016dc44 StaticDependenciesID=71befe394bf54a02f64e93d88e40c514 
+Start importing Assets/Photon/Quantum/Runtime/RuntimeAssets/QuantumMultiClientRunner.prefab using Guid(46ab3bf8b18e92b479effcac700a8337) (PrefabImporter) -> (Import Result ID: '575814497322a0fb0490cd466d63a498') in 0.005359875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6bba011c5470975a48440c415ee572a3 DependenciesID=a28a7eb2170233d5a4cbbe4fa1d9200a StaticDependenciesID=ebeb31203aebe2f13b51d3c7fa717a21 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabProfilingTools.prefab using Guid(5602860c4031ceb4894f9d73c30de540) (PrefabImporter) -> (Import Result ID: '6caaa5e3f562e087cb3b7ae8c02998c5') in 0.004902333 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d48479c7484ca7754d4e4ee055a6dd45 DependenciesID=c172bcc25eb5a13c925ee810ef282c06 StaticDependenciesID=84be8bbaf7ee799900841508581f9dc0 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabFrameTimeProfiler.prefab using Guid(66f3c18467dcd004c900ab20c0784819) (PrefabImporter) -> (Import Result ID: '7192cf408f357a50fbd932c4468d6b42') in 0.00337225 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9627ecdcb98954dab3183599cd0978f4 DependenciesID=54d851d6411d1e83f90025f16694501e StaticDependenciesID=4b8d7e517513634f3113f0204a167884 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabPredictedFramesProfiler.prefab using Guid(763c211d51f9b544486f73789a8da5d1) (PrefabImporter) -> (Import Result ID: '943ea6814708af0a7499643b4db878ed') in 0.00324875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4842f0c68b150352a2bfc5fd447fbab7 DependenciesID=4856b9be169ac1bf0a5cbcbb631239b8 StaticDependenciesID=90dbeae9af4421b8d193f0988767a918 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabProfilingStatistics.prefab using Guid(79c7ffae163c8dc40b2032f2c7a8c524) (PrefabImporter) -> (Import Result ID: 'acb5e3c842ed401652d07b109a78c0f5') in 0.003500292 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bc3492f2639f2811ee49267b7ce4cb7b DependenciesID=55628ea52e242514c650e5f214186a50 StaticDependenciesID=465b9a9e7a8581c3519ed2f9299f992f 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabVerifiedFramesProfiler.prefab using Guid(498af888cab28f44ab69e60b1795652d) (PrefabImporter) -> (Import Result ID: '50760138628d2e5d8bc86722eca82b05') in 0.003928417 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4371722a216d3a391e2242a46c5aa3b5 DependenciesID=6fb1a65cda593e9a596420f161e4d2f0 StaticDependenciesID=c4f82860e1c3c116296c31c1a6b168ff 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabMarkersProfiler.prefab using Guid(8f36a662379762845b2c1db9bed564c5) (PrefabImporter) -> (Import Result ID: 'd56b610c50be0055827d492434244501') in 0.003469625 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1d98bb6d9da26113bb1306655b5e2fb7 DependenciesID=35fde10c68d0541fdcdc9b5cce8bfeca StaticDependenciesID=682c695f563cee3a03d5a80a706be2b1 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabPingProfiler.prefab using Guid(3efd9b4dd1595d7488b943ff30165085) (PrefabImporter) -> (Import Result ID: 'efe57e934552b263504fba495c4be3b1') in 0.002937625 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7b31a5f1670267d565fe2c07f445387f DependenciesID=e550b4bbfbaa932832b97fbc7f285adf StaticDependenciesID=e6743a2ad8d592b58e61a8081c5de20b 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabUserScriptsProfiler.prefab using Guid(3d23186ed87941442a8e556c14074548) (PrefabImporter) -> (Import Result ID: 'c33516629f5fe95fac217d56f0b15ec0') in 0.003441542 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c238d0789a213e8e303fce4134155350 DependenciesID=e407f0f089eed4a2c6c56641c161b98c StaticDependenciesID=d32d9531e0910b197e1a7d8d50c7e5cc 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabDeltaTimeProfiler.prefab using Guid(6f99513f516ff6240ba18e8a35408da8) (PrefabImporter) -> (Import Result ID: '15dd48aa83411c6bb632dcd782e097b1') in 0.00338475 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f1ec95682cba4ef399c14342d4cda40f DependenciesID=153c660546569dcf3421d7ccc62368f3 StaticDependenciesID=13032de42ae54f7f17d41d359edc22ac 
+Start importing Assets/Photon/Quantum/Runtime/GraphProfilers/QuantumGraphPrefabProfilers.prefab using Guid(e7b1355f609cb304da5529115986eb8b) (PrefabImporter) -> (Import Result ID: 'b8c527964e363169bd80d92d647b69b9') in 0.015057291 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7ca7336e8af21e7dc3e1935c746165fe DependenciesID=459d50631f3e5f7b876086ab983264b3 StaticDependenciesID=9322bcded3e24e776904f17e1aec2ae8 
+Start importing Assets/Photon/Quantum/Resources/QuantumStats.prefab using Guid(9e5addbaa78b7264889bf147e593db91) (PrefabImporter) -> (Import Result ID: '93a9ae94030f3bdf15432805a54647bc') in 0.007961458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8d772417d824a47512ebfbdb51a23c69 DependenciesID=42263b7e388e4a7658a4630d419b0ef6 StaticDependenciesID=45bed424dfd9b2dbd45181d55ca2f14f 
+(Values over 0.050ms)
+Asset Pipeline Refresh (id=749806b6774504e5394958f0f3600e95): Total: 6.192 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=27 (actual=27, local cache=0, cache server=0)
+		Asset DB Process Time: managed=47 ms, native=789 ms
+		Asset DB Callback time: managed=56 ms, native=6 ms
+		Scripting: domain reloads=1, domain reload time=489 ms, compile time=4788 ms, other=13 ms
+		Project Asset Count: scripts=624, non-scripts=748
+		Asset File Changes: new=0, changed=2, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokePackagesCallback: 4.091ms
+	ApplyChangesToAssetFolders: 0.084ms
+	Scan: 117.279ms
+	OnSourceAssetsModified: 0.469ms
+	CategorizeScriptCompilationAssets: 14.203ms
+	ProcessAssetsWithTransientArtifactChanges: 19.561ms
+	CategorizeAssets: 5.885ms
+	CompileScripts: 4787.910ms
+	ImportOutOfDateAssets: 639.957ms (433.702ms without children)
+		ImportManagerImport: 205.773ms (6.901ms without children)
+			UpdateCategorizedAssets: 0.058ms
+		UnloadImportedAssets: 0.144ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.147ms
+		OnDemandSchedulerStart: 0.188ms
+	PostProcessAllAssets: 57.718ms
+		AssemblyValidation.PostprocessAllAssets 0.829ms
+		VCAutoAddAssetPostprocess 0.530ms
+		XRBuildSystem.XRAssetImported 0.081ms
+		MonoPostProcessAllAssets: 55.864ms
+			AssetPostprocessor.OnPostprocessAllAssets 31.311ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 9.709ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 3.505ms
+			AssetChangedListener.OnPostprocessAllAssets 1.106ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.750ms
+			QuantumEditorHubWindowAssetPostprocessor.OnPostprocessAllAssets 0.711ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.657ms
+			QuantumAssetObjectPostprocessor.OnPostprocessAllAssets 0.606ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 0.386ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.324ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.272ms
+			QuantumDefaultConfigsAssetPostprocessor.OnPostprocessAllAssets 0.271ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 0.204ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.182ms
+			Postprocessor.OnPostprocessAllAssets 0.146ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.138ms
+			AssetEvents.OnPostprocessAllAssets 0.134ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.114ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.103ms
+			InternalPostprocessor.OnPostprocessAllAssets 0.094ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 0.079ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 0.069ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.067ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.066ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.060ms
+	PostAssetChangesProfiler: 1.633ms
+	UnloadStreamsBegin: 0.477ms
+	PersistCurrentRevisions: 0.099ms
+	GenerateScriptTypeHashes: 1.170ms
+	GenerateScriptTypeSerializationHashes: 2.362ms
+	Untracked: 541.691ms
+
+Application.AssetDatabase Initial Refresh End
+Launching external process: /Applications/Unity/Hub/Editor/6000.4.1f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.03 seconds
+Scanning for USB devices : 0.974ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Anachron
+2026-08-09 18:41:11.225 Unity[16622:1209321] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xbe27ec000 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Unloading 8 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 3527 unused Assets / (3.0 MB). Loaded Objects now: 4118.
+Memory consumption went from 159.6 MB to 156.5 MB.
+Total: 5.392083 ms (FindLiveObjects: 0.183042 ms CreateObjectMapping: 0.068958 ms MarkObjects: 4.269167 ms  DeleteObjects: 0.870541 ms)
+
+2026-08-09 18:41:11.254 Unity[16622:1209321] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xbe27ed360 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Batchmode quit successfully invoked - shutting down!
+Curl error 42: Callback aborted
+Killing ADB server in 0.057442 seconds.
+Thread 0x302347000 may have been prematurely finalized
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-douglasgordy-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-douglasgordy channel disconnected successfully.
+Thread 0x16fb9f000 may have been prematurely finalized
+AcceleratorClientConnectionCallback - disconnected - :0
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+Cleanup mono
+CodeReloadManager destroyed
+debugger-agent: Unable to listen on 44
+Exiting batchmode successfully now!
+[Package Manager] Server process was shutdown

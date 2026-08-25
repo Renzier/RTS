@@ -1,0 +1,147 @@
+component UnitIdentity {
+    Int32 UnitId;
+    Int32 OwnerPlayer;
+    Int32 UnitKind;
+}
+
+component WorkerResourceCarry {
+    Int32 ResourceKind;
+    Int32 Amount;
+    Int32 Capacity;
+}
+
+component UnitHealth {
+    Int32 Health;
+    Int32 MaxHealth;
+    Boolean IsDead;
+}
+
+component PlayerEconomyState {
+    Int32 PlayerIndex;
+    Int32 Wood;
+    Int32 Iron;
+    Int32 FoodUsed;
+    Int32 FoodCap;
+    Boolean IsDefeated;
+}
+
+component PlayerFactionState {
+    Int32 PlayerIndex;
+    Int32 FactionId;
+}
+
+component PlayerTechState {
+    Int32 PlayerIndex;
+    Int32 TechTier;
+    Boolean UpgradeInProgress;
+    Int32 UpgradeTargetTier;
+    Int32 UpgradeTicksRemaining;
+    Int32 UpgradeTicksTotal;
+    Int32 LastUpgradeResult;
+}
+
+component PlayerHeroState {
+    Int32 PlayerIndex;
+    EntityRef HeroEntity;
+    Boolean HasActiveHero;
+    Boolean RebuildAvailable;
+    Int32 HeroLevel;
+    Int32 HeroHealth;
+    Int32 HeroMaxHealth;
+    Boolean RebuildInProgress;
+    Int32 RebuildTicksRemaining;
+    Int32 RebuildTicksTotal;
+    Int32 LastHeroResult;
+}
+
+component ResourceNode {
+    Int32 ResourceKind;
+    Int32 AmountRemaining;
+    Int32 HarvestBatchSize;
+}
+
+component ResourceDropoff {
+    Int32 OwnerPlayer;
+    Int32 AcceptedResourceMask;
+}
+
+component MainBuilding {
+    Int32 OwnerPlayer;
+    Int32 Health;
+    Int32 MaxHealth;
+}
+
+component SupplyBuilding {
+    Int32 OwnerPlayer;
+    Int32 FoodProvided;
+    Int32 Health;
+    Int32 MaxHealth;
+    Boolean IsConstructing;
+    Boolean HasGrantedFood;
+    Int32 BuildTicksRemaining;
+    Int32 BuildTicksTotal;
+    Int32 WoodCost;
+    Int32 IronCost;
+    Boolean HasRefunded;
+    Boolean IsDeconstructing;
+    Int32 DeconstructTicksRemaining;
+    Int32 DeconstructTicksTotal;
+}
+
+component BuildingTier {
+    Int32 Tier;
+}
+
+component Targetable {
+    Int32 OwnerPlayer;
+    Int32 Health;
+    Int32 MaxHealth;
+    FP TargetRadius;
+}
+
+component Selectable {
+    Boolean IsSelected;
+    FP SelectionRadius;
+}
+
+component SelectionCandidate {
+    FPVector2 ScreenPosition;
+}
+
+component CommandIntentDebug {
+    Boolean HasMoveCommandIntent;
+    Boolean WasMoveCommandAccepted;
+    Boolean WasMoveCommandRejected;
+    Int32 MoveCommandPlayer;
+    Int32 MoveCommandResult;
+    FPVector2 MoveCommandTargetWorld;
+}
+
+component MoveIntent {
+    Boolean HasTarget;
+    Int32 MovementMode;
+    FPVector2 TargetWorld;
+}
+
+component GatherIntent {
+    Boolean HasTarget;
+    EntityRef TargetNode;
+    Int32 ResourceKind;
+    FPVector2 TargetWorld;
+}
+
+component WorkerBuildIntent {
+    Boolean IsBuilding;
+    EntityRef TargetBuilding;
+}
+
+component AttackIntent {
+    Boolean HasTarget;
+    EntityRef TargetEntity;
+    FPVector2 TargetWorld;
+    FP AttackRange;
+    Int32 Damage;
+    Int32 CooldownTicksRemaining;
+    Int32 CooldownTicks;
+    Boolean IsInRange;
+}

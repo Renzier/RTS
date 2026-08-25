@@ -1,0 +1,42 @@
+# RTS Master Project Document For Anachron
+
+## 1. Strict Architecture Rules
+* **Engine:** Unity 6 (View) + Photon Quantum (Simulation)
+* **Codebase:** Clean project. DO NOT use prebuilt Quantum RTS or MOBA templates.
+* **Determinism:** ALL gameplay logic must execute within the Quantum ECS simulation.
+* **Banned APIs:** `UnityEngine.Mathf`, `UnityEngine.Vector3`, `UnityEngine.Physics`.
+* **Required APIs:** Quantum fixed-point math (`FP`, `FPVector2`, `FPVector3`).
+* **Visuals:** Unity `MonoBehaviours` are strictly for polling Quantum state and updating visual feedback via Unity MCP.
+
+## 2. Game Overview
+* **Match Size:** Up to 3 entities (Players or AI).
+* **Factions:** Tech, Fantasy, Tech/Fantasy Hybrid.
+* **Pacing:** Micro-heavy combat (Warcraft 3 style) with single-hero focus.
+* **Economy:** 
+  * Harvested: Wood, Iron (Workers gather and return to base).
+  * Population Cap: Food (Static cap provided by faction structures).
+* **Progression:** Global tech building unlocks building tiers. Costs are deducted instantly from the global bank.
+* **Hero System:** Singleton entity tied to the Main Building. Only one active per player. Can be rebuilt upon death.
+* **Win/Loss Condition:** A player is defeated when their central Main Building is destroyed.
+
+## 3. Pathing & Movement Architecture
+* **Hybrid Model:** Buildings snap to a strict grid. Units navigate via Quantum NavMesh.
+* **Phase 1 Restriction (Ghost Buildings):** Buildings do NOT act as dynamic obstacles. Units are allowed to clip through structures to ensure baseline pathing stability.
+
+## 4. Development Phases
+* **Phase 1: Core Systems & Input (No Factions)**
+  * Implement deterministic lockstep session from scratch.
+  * Build Unity view layer input polling (drag-select boxes, right-click commands) mapped to Quantum Input Structs.
+  * Build Hybrid pathing (Grid placement + NavMesh movement with Ghost Buildings).
+  * Implement resource economy (Wood/Iron harvesting loops, static Food caps).
+  * Implement Game Over state (Main Building destruction).
+* **Phase 2: Progression & Combat**
+  * Implement instant-deduction tech upgrades and building tier logic.
+  * Implement singleton hero spawning, death, and rebuild states.
+  * Execute target selection, attack ranges, and damage resolution.
+* **Phase 3: Faction Implementation & Polish**
+  * Replace generic primitives with Tech, Fantasy, and Hybrid unit data.
+  * Implement dynamic NavMesh obstacle baking for placed buildings.
+* **Phase 4: Advanced Systems**
+  * Implement Fog of War rendering and vision radius logic.
+  * Implement deterministic AI state machines for non-player opponents.
