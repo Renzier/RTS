@@ -129,7 +129,7 @@ namespace Quantum {
       }
     }
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 4463;
         fixed (UInt64* p = Bits) hash = hash * 31 + HashCodeUtils.GetArrayHashCode(p, 2);
         return hash;
@@ -204,7 +204,7 @@ namespace Quantum {
       }
     }
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 3319;
         fixed (UInt64* p = Bits) hash = hash * 31 + HashCodeUtils.GetArrayHashCode(p, 32);
         return hash;
@@ -281,7 +281,7 @@ namespace Quantum {
       }
     }
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 14057;
         fixed (UInt64* p = Bits) hash = hash * 31 + HashCodeUtils.GetArrayHashCode(p, 4);
         return hash;
@@ -356,7 +356,7 @@ namespace Quantum {
       }
     }
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 1433;
         fixed (UInt64* p = Bits) hash = hash * 31 + HashCodeUtils.GetArrayHashCode(p, 64);
         return hash;
@@ -431,7 +431,7 @@ namespace Quantum {
       }
     }
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 17491;
         fixed (UInt64* p = Bits) hash = hash * 31 + HashCodeUtils.GetArrayHashCode(p, 8);
         return hash;
@@ -502,7 +502,7 @@ namespace Quantum {
       }
     }
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 13669;
         fixed (UInt64* p = Bits) hash = hash * 31 + HashCodeUtils.GetArrayHashCode(p, 1);
         return hash;
@@ -542,7 +542,7 @@ namespace Quantum {
     [FieldOffset(4)]
     public Int32 UpgradeIntent;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 19249;
         hash = hash * 31 + Select.GetHashCode();
         hash = hash * 31 + Command.GetHashCode();
@@ -663,7 +663,7 @@ namespace Quantum {
       }
     }
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 12473;
         hash = hash * 31 + Map.GetHashCode();
         hash = hash * 31 + DeltaTime.GetHashCode();
@@ -749,7 +749,7 @@ namespace Quantum {
     [FieldOffset(16)]
     public QBoolean IsInRange;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 4729;
         hash = hash * 31 + HasTarget.GetHashCode();
         hash = hash * 31 + TargetEntity.GetHashCode();
@@ -781,7 +781,7 @@ namespace Quantum {
     [FieldOffset(0)]
     public Int32 Tier;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 5431;
         hash = hash * 31 + Tier.GetHashCode();
         return hash;
@@ -809,7 +809,7 @@ namespace Quantum {
     [FieldOffset(24)]
     public FPVector2 MoveCommandTargetWorld;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 10723;
         hash = hash * 31 + HasMoveCommandIntent.GetHashCode();
         hash = hash * 31 + WasMoveCommandAccepted.GetHashCode();
@@ -843,7 +843,7 @@ namespace Quantum {
     [FieldOffset(16)]
     public FPVector2 TargetWorld;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 2371;
         hash = hash * 31 + HasTarget.GetHashCode();
         hash = hash * 31 + TargetNode.GetHashCode();
@@ -861,6 +861,32 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct GrainState : Quantum.IComponent {
+    public const Int32 SIZE = 12;
+    public const Int32 ALIGNMENT = 4;
+    [FieldOffset(8)]
+    public QBoolean IsGrainLoud;
+    [FieldOffset(4)]
+    public Int32 GrainLoudTicksRemaining;
+    [FieldOffset(0)]
+    public Int32 GrainLoudSource;
+    public override readonly Int32 GetHashCode() {
+      unchecked {
+        var hash = 17317;
+        hash = hash * 31 + IsGrainLoud.GetHashCode();
+        hash = hash * 31 + GrainLoudTicksRemaining.GetHashCode();
+        hash = hash * 31 + GrainLoudSource.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (GrainState*)ptr;
+        serializer.Stream.Serialize(&p->GrainLoudSource);
+        serializer.Stream.Serialize(&p->GrainLoudTicksRemaining);
+        QBoolean.Serialize(&p->IsGrainLoud, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct MainBuilding : Quantum.IComponent {
     public const Int32 SIZE = 12;
     public const Int32 ALIGNMENT = 4;
@@ -871,7 +897,7 @@ namespace Quantum {
     [FieldOffset(4)]
     public Int32 MaxHealth;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 17959;
         hash = hash * 31 + OwnerPlayer.GetHashCode();
         hash = hash * 31 + Health.GetHashCode();
@@ -887,32 +913,6 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
-  public unsafe partial struct GrainState : Quantum.IComponent {
-    public const Int32 SIZE = 12;
-    public const Int32 ALIGNMENT = 4;
-    [FieldOffset(8)]
-    public QBoolean IsGrainLoud;
-    [FieldOffset(4)]
-    public Int32 GrainLoudTicksRemaining;
-    [FieldOffset(0)]
-    public Int32 GrainLoudSource;
-    public override readonly Int32 GetHashCode() {
-      unchecked {
-        var hash = 11299;
-        hash = hash * 31 + IsGrainLoud.GetHashCode();
-        hash = hash * 31 + GrainLoudTicksRemaining.GetHashCode();
-        hash = hash * 31 + GrainLoudSource.GetHashCode();
-        return hash;
-      }
-    }
-    public static void Serialize(void* ptr, FrameSerializer serializer) {
-        var p = (GrainState*)ptr;
-        serializer.Stream.Serialize(&p->GrainLoudSource);
-        serializer.Stream.Serialize(&p->GrainLoudTicksRemaining);
-        QBoolean.Serialize(&p->IsGrainLoud, serializer);
-    }
-  }
-  [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct MoveIntent : Quantum.IComponent {
     public const Int32 SIZE = 24;
     public const Int32 ALIGNMENT = 8;
@@ -923,7 +923,7 @@ namespace Quantum {
     [FieldOffset(8)]
     public FPVector2 TargetWorld;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 18269;
         hash = hash * 31 + HasTarget.GetHashCode();
         hash = hash * 31 + MovementMode.GetHashCode();
@@ -955,7 +955,7 @@ namespace Quantum {
     [FieldOffset(20)]
     public QBoolean IsDefeated;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 14821;
         hash = hash * 31 + PlayerIndex.GetHashCode();
         hash = hash * 31 + Wood.GetHashCode();
@@ -985,7 +985,7 @@ namespace Quantum {
     [FieldOffset(0)]
     public Int32 FactionId;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 7219;
         hash = hash * 31 + PlayerIndex.GetHashCode();
         hash = hash * 31 + FactionId.GetHashCode();
@@ -1025,7 +1025,7 @@ namespace Quantum {
     [FieldOffset(12)]
     public Int32 LastHeroResult;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 16481;
         hash = hash * 31 + PlayerIndex.GetHashCode();
         hash = hash * 31 + HeroEntity.GetHashCode();
@@ -1075,7 +1075,7 @@ namespace Quantum {
     [FieldOffset(0)]
     public Int32 LastUpgradeResult;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 1163;
         hash = hash * 31 + PlayerIndex.GetHashCode();
         hash = hash * 31 + TechTier.GetHashCode();
@@ -1107,7 +1107,7 @@ namespace Quantum {
     [FieldOffset(0)]
     public Int32 AcceptedResourceMask;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 17863;
         hash = hash * 31 + OwnerPlayer.GetHashCode();
         hash = hash * 31 + AcceptedResourceMask.GetHashCode();
@@ -1131,7 +1131,7 @@ namespace Quantum {
     [FieldOffset(4)]
     public Int32 HarvestBatchSize;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 16333;
         hash = hash * 31 + ResourceKind.GetHashCode();
         hash = hash * 31 + AmountRemaining.GetHashCode();
@@ -1155,7 +1155,7 @@ namespace Quantum {
     [FieldOffset(8)]
     public FP SelectionRadius;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 2251;
         hash = hash * 31 + IsSelected.GetHashCode();
         hash = hash * 31 + SelectionRadius.GetHashCode();
@@ -1175,7 +1175,7 @@ namespace Quantum {
     [FieldOffset(0)]
     public FPVector2 ScreenPosition;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 9473;
         hash = hash * 31 + ScreenPosition.GetHashCode();
         return hash;
@@ -1219,7 +1219,7 @@ namespace Quantum {
     [FieldOffset(12)]
     public Int32 DeconstructTicksTotal;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 4729;
         hash = hash * 31 + OwnerPlayer.GetHashCode();
         hash = hash * 31 + FoodProvided.GetHashCode();
@@ -1269,7 +1269,7 @@ namespace Quantum {
     [FieldOffset(16)]
     public FP TargetRadius;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 1709;
         hash = hash * 31 + OwnerPlayer.GetHashCode();
         hash = hash * 31 + Health.GetHashCode();
@@ -1297,7 +1297,7 @@ namespace Quantum {
     [FieldOffset(8)]
     public QBoolean IsDead;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 929;
         hash = hash * 31 + Health.GetHashCode();
         hash = hash * 31 + MaxHealth.GetHashCode();
@@ -1323,7 +1323,7 @@ namespace Quantum {
     [FieldOffset(8)]
     public Int32 UnitKind;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 17117;
         hash = hash * 31 + UnitId.GetHashCode();
         hash = hash * 31 + OwnerPlayer.GetHashCode();
@@ -1347,7 +1347,7 @@ namespace Quantum {
     [FieldOffset(8)]
     public EntityRef TargetBuilding;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 7879;
         hash = hash * 31 + IsBuilding.GetHashCode();
         hash = hash * 31 + TargetBuilding.GetHashCode();
@@ -1371,7 +1371,7 @@ namespace Quantum {
     [FieldOffset(4)]
     public Int32 Capacity;
     public override readonly Int32 GetHashCode() {
-      unchecked { 
+      unchecked {
         var hash = 14731;
         hash = hash * 31 + ResourceKind.GetHashCode();
         hash = hash * 31 + Amount.GetHashCode();

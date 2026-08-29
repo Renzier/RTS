@@ -132,7 +132,7 @@ namespace Quantum.Prototypes {
         result.HasTarget = this.HasTarget;
         PrototypeValidator.FindMapEntity(this.TargetNode, in context, out result.TargetNode);
         result.ResourceKind = this.ResourceKind;
-      result.TargetWorld = this.TargetWorld;
+        result.TargetWorld = this.TargetWorld;
     }
   }
   [System.SerializableAttribute()]
