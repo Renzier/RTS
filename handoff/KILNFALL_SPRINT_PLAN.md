@@ -1055,7 +1055,9 @@ Acceptance:
 
 ### Sprint 33: Virii Placeholder Faction Entry
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-29: added a current repo placeholder under the Virii section in `handoff/KILNFALL_GAME_DIRECTION.md`. The placeholder names future hooks through `handoff/GRAIN_CAST_SEAL_CONTRACT.md`, preserves Virii building/unit names, and explicitly keeps Virii non-playable until a dedicated faction-expansion/codegen sprint. No `FactionId`, schema, UI helper, or gameplay behavior changed.
 
 Goal: Add design-only or code-safe placeholder for future Virii support.
 
@@ -1437,4 +1439,4 @@ Use this order first:
 12. Sprint 29: Ardent Concord Pathfinder Scope Note. `[x]`
 13. Sprint 30: Grain/Cast/Seal Data Contract Note. `[x]`
 
-After that, choose between map identity work, pathing stability, or first Ardent Concord mechanics. Domain expansion and Virii implementation now have the required architecture/data-contract notes, but should still start with small proof sprints.
+After that, choose between map identity work, pathing stability, first Ardent Concord mechanics, or faction expansion strategy. Domain expansion and Virii implementation now have the required architecture/data-contract notes, but should still start with small proof sprints.

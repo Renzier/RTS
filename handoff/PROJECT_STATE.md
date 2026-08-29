@@ -30,6 +30,13 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 33 completed:
+  - Added a current repo placeholder under the Virii section of `handoff/KILNFALL_GAME_DIRECTION.md`.
+  - Confirmed Virii are not playable in the current three-faction prototype.
+  - Deferred adding a Virii `FactionId` until a dedicated faction-expansion/codegen sprint.
+  - Pointed future Virii mechanics at `handoff/GRAIN_CAST_SEAL_CONTRACT.md`.
+  - Preserved future hook names: The Fold, Platen Node, Sounding Node, Skinline Updraft Node, A Draft, and Kin-shape.
+  - No schema, UI helper, faction enum, or gameplay behavior changed.
 - Selection click correction completed:
   - Normal click selection now chooses only the nearest eligible selectable entity under the pointer.
   - Clustered workers no longer all become selected from one click.
