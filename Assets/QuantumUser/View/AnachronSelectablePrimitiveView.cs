@@ -107,10 +107,10 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             PrimitiveType primitiveType = GetPrimitiveType(frame, entity, isEconomyEntity);
             Renderer view = GetOrCreateView(entity, primitiveType);
             bool isDeadUnit = IsDeadUnit(frame, entity);
-            view.transform.position = transform.Position.ToUnityVector3() + (isEconomyEntity ? new Vector3(0.0f, 0.5f, 0.0f) : Vector3.zero);
+            view.transform.position = transform.Position.ToUnityVector3() + GetViewPositionOffset(frame, entity, isEconomyEntity);
             view.transform.rotation = Quaternion.Euler(0.0f, -transform.Rotation.AsFloat, 0.0f);
-            view.transform.localScale = isEconomyEntity ? GetEconomyScale(frame, entity) : GetUnitScale(frame, entity, isDeadUnit);
-            view.material.color = isEconomyEntity ? economyColor : GetUnitColor(frame, entity, isDeadUnit);
+            view.transform.localScale = GetViewScale(frame, entity, isEconomyEntity, isDeadUnit);
+            view.material.color = GetViewColor(frame, entity, isEconomyEntity, economyColor, isDeadUnit);
 
             UpdateHealthBar(frame, entity, transform.Position.ToUnityVector3(), isEconomyEntity, isDeadUnit);
         }
@@ -259,7 +259,6 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         CreateLandmarkPrimitive(root.transform, "MereWest", PrimitiveType.Cube, new Vector3(-42.0f, -0.12f, 0.0f), new Vector3(6.0f, 0.04f, 82.0f), MereBoundaryColor);
         CreateLandmarkPrimitive(root.transform, "QuillWaistSpire", PrimitiveType.Cylinder, new Vector3(0.0f, 2.1f, 22.0f), new Vector3(0.8f, 2.1f, 0.8f), QuillMarkerColor);
         CreateLandmarkPrimitive(root.transform, "QuillWaistRing", PrimitiveType.Cylinder, new Vector3(0.0f, 0.08f, 22.0f), new Vector3(4.4f, 0.06f, 4.4f), ShardRidgeColor);
-        CreateLandmarkPrimitive(root.transform, "CentralQuillWaistObjective", PrimitiveType.Cylinder, new Vector3(0.0f, 0.85f, 7.0f), new Vector3(0.55f, 0.85f, 0.55f), QuillObjectiveColor);
         CreateLandmarkPrimitive(root.transform, "CentralQuillWaistRing", PrimitiveType.Cylinder, new Vector3(0.0f, 0.06f, 7.0f), new Vector3(2.8f, 0.04f, 2.8f), QuillMarkerColor);
         CreateLandmarkPrimitive(root.transform, "ShardRidgeWest", PrimitiveType.Cube, new Vector3(-16.0f, 0.08f, 18.0f), new Vector3(8.0f, 0.16f, 1.0f), ShardRidgeColor);
         CreateLandmarkPrimitive(root.transform, "ShardRidgeEast", PrimitiveType.Cube, new Vector3(16.0f, 0.08f, 18.0f), new Vector3(8.0f, 0.16f, 1.0f), ShardRidgeColor);
@@ -334,6 +333,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static Vector3 GetUnitScale(Frame frame, EntityRef entity, bool isDeadUnit)
     {
+        if (IsQuillObjective(frame, entity))
+        {
+            return new Vector3(0.75f, 1.35f, 0.75f);
+        }
+
         if (isDeadUnit)
         {
             return new Vector3(0.8f, 0.05f, 0.8f);
@@ -402,6 +406,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static PrimitiveType GetPrimitiveType(Frame frame, EntityRef entity, bool isEconomyEntity)
     {
+        if (IsQuillObjective(frame, entity))
+        {
+            return PrimitiveType.Cylinder;
+        }
+
         if (isEconomyEntity)
         {
             if (TryGetMainBuildingOwner(frame, entity, out int ownerPlayer) == false)
@@ -435,6 +444,31 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         return PrimitiveType.Cube;
+    }
+
+    private static Vector3 GetViewPositionOffset(Frame frame, EntityRef entity, bool isEconomyEntity)
+    {
+        if (IsQuillObjective(frame, entity))
+        {
+            return new Vector3(0.0f, 0.85f, 0.0f);
+        }
+
+        return isEconomyEntity ? new Vector3(0.0f, 0.5f, 0.0f) : Vector3.zero;
+    }
+
+    private static Vector3 GetViewScale(Frame frame, EntityRef entity, bool isEconomyEntity, bool isDeadUnit)
+    {
+        return isEconomyEntity ? GetEconomyScale(frame, entity) : GetUnitScale(frame, entity, isDeadUnit);
+    }
+
+    private static Color GetViewColor(Frame frame, EntityRef entity, bool isEconomyEntity, Color economyColor, bool isDeadUnit)
+    {
+        if (IsQuillObjective(frame, entity))
+        {
+            return IsSelected(frame, entity) ? SelectedColor : QuillObjectiveColor;
+        }
+
+        return isEconomyEntity ? economyColor : GetUnitColor(frame, entity, isDeadUnit);
     }
 
     private static bool TryGetMainBuildingOwner(Frame frame, EntityRef candidateEntity, out int ownerPlayer)
@@ -487,8 +521,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         HealthBarView healthBar = GetOrCreateHealthBar(entity);
         float normalizedHealth = Mathf.Clamp01((float)health / maxHealth);
         bool isHero = IsHero(frame, entity);
-        float barWidth = isEconomyEntity ? BaseHealthBarWidth : isHero ? HeroHealthBarWidth : UnitHealthBarWidth;
-        float yOffset = isEconomyEntity ? 1.65f : isHero ? 1.05f : 0.72f;
+        bool isQuillObjective = IsQuillObjective(frame, entity);
+        float barWidth = isEconomyEntity || isQuillObjective ? BaseHealthBarWidth : isHero ? HeroHealthBarWidth : UnitHealthBarWidth;
+        float yOffset = isQuillObjective ? 1.95f : isEconomyEntity ? 1.65f : isHero ? 1.05f : 0.72f;
         healthBar.Root.transform.position = worldPosition + new Vector3(0.0f, yOffset, 0.0f);
         healthBar.Root.transform.rotation = Quaternion.Euler(55.0f, 0.0f, 0.0f);
         healthBar.Root.SetActive(isDeadUnit == false || health > 0);
@@ -527,6 +562,16 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             {
                 health = supplyBuilding.Health;
                 maxHealth = supplyBuilding.MaxHealth;
+                return true;
+            }
+        }
+
+        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        {
+            if (entity == candidateEntity && targetable.OwnerPlayer == QuillObjective.NeutralOwner)
+            {
+                health = targetable.Health;
+                maxHealth = targetable.MaxHealth;
                 return true;
             }
         }
@@ -580,6 +625,19 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         return 0;
+    }
+
+    private static bool IsQuillObjective(Frame frame, EntityRef candidateEntity)
+    {
+        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        {
+            if (entity == candidateEntity)
+            {
+                return targetable.OwnerPlayer == QuillObjective.NeutralOwner;
+            }
+        }
+
+        return false;
     }
 
     private static bool IsDeadUnit(Frame frame, EntityRef candidateEntity)

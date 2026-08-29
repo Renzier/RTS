@@ -31,6 +31,8 @@ namespace Quantum
             {
                 CreateResourceNode(f, resourceNode);
             }
+
+            CreateQuillObjective(f);
         }
 
         private static void CreatePlayerState(Frame f, AnachronPrototypeScenario.PlayerSpawn player)
@@ -332,6 +334,36 @@ namespace Quantum
                 ResourceKind = resourceNode.ResourceKind,
                 AmountRemaining = resourceNode.AmountRemaining,
                 HarvestBatchSize = 5
+            });
+        }
+
+        private static void CreateQuillObjective(Frame f)
+        {
+            EntityRef entity = f.Create();
+
+            f.Set(entity, new Transform2D
+            {
+                Position = QuillObjective.Position,
+                Rotation = FP._0
+            });
+
+            f.Set(entity, new Targetable
+            {
+                OwnerPlayer = QuillObjective.NeutralOwner,
+                Health = QuillObjective.MaxHealth,
+                MaxHealth = QuillObjective.MaxHealth,
+                TargetRadius = QuillObjective.TargetRadius
+            });
+
+            f.Set(entity, new Selectable
+            {
+                IsSelected = false,
+                SelectionRadius = QuillObjective.SelectionRadius
+            });
+
+            f.Set(entity, new SelectionCandidate
+            {
+                ScreenPosition = FPVector2.Zero
             });
         }
     }

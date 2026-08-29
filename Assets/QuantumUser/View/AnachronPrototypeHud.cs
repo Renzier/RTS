@@ -105,6 +105,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         DrawSelectedBuildingPanel(frame, headerStyle, labelStyle);
         DrawSelectedSupplyPanel(frame, headerStyle, labelStyle);
+        DrawSelectedQuillObjectivePanel(frame, headerStyle, labelStyle);
         DrawSelectedWorkerBuildPanel(frame, headerStyle, labelStyle);
         DrawSupplyWorldTimers(frame, labelStyle);
         DrawWorldHealthLabels(frame, labelStyle);
@@ -381,6 +382,21 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), "Press X  Debug damage: V", labelStyle);
     }
 
+    private static void DrawSelectedQuillObjectivePanel(Frame frame, GUIStyle headerStyle, GUIStyle labelStyle)
+    {
+        if (TryGetSelectedQuillObjective(frame, out Targetable quillTargetable) == false)
+        {
+            return;
+        }
+
+        Rect panelRect = new Rect(Screen.width - RightPanelWidth - 20, 456, RightPanelWidth, 92);
+        DrawPanel(panelRect);
+
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 8, RightPanelContentWidth, RowHeight), "Quill-Waist Landmark", headerStyle);
+        DrawHealthBar(new Rect(panelRect.x + 12, panelRect.y + 32, RightPanelContentWidth, 18), quillTargetable.Health, quillTargetable.MaxHealth, labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 56, RightPanelContentWidth, RowHeight), "Neutral objective: no capture effect yet", labelStyle);
+    }
+
     private static void DrawSupplyWorldTimers(Frame frame, GUIStyle labelStyle)
     {
         Camera camera = Camera.main;
@@ -634,10 +650,39 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             }
         }
 
+        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        {
+            if (entity == candidateEntity && targetable.OwnerPlayer == QuillObjective.NeutralOwner)
+            {
+                health = targetable.Health;
+                maxHealth = targetable.MaxHealth;
+                isBuilding = true;
+                isHero = false;
+                return true;
+            }
+        }
+
         health = 0;
         maxHealth = 0;
         isBuilding = false;
         isHero = false;
+        return false;
+    }
+
+    private static bool TryGetSelectedQuillObjective(Frame frame, out Targetable quillTargetable)
+    {
+        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        {
+            if (targetable.OwnerPlayer != QuillObjective.NeutralOwner || IsSelected(frame, entity) == false)
+            {
+                continue;
+            }
+
+            quillTargetable = targetable;
+            return true;
+        }
+
+        quillTargetable = default;
         return false;
     }
 

@@ -157,6 +157,11 @@ namespace Quantum
                     continue;
                 }
 
+                if (candidateTargetable.OwnerPlayer == QuillObjective.NeutralOwner)
+                {
+                    continue;
+                }
+
                 if (IsPlayerDefeated(f, candidateTargetable.OwnerPlayer))
                 {
                     continue;

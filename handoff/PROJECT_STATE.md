@@ -30,6 +30,16 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 24 completed:
+  - Added a deterministic neutral Quill objective entity at the central Quill-waist marker.
+  - The objective uses existing `Transform2D`, `Targetable`, `Selectable`, and `SelectionCandidate` components, so no new Quantum schema was required.
+  - Neutral owner is represented as `-1` through `QuillObjective.NeutralOwner`.
+  - Selection now allows the neutral Quill objective while preserving normal owned-unit/building selection rules.
+  - Right-click attack targeting ignores neutral Quill objectives, so the landmark does not accept attack commands.
+  - The view layer now renders the central Quill objective from deterministic state instead of as a duplicate view-only pillar.
+  - Selected-object HUD now shows a neutral Quill-Waist Landmark panel with health and a no-capture-effect note.
+  - No capture logic, ownership, score, resources, victory condition, pathing effect, or placement effect was added.
+  - No Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 23 completed:
   - Added `WorkerRepairSystem` as a deterministic worker repair loop.
   - Right-clicking a damaged friendly main building or completed support building with selected live workers assigns those workers to repair.
