@@ -20,6 +20,7 @@ namespace Quantum
             systems.Add(new MainBaseDefeatSystem());
             systems.Add(new MainBuildingDestroyedCleanupSystem());
             systems.Add(new DefeatedPlayerCleanupSystem());
+            systems.Add(new GrainStateSystem());
             systems.Add(new SupplyBuildingConstructionSystem());
             systems.Add(new WorkerProductionSystem());
             systems.Add(new TechUpgradeSystem());

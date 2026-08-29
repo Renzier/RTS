@@ -48,6 +48,7 @@ namespace Quantum
                 }
 
                 RepairTarget(f, workIntent.TargetBuilding);
+                GrainStateSystem.MarkGrainLoud(f, workIntent.TargetBuilding, GrainLoudSource.WorkerRepair);
                 if (IsFullyRepaired(f, workIntent.TargetBuilding))
                 {
                     ReleaseWorker(f, workerEntity, workIntent);

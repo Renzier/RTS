@@ -132,7 +132,26 @@ namespace Quantum.Prototypes {
         result.HasTarget = this.HasTarget;
         PrototypeValidator.FindMapEntity(this.TargetNode, in context, out result.TargetNode);
         result.ResourceKind = this.ResourceKind;
-        result.TargetWorld = this.TargetWorld;
+      result.TargetWorld = this.TargetWorld;
+    }
+  }
+  [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.GrainState))]
+  public unsafe partial class GrainStatePrototype : ComponentPrototype<Quantum.GrainState> {
+    public QBoolean IsGrainLoud;
+    public Int32 GrainLoudTicksRemaining;
+    public Int32 GrainLoudSource;
+    partial void MaterializeUser(Frame frame, ref Quantum.GrainState result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.GrainState component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.GrainState result, in PrototypeMaterializationContext context = default) {
+        result.IsGrainLoud = this.IsGrainLoud;
+        result.GrainLoudTicksRemaining = this.GrainLoudTicksRemaining;
+        result.GrainLoudSource = this.GrainLoudSource;
+        MaterializeUser(frame, ref result, in context);
     }
   }
   [System.SerializableAttribute()]

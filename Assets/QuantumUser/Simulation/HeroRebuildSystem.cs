@@ -103,6 +103,7 @@ namespace Quantum
 
                 FactionStats stats = FactionStats.ForPlayer(f, heroState.PlayerIndex);
                 ReviveHero(f, heroState.HeroEntity, basePosition + new FPVector2(FP._0, FP.FromString("-2.0")), stats.HeroMaxHealth);
+                GrainStateSystem.MarkGrainLoud(f, heroState.HeroEntity, GrainLoudSource.HeroRebuild);
 
                 updatedHeroState.HasActiveHero = true;
                 updatedHeroState.RebuildAvailable = false;

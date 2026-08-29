@@ -31,6 +31,7 @@ namespace Quantum
                 updatedBuilding.Health = ClampRepair(updatedBuilding.Health, updatedBuilding.MaxHealth);
                 f.Set(entity, updatedBuilding);
                 SyncTargetableHealth(f, entity, updatedBuilding.Health, updatedBuilding.MaxHealth);
+                GrainStateSystem.MarkGrainLoud(f, entity, GrainLoudSource.PassiveMend);
             }
         }
 
@@ -51,6 +52,7 @@ namespace Quantum
                 updatedBuilding.Health = ClampRepair(updatedBuilding.Health, updatedBuilding.MaxHealth);
                 f.Set(entity, updatedBuilding);
                 SyncTargetableHealth(f, entity, updatedBuilding.Health, updatedBuilding.MaxHealth);
+                GrainStateSystem.MarkGrainLoud(f, entity, GrainLoudSource.PassiveMend);
             }
         }
 

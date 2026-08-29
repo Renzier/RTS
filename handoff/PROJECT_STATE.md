@@ -30,6 +30,16 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 31 completed:
+  - Added `GrainState` schema with `IsGrainLoud`, `GrainLoudTicksRemaining`, and `GrainLoudSource`.
+  - Added `GrainStateSystem` to tick Grain-loud exposure down over `180` deterministic ticks.
+  - Added `GrainLoudSource` constants for worker repair, passive mend, and hero rebuild.
+  - Worker repair now marks the repaired main/support building Grain-loud.
+  - Ardent Concord passive mend now marks the mended main/support building Grain-loud.
+  - Hero rebuild now marks the rebuilt hero Grain-loud.
+  - The primitive view applies a subtle cyan tint while an entity is Grain-loud.
+  - Tech upgrades remain a deferred Grain-loud source until there is a clear upgraded entity target; current upgrades are player-level state.
+  - Quantum generated component/prototype files were updated for the new schema component.
 - Kilnfall Sprint 30 completed:
   - Added `handoff/GRAIN_CAST_SEAL_CONTRACT.md`.
   - Defined Grain-loud, Cast, Seal, and Tell as shared deterministic Quantum concepts.

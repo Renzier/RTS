@@ -887,6 +887,32 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct GrainState : Quantum.IComponent {
+    public const Int32 SIZE = 12;
+    public const Int32 ALIGNMENT = 4;
+    [FieldOffset(8)]
+    public QBoolean IsGrainLoud;
+    [FieldOffset(4)]
+    public Int32 GrainLoudTicksRemaining;
+    [FieldOffset(0)]
+    public Int32 GrainLoudSource;
+    public override readonly Int32 GetHashCode() {
+      unchecked {
+        var hash = 11299;
+        hash = hash * 31 + IsGrainLoud.GetHashCode();
+        hash = hash * 31 + GrainLoudTicksRemaining.GetHashCode();
+        hash = hash * 31 + GrainLoudSource.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (GrainState*)ptr;
+        serializer.Stream.Serialize(&p->GrainLoudSource);
+        serializer.Stream.Serialize(&p->GrainLoudTicksRemaining);
+        QBoolean.Serialize(&p->IsGrainLoud, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct MoveIntent : Quantum.IComponent {
     public const Int32 SIZE = 24;
     public const Int32 ALIGNMENT = 8;
@@ -1388,6 +1414,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<Quantum.CommandIntentDebug>();
       BuildSignalsArrayOnComponentAdded<Quantum.GatherIntent>();
       BuildSignalsArrayOnComponentRemoved<Quantum.GatherIntent>();
+      BuildSignalsArrayOnComponentAdded<Quantum.GrainState>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.GrainState>();
       BuildSignalsArrayOnComponentAdded<Quantum.MainBuilding>();
       BuildSignalsArrayOnComponentRemoved<Quantum.MainBuilding>();
       BuildSignalsArrayOnComponentAdded<MapEntityLink>();
@@ -1526,6 +1554,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(FrameMetaData), FrameMetaData.SIZE);
       typeRegistry.Register(typeof(FrameTimer), FrameTimer.SIZE);
       typeRegistry.Register(typeof(Quantum.GatherIntent), Quantum.GatherIntent.SIZE);
+      typeRegistry.Register(typeof(Quantum.GrainState), Quantum.GrainState.SIZE);
       typeRegistry.Register(typeof(HingeJoint), HingeJoint.SIZE);
       typeRegistry.Register(typeof(HingeJoint3D), HingeJoint3D.SIZE);
       typeRegistry.Register(typeof(Hit), Hit.SIZE);
@@ -1595,12 +1624,13 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 20)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 21)
         .AddBuiltInComponents()
         .Add<Quantum.AttackIntent>(Quantum.AttackIntent.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.BuildingTier>(Quantum.BuildingTier.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.CommandIntentDebug>(Quantum.CommandIntentDebug.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.GatherIntent>(Quantum.GatherIntent.Serialize, null, null, ComponentFlags.None)
+        .Add<Quantum.GrainState>(Quantum.GrainState.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.MainBuilding>(Quantum.MainBuilding.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.MoveIntent>(Quantum.MoveIntent.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.PlayerEconomyState>(Quantum.PlayerEconomyState.Serialize, null, null, ComponentFlags.None)

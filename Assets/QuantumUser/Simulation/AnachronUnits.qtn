@@ -54,6 +54,12 @@ component PlayerHeroState {
     Int32 LastHeroResult;
 }
 
+component GrainState {
+    Boolean IsGrainLoud;
+    Int32 GrainLoudTicksRemaining;
+    Int32 GrainLoudSource;
+}
+
 component ResourceNode {
     Int32 ResourceKind;
     Int32 AmountRemaining;

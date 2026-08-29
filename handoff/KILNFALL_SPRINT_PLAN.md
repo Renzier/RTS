@@ -1006,7 +1006,9 @@ Acceptance:
 
 ### Sprint 31: Add Grain-Loud State
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-29: added a minimal `GrainState` component, `GrainStateSystem`, and `GrainLoudSource` constants. Worker repair, Ardent Concord passive mend, and hero rebuild now mark the repaired/rebuilt entity Grain-loud for `180` deterministic ticks. The primitive view applies a subtle cyan tint while Grain-loud. Tech upgrade remains deferred as an entity-specific Grain-loud hook because current upgrades are player-level state, not per-entity transformations.
 
 Goal: Track when a unit exposes its record through healing, repair, upgrade, or hero rebuild.
 

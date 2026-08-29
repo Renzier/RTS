@@ -33,6 +33,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static readonly Color ShardRidgeColor = new Color(0.22f, 0.24f, 0.22f, 1.0f);
     private static readonly Color QuillMarkerColor = new Color(0.78f, 0.68f, 0.42f, 1.0f);
     private static readonly Color QuillObjectiveColor = new Color(0.95f, 0.82f, 0.38f, 1.0f);
+    private static readonly Color GrainLoudTint = new Color(0.32f, 0.82f, 1.0f, 1.0f);
     private static readonly Color HealthBarBackColor = new Color(0.01f, 0.012f, 0.012f, 1.0f);
     private static readonly Color HealthBarGoodColor = new Color(0.1f, 0.9f, 0.2f, 1.0f);
     private static readonly Color HealthBarWarnColor = new Color(1.0f, 0.75f, 0.12f, 1.0f);
@@ -110,7 +111,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             view.transform.position = transform.Position.ToUnityVector3() + GetViewPositionOffset(frame, entity, isEconomyEntity);
             view.transform.rotation = Quaternion.Euler(0.0f, -transform.Rotation.AsFloat, 0.0f);
             view.transform.localScale = GetViewScale(frame, entity, isEconomyEntity, isDeadUnit);
-            view.material.color = GetViewColor(frame, entity, isEconomyEntity, economyColor, isDeadUnit);
+            view.material.color = ApplyGrainLoudTint(frame, entity, GetViewColor(frame, entity, isEconomyEntity, economyColor, isDeadUnit));
 
             UpdateHealthBar(frame, entity, transform.Position.ToUnityVector3(), isEconomyEntity, isDeadUnit);
         }
@@ -329,6 +330,19 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         return ownerPlayer == QuantumPhase0LocalSessionController.ActivePlayerSlot ? IdleColor : GetFactionColor(frame, ownerPlayer);
+    }
+
+    private static Color ApplyGrainLoudTint(Frame frame, EntityRef entity, Color baseColor)
+    {
+        foreach ((EntityRef grainEntity, GrainState grainState) in frame.GetComponentIterator<GrainState>())
+        {
+            if (grainEntity == entity && grainState.IsGrainLoud && grainState.GrainLoudTicksRemaining > 0)
+            {
+                return Color.Lerp(baseColor, GrainLoudTint, 0.45f);
+            }
+        }
+
+        return baseColor;
     }
 
     private static Vector3 GetUnitScale(Frame frame, EntityRef entity, bool isDeadUnit)
