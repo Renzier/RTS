@@ -30,6 +30,12 @@
 
 ## Most Recent Work
 
+- Selection click correction completed:
+  - Normal click selection now chooses only the nearest eligible selectable entity under the pointer.
+  - Clustered workers no longer all become selected from one click.
+  - Drag selection still selects groups inside the selection rectangle.
+  - Additive Shift-click still adds only the nearest clicked entity.
+  - Clicking empty ground without Shift clears the current selection.
 - Kilnfall Sprint 32 completed:
   - Added first-pass faction Tell labels to the HUD.
   - Ardent Concord displays `Tell: Countersign`.

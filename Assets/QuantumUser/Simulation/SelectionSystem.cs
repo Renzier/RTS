@@ -20,6 +20,12 @@ namespace Quantum
                 f.Global->LastDragStartWorld,
                 f.Global->LastDragEndWorld);
 
+            EntityRef clickedEntity = EntityRef.None;
+            if (isDragSelection == false)
+            {
+                clickedEntity = FindClickedEntity(f);
+            }
+
             foreach ((EntityRef entity, SelectionCandidate candidate) in f.GetComponentIterator<SelectionCandidate>())
             {
                 if (f.Unsafe.TryGetPointer<Selectable>(entity, out Selectable* selectable) == false)
@@ -46,7 +52,7 @@ namespace Quantum
 
                 bool isInsideSelection = isDragSelection
                     ? selectionRect.Contains(transform->Position)
-                    : Photon.Deterministic.FPVector2.Distance(transform->Position, f.Global->LastPointerWorld) <= selectable->SelectionRadius + ClickSelectionRadius;
+                    : entity == clickedEntity;
 
                 if (f.Global->LastAdditiveSelectHeld)
                 {
@@ -57,6 +63,39 @@ namespace Quantum
                     selectable->IsSelected = isInsideSelection;
                 }
             }
+        }
+
+        private static EntityRef FindClickedEntity(Frame f)
+        {
+            EntityRef bestEntity = EntityRef.None;
+            Photon.Deterministic.FP bestDistance = default;
+            bool hasBestEntity = false;
+
+            foreach ((EntityRef entity, SelectionCandidate candidate) in f.GetComponentIterator<SelectionCandidate>())
+            {
+                if (f.Unsafe.TryGetPointer<Selectable>(entity, out Selectable* selectable) == false ||
+                    f.Unsafe.TryGetPointer<Transform2D>(entity, out Transform2D* transform) == false ||
+                    IsOwnedByInputPlayer(f, entity) == false ||
+                    IsDeadOrDestroyed(f, entity))
+                {
+                    continue;
+                }
+
+                Photon.Deterministic.FP distance = Photon.Deterministic.FPVector2.Distance(transform->Position, f.Global->LastPointerWorld);
+                if (distance > selectable->SelectionRadius + ClickSelectionRadius)
+                {
+                    continue;
+                }
+
+                if (hasBestEntity == false || distance < bestDistance)
+                {
+                    bestEntity = entity;
+                    bestDistance = distance;
+                    hasBestEntity = true;
+                }
+            }
+
+            return bestEntity;
         }
 
         private static bool IsOwnedByInputPlayer(Frame f, EntityRef entity)
