@@ -88,7 +88,11 @@ namespace Quantum
                 SupplyBuilding updatedSupply = supplyBuilding;
                 if (updatedSupply.BuildTicksRemaining > 0)
                 {
-                    updatedSupply.BuildTicksRemaining--;
+                    updatedSupply.BuildTicksRemaining -= GetActiveBuilderCount(f, entity);
+                    if (updatedSupply.BuildTicksRemaining < 0)
+                    {
+                        updatedSupply.BuildTicksRemaining = 0;
+                    }
                 }
 
                 if (updatedSupply.BuildTicksRemaining <= 0)
@@ -388,6 +392,43 @@ namespace Quantum
             }
         }
 
+        public static bool TryAssignSelectedWorkersToConstruction(Frame f, int playerIndex, EntityRef supplyEntity)
+        {
+            if (f.Unsafe.TryGetPointer<SupplyBuilding>(supplyEntity, out SupplyBuilding* supplyBuilding) == false ||
+                supplyBuilding->OwnerPlayer != playerIndex ||
+                supplyBuilding->Health <= 0 ||
+                supplyBuilding->IsConstructing == false)
+            {
+                return false;
+            }
+
+            if (f.Unsafe.TryGetPointer<Transform2D>(supplyEntity, out Transform2D* supplyTransform) == false)
+            {
+                return false;
+            }
+
+            bool assignedAny = false;
+            int selectedWorkerIndex = 0;
+            foreach ((EntityRef entity, Selectable selectable) in f.GetComponentIterator<Selectable>())
+            {
+                if (selectable.IsSelected == false)
+                {
+                    continue;
+                }
+
+                if (CanAssignWorkerToConstruction(f, entity, playerIndex, supplyEntity) == false)
+                {
+                    continue;
+                }
+
+                AssignBuilder(f, entity, supplyEntity, supplyTransform->Position + GetBuilderFormationOffset(selectedWorkerIndex));
+                selectedWorkerIndex++;
+                assignedAny = true;
+            }
+
+            return assignedAny;
+        }
+
         private static void ReleaseBuildersForCompletedOrDestroyedSupply(Frame f, EntityRef supplyEntity)
         {
             foreach ((EntityRef workerEntity, WorkerBuildIntent buildIntent) in f.GetComponentIterator<WorkerBuildIntent>())
@@ -409,6 +450,89 @@ namespace Quantum
                     moveIntent->TargetWorld = FPVector2.Zero;
                 }
             }
+        }
+
+        private static int GetActiveBuilderCount(Frame f, EntityRef supplyEntity)
+        {
+            int count = 0;
+            foreach ((EntityRef workerEntity, WorkerBuildIntent buildIntent) in f.GetComponentIterator<WorkerBuildIntent>())
+            {
+                if (buildIntent.IsBuilding == false || buildIntent.TargetBuilding != supplyEntity)
+                {
+                    continue;
+                }
+
+                if (f.Unsafe.TryGetPointer<UnitIdentity>(workerEntity, out UnitIdentity* unitIdentity) == false ||
+                    unitIdentity->UnitKind != UnitKind.Worker)
+                {
+                    continue;
+                }
+
+                if (f.Unsafe.TryGetPointer<UnitHealth>(workerEntity, out UnitHealth* unitHealth) && unitHealth->IsDead)
+                {
+                    continue;
+                }
+
+                count++;
+            }
+
+            if (count < 1)
+            {
+                return 1;
+            }
+
+            return count;
+        }
+
+        private static bool CanAssignWorkerToConstruction(Frame f, EntityRef entity, int playerIndex, EntityRef supplyEntity)
+        {
+            if (f.Unsafe.TryGetPointer<UnitIdentity>(entity, out UnitIdentity* unitIdentity) == false ||
+                unitIdentity->OwnerPlayer != playerIndex ||
+                unitIdentity->UnitKind != UnitKind.Worker)
+            {
+                return false;
+            }
+
+            if (f.Unsafe.TryGetPointer<UnitHealth>(entity, out UnitHealth* unitHealth) && unitHealth->IsDead)
+            {
+                return false;
+            }
+
+            if (f.Unsafe.TryGetPointer<WorkerBuildIntent>(entity, out WorkerBuildIntent* buildIntent) &&
+                buildIntent->IsBuilding &&
+                buildIntent->TargetBuilding == supplyEntity)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static FPVector2 GetBuilderFormationOffset(int selectedWorkerIndex)
+        {
+            FP spacing = FP.FromString("0.65");
+
+            if (selectedWorkerIndex == 1)
+            {
+                return new FPVector2(spacing, FP._0);
+            }
+
+            if (selectedWorkerIndex == 2)
+            {
+                return new FPVector2(FP._0, spacing);
+            }
+
+            if (selectedWorkerIndex == 3)
+            {
+                return new FPVector2(-spacing, FP._0);
+            }
+
+            if (selectedWorkerIndex == 4)
+            {
+                return new FPVector2(FP._0, -spacing);
+            }
+
+            return FPVector2.Zero;
         }
 
         private static bool TryGetSelectedWorkerNearBuildPoint(Frame f, int playerIndex, FPVector2 buildPoint, out EntityRef builderEntity)

@@ -346,7 +346,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
     private static void DrawSelectedSupplyPanel(Frame frame, GUIStyle headerStyle, GUIStyle labelStyle)
     {
-        if (TryGetSelectedSupplyBuilding(frame, out SupplyBuilding supplyBuilding) == false)
+        if (TryGetSelectedSupplyBuilding(frame, out EntityRef supplyEntity, out SupplyBuilding supplyBuilding) == false)
         {
             return;
         }
@@ -363,7 +363,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         if (supplyBuilding.IsConstructing)
         {
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), $"Constructing: {FormatTicksAsSeconds(supplyBuilding.BuildTicksRemaining)} remaining", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), $"Constructing: {FormatTicksAsSeconds(supplyBuilding.BuildTicksRemaining)} remaining  Builders: {CountActiveBuilders(frame, supplyEntity)}", labelStyle);
             DrawProgressBar(new Rect(panelRect.x + 12, panelRect.y + 100, RightPanelContentWidth, 8), supplyBuilding.BuildTicksTotal, supplyBuilding.BuildTicksRemaining);
             GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 112, RightPanelContentWidth, RowHeight), $"Cancel: full refund - press X  Debug damage: V", labelStyle);
             return;
@@ -511,7 +511,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         return false;
     }
 
-    private static bool TryGetSelectedSupplyBuilding(Frame frame, out SupplyBuilding supplyBuilding)
+    private static bool TryGetSelectedSupplyBuilding(Frame frame, out EntityRef supplyEntity, out SupplyBuilding supplyBuilding)
     {
         foreach ((EntityRef entity, SupplyBuilding candidateSupplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
         {
@@ -520,12 +520,35 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 continue;
             }
 
+            supplyEntity = entity;
             supplyBuilding = candidateSupplyBuilding;
             return true;
         }
 
+        supplyEntity = EntityRef.None;
         supplyBuilding = default;
         return false;
+    }
+
+    private static int CountActiveBuilders(Frame frame, EntityRef supplyEntity)
+    {
+        int count = 0;
+        foreach ((EntityRef entity, WorkerBuildIntent buildIntent) in frame.GetComponentIterator<WorkerBuildIntent>())
+        {
+            if (buildIntent.IsBuilding == false || buildIntent.TargetBuilding != supplyEntity)
+            {
+                continue;
+            }
+
+            if (IsDeadUnit(frame, entity))
+            {
+                continue;
+            }
+
+            count++;
+        }
+
+        return count;
     }
 
     private static bool TryGetWorldHealth(Frame frame, EntityRef candidateEntity, out int health, out int maxHealth, out bool isBuilding, out bool isHero)

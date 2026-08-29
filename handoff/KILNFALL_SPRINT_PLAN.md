@@ -703,7 +703,7 @@ Implementation note:
 
 ### Sprint 22: Add Multi-Worker Construction Speed
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Allow multiple workers to speed construction, if this remains desired.
 
@@ -723,6 +723,17 @@ Acceptance:
 - More assigned builders reduce construction time deterministically.
 - Builder assignment/cleanup handles death, cancel, and completion.
 - CodeGen completed if schema changes.
+
+Implementation note:
+
+- Added deterministic multi-worker construction speed without changing the Quantum schema.
+- Right-clicking an owned, in-progress support foundation assigns selected live workers to help build it.
+- Workers already assigned to that same foundation are ignored so assignment is not duplicated.
+- Each construction tick now subtracts the number of live assigned builders from `BuildTicksRemaining`, with a minimum speed of `1` tick per tick.
+- Existing completion, cancellation, refund, death cleanup, and builder release paths continue to clear workers through `WorkerBuildIntent`.
+- Selected foundation HUD now shows the active builder count while construction is in progress.
+- Existing construction cost, Holding value, max health, placement validation, and deconstruction timing were unchanged.
+- No Quantum schema or CodeGen changes were required.
 
 ### Sprint 23: Add Repair Command
 

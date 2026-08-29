@@ -21,6 +21,7 @@ namespace Quantum
 
             bool hasAttackTarget = TryFindAttackTargetAtCommand(f, out EntityRef attackTargetEntity, out Targetable attackTarget, out FPVector2 attackTargetPosition);
             bool hasResourceTarget = TryFindResourceNodeAtCommand(f, out EntityRef resourceNodeEntity, out ResourceNode resourceNode, out FPVector2 resourceNodePosition);
+            bool hasConstructionTarget = TryFindOwnedConstructionAtCommand(f, out EntityRef constructionTargetEntity);
 
             f.Global->HasMoveCommandIntent = true;
             f.Global->MoveCommandPlayer = f.Global->LastInputPlayer;
@@ -36,6 +37,12 @@ namespace Quantum
                 updatedIntentDebug.MoveCommandResult = MoveCommandResult.Pending;
                 updatedIntentDebug.MoveCommandTargetWorld = f.Global->LastPointerWorld;
                 f.Set(entity, updatedIntentDebug);
+            }
+
+            if (hasConstructionTarget &&
+                SupplyBuildingConstructionSystem.TryAssignSelectedWorkersToConstruction(f, f.Global->LastInputPlayer, constructionTargetEntity))
+            {
+                return;
             }
 
             int selectedMoveIndex = 0;
@@ -194,6 +201,40 @@ namespace Quantum
                 resourceNodeEntity = entity;
                 resourceNode = candidateNode;
                 resourceNodePosition = transform->Position;
+                found = true;
+            }
+
+            return found;
+        }
+
+        private static bool TryFindOwnedConstructionAtCommand(Frame f, out EntityRef supplyEntity)
+        {
+            supplyEntity = EntityRef.None;
+
+            FP bestDistance = AttackCommandRadius;
+            bool found = false;
+            foreach ((EntityRef entity, SupplyBuilding supplyBuilding) in f.GetComponentIterator<SupplyBuilding>())
+            {
+                if (supplyBuilding.OwnerPlayer != f.Global->LastInputPlayer ||
+                    supplyBuilding.Health <= 0 ||
+                    supplyBuilding.IsConstructing == false)
+                {
+                    continue;
+                }
+
+                if (f.Unsafe.TryGetPointer<Transform2D>(entity, out Transform2D* transform) == false)
+                {
+                    continue;
+                }
+
+                FP distance = FPVector2.Distance(transform->Position, f.Global->LastPointerWorld);
+                if (distance > bestDistance)
+                {
+                    continue;
+                }
+
+                bestDistance = distance;
+                supplyEntity = entity;
                 found = true;
             }
 
