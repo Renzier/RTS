@@ -1030,7 +1030,9 @@ Acceptance:
 
 ### Sprint 32: Add Faction Tell Labels
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-29: selected/listed units and selected main/support buildings now show first-pass Tell labels in the HUD: Ardent Concord `Countersign`, Wrought `Count`, and Gharn `Burr`. Entities with active `GrainState` append `Grain-loud`. This is view-only and has no gameplay effect.
 
 Goal: Add UI/lore labels for each faction's identity check.
 

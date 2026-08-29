@@ -30,6 +30,15 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 32 completed:
+  - Added first-pass faction Tell labels to the HUD.
+  - Ardent Concord displays `Tell: Countersign`.
+  - Wrought displays `Tell: Count`.
+  - Gharn displays `Tell: Burr`.
+  - Owned units in the Player Units list now include their Tell label.
+  - Selected main buildings and support buildings now include their Tell label.
+  - Active Grain-loud entities append `Grain-loud` to the Tell label.
+  - This is view-only and has no simulation gameplay effect.
 - Kilnfall Sprint 31 completed:
   - Added `GrainState` schema with `IsGrainLoud`, `GrainLoudTicksRemaining`, and `GrainLoudSource`.
   - Added `GrainStateSystem` to tick Grain-loud exposure down over `180` deterministic ticks.

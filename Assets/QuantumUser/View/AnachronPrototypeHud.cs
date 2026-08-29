@@ -100,7 +100,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 continue;
             }
 
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{GetShortEntityName(entity)} {GetUnitDisplayName(frame, unitIdentity)}: {GetUnitState(frame, entity)} HP {GetUnitHealth(frame, entity)} {GetAttackLabel(frame, entity)} {GetCarryLabel(frame, entity)}", labelStyle);
+            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{GetShortEntityName(entity)} {GetUnitDisplayName(frame, unitIdentity)}: {GetUnitState(frame, entity)} HP {GetUnitHealth(frame, entity)} {GetAttackLabel(frame, entity)} {GetCarryLabel(frame, entity)} {GetTellLabel(frame, entity, unitIdentity.OwnerPlayer)}", labelStyle);
             row++;
         }
 
@@ -307,7 +307,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
     private static void DrawSelectedBuildingPanel(Frame frame, GUIStyle headerStyle, GUIStyle labelStyle)
     {
-        if (TryGetSelectedMainBuilding(frame, out MainBuilding mainBuilding, out int buildingTier) == false)
+        if (TryGetSelectedMainBuilding(frame, out EntityRef mainEntity, out MainBuilding mainBuilding, out int buildingTier) == false)
         {
             return;
         }
@@ -322,16 +322,18 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         if (TryGetTechState(frame, mainBuilding.OwnerPlayer, out PlayerTechState techState) && techState.UpgradeInProgress)
         {
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), $"Upgrading to T{techState.UpgradeTargetTier}", labelStyle);
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), $"{FormatTicksAsSeconds(techState.UpgradeTicksRemaining)} remaining  Debug damage: V", labelStyle);
-            DrawProgressBar(new Rect(panelRect.x + 12, panelRect.y + 124, RightPanelContentWidth, 10), techState.UpgradeTicksTotal, techState.UpgradeTicksRemaining);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), GetTellLabel(frame, mainEntity, mainBuilding.OwnerPlayer), labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), $"Upgrading to T{techState.UpgradeTargetTier}", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 124, RightPanelContentWidth, RowHeight), $"{FormatTicksAsSeconds(techState.UpgradeTicksRemaining)} remaining  Debug damage: V", labelStyle);
+            DrawProgressBar(new Rect(panelRect.x + 12, panelRect.y + 146, RightPanelContentWidth, 10), techState.UpgradeTicksTotal, techState.UpgradeTicksRemaining);
             return;
         }
 
         if (buildingTier >= MaxTechTier)
         {
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), "Upgrade: Max Tier", labelStyle);
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), "Debug damage: press V", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), GetTellLabel(frame, mainEntity, mainBuilding.OwnerPlayer), labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), "Upgrade: Max Tier", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 124, RightPanelContentWidth, RowHeight), "Debug damage: press V", labelStyle);
             return;
         }
 
@@ -342,8 +344,9 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                          economyState.Iron >= ironCost;
         string status = canAfford ? "Ready - press T" : $"Need {GetResourceShortfall(economyState, woodCost, ironCost)}";
 
-        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), $"Upgrade to T{nextTier}: {FormatResourcePair(woodCost, ironCost)}", labelStyle);
-        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), $"{status}  Debug damage: V", labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), GetTellLabel(frame, mainEntity, mainBuilding.OwnerPlayer), labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), $"Upgrade to T{nextTier}: {FormatResourcePair(woodCost, ironCost)}", labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 124, RightPanelContentWidth, RowHeight), $"{status}  Debug damage: V", labelStyle);
     }
 
     private static void DrawSelectedSupplyPanel(Frame frame, GUIStyle headerStyle, GUIStyle labelStyle)
@@ -354,7 +357,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         }
 
         bool isTimedAction = supplyBuilding.IsConstructing || supplyBuilding.IsDeconstructing;
-        Rect panelRect = new Rect(Screen.width - RightPanelWidth - 20, 314, RightPanelWidth, isTimedAction ? 140 : 132);
+        Rect panelRect = new Rect(Screen.width - RightPanelWidth - 20, 314, RightPanelWidth, isTimedAction ? 162 : 154);
         DrawPanel(panelRect);
 
         string supplyName = GetSupplyBuildingDisplayName(frame, supplyBuilding.OwnerPlayer);
@@ -365,22 +368,25 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         if (supplyBuilding.IsConstructing)
         {
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), $"Constructing: {FormatTicksAsSeconds(supplyBuilding.BuildTicksRemaining)} remaining  Builders: {CountActiveBuilders(frame, supplyEntity)}", labelStyle);
-            DrawProgressBar(new Rect(panelRect.x + 12, panelRect.y + 100, RightPanelContentWidth, 8), supplyBuilding.BuildTicksTotal, supplyBuilding.BuildTicksRemaining);
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 112, RightPanelContentWidth, RowHeight), $"Cancel: full refund - press X  Debug damage: V", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), GetTellLabel(frame, supplyEntity, supplyBuilding.OwnerPlayer), labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), $"Constructing: {FormatTicksAsSeconds(supplyBuilding.BuildTicksRemaining)} remaining  Builders: {CountActiveBuilders(frame, supplyEntity)}", labelStyle);
+            DrawProgressBar(new Rect(panelRect.x + 12, panelRect.y + 122, RightPanelContentWidth, 8), supplyBuilding.BuildTicksTotal, supplyBuilding.BuildTicksRemaining);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 134, RightPanelContentWidth, RowHeight), $"Cancel: full refund - press X  Debug damage: V", labelStyle);
             return;
         }
 
         if (supplyBuilding.IsDeconstructing)
         {
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), $"Deconstructing: {FormatTicksAsSeconds(supplyBuilding.DeconstructTicksRemaining)} remaining", labelStyle);
-            DrawProgressBar(new Rect(panelRect.x + 12, panelRect.y + 100, RightPanelContentWidth, 8), supplyBuilding.DeconstructTicksTotal, supplyBuilding.DeconstructTicksRemaining);
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 112, RightPanelContentWidth, RowHeight), $"Refund: {FormatResourcePair(supplyBuilding.WoodCost * 80 / 100, supplyBuilding.IronCost * 80 / 100)}", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), GetTellLabel(frame, supplyEntity, supplyBuilding.OwnerPlayer), labelStyle);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), $"Deconstructing: {FormatTicksAsSeconds(supplyBuilding.DeconstructTicksRemaining)} remaining", labelStyle);
+            DrawProgressBar(new Rect(panelRect.x + 12, panelRect.y + 122, RightPanelContentWidth, 8), supplyBuilding.DeconstructTicksTotal, supplyBuilding.DeconstructTicksRemaining);
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 134, RightPanelContentWidth, RowHeight), $"Refund: {FormatResourcePair(supplyBuilding.WoodCost * 80 / 100, supplyBuilding.IronCost * 80 / 100)}", labelStyle);
             return;
         }
 
-        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), $"Deconstruct: {FormatResourcePair(supplyBuilding.WoodCost * 80 / 100, supplyBuilding.IronCost * 80 / 100)}", labelStyle);
-        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), "Press X  Debug damage: V", labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 80, RightPanelContentWidth, RowHeight), GetTellLabel(frame, supplyEntity, supplyBuilding.OwnerPlayer), labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 102, RightPanelContentWidth, RowHeight), $"Deconstruct: {FormatResourcePair(supplyBuilding.WoodCost * 80 / 100, supplyBuilding.IronCost * 80 / 100)}", labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 124, RightPanelContentWidth, RowHeight), "Press X  Debug damage: V", labelStyle);
     }
 
     private static void DrawSelectedQuillObjectivePanel(Frame frame, GUIStyle headerStyle, GUIStyle labelStyle)
@@ -555,7 +561,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         return false;
     }
 
-    private static bool TryGetSelectedMainBuilding(Frame frame, out MainBuilding mainBuilding, out int buildingTier)
+    private static bool TryGetSelectedMainBuilding(Frame frame, out EntityRef mainEntity, out MainBuilding mainBuilding, out int buildingTier)
     {
         foreach ((EntityRef entity, MainBuilding candidateMainBuilding) in frame.GetComponentIterator<MainBuilding>())
         {
@@ -565,10 +571,12 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             }
 
             mainBuilding = candidateMainBuilding;
+            mainEntity = entity;
             buildingTier = GetBuildingTier(frame, entity);
             return true;
         }
 
+        mainEntity = EntityRef.None;
         mainBuilding = default;
         buildingTier = 1;
         return false;
@@ -853,6 +861,48 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         }
 
         return "Countersign Post";
+    }
+
+    private static string GetTellLabel(Frame frame, EntityRef entity, int playerIndex)
+    {
+        string tell = GetFactionTellLabel(frame, playerIndex);
+        if (IsGrainLoud(frame, entity))
+        {
+            return $"Tell: {tell}  Grain-loud";
+        }
+
+        return $"Tell: {tell}";
+    }
+
+    private static string GetFactionTellLabel(Frame frame, int playerIndex)
+    {
+        int factionId = GetFactionId(frame, playerIndex);
+        if (factionId == FactionId.Fantasy)
+        {
+            return "Count";
+        }
+
+        if (factionId == FactionId.Hybrid)
+        {
+            return "Burr";
+        }
+
+        return "Countersign";
+    }
+
+    private static bool IsGrainLoud(Frame frame, EntityRef candidateEntity)
+    {
+        foreach ((EntityRef entity, GrainState grainState) in frame.GetComponentIterator<GrainState>())
+        {
+            if (entity == candidateEntity &&
+                grainState.IsGrainLoud &&
+                grainState.GrainLoudTicksRemaining > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static string GetUpgradeProgressLabel(PlayerTechState techState)
