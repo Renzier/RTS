@@ -978,7 +978,9 @@ Acceptance:
 
 ### Sprint 30: Grain/Cast/Seal Data Contract Note
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-29: added `handoff/GRAIN_CAST_SEAL_CONTRACT.md`. The note defines Grain-loud, Cast, Seal, and Tell as shared deterministic Quantum concepts, lists first-pass schema directions and exposure sources, recommends simple Tell labels, and blocks future Virii copying from becoming one-off faction hacks. No code, schema, or gameplay behavior changed.
 
 Goal: Define the reusable data model for Grain-loud, Cast, Seal, Tell, and Virii copying before implementing any Virii mechanics.
 
@@ -1429,6 +1431,6 @@ Use this order first:
 10. Sprint 9: Rename Prototype Scenario Concept.
 11. Sprint 28: Quantum MovementDomain Architecture Note. `[x]`
 12. Sprint 29: Ardent Concord Pathfinder Scope Note. `[x]`
-13. Sprint 30: Grain/Cast/Seal Data Contract Note.
+13. Sprint 30: Grain/Cast/Seal Data Contract Note. `[x]`
 
-After that, choose between map identity work, pathing stability, or first Ardent Concord mechanics. Do not start domain expansion or Virii implementation before the relevant architecture/data-contract notes exist.
+After that, choose between map identity work, pathing stability, or first Ardent Concord mechanics. Domain expansion and Virii implementation now have the required architecture/data-contract notes, but should still start with small proof sprints.

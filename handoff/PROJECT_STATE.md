@@ -30,6 +30,15 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 30 completed:
+  - Added `handoff/GRAIN_CAST_SEAL_CONTRACT.md`.
+  - Defined Grain-loud, Cast, Seal, and Tell as shared deterministic Quantum concepts.
+  - Recommended first-pass data model fields for future Grain state, Identity Seal, Cast record, and Tell state.
+  - Listed deterministic Grain-loud exposure sources: repair, passive mend, healing, upgrades, tier sync, hero rebuild, transformations, future domain transitions, Quill-root interactions, and future Virii observation.
+  - Defined simple first-pass Tell labels: None, TrueSeal, Unsealed, FalseCast, GrainLoud, and Unheld.
+  - Clarified that faction-specific authenticity mechanics should eventually check Seal rather than copied visuals/Cast alone.
+  - Added Virii copying guardrails so future copy mechanics use shared Grain/Cast/Seal/Tell state instead of one-off faction hacks.
+  - No code, schema, or gameplay behavior changed.
 - Kilnfall Sprint 29 completed:
   - Added `handoff/ARDENT_CONCORD_PATHFINDER_SCOPE.md`.
   - Defined Ardent Concord as the first mission-quality pathfinder faction for proving core RTS loops before broad roster expansion.
