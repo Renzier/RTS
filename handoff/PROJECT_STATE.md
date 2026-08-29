@@ -30,6 +30,13 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 34 completed:
+  - Added `handoff/FACTION_ID_EXPANSION_STRATEGY.md`.
+  - Chose to extend the current deterministic integer `FactionId` constants into canonical Kilnfall IDs.
+  - Preserved `Tech`, `Fantasy`, and `Hybrid` as compatibility aliases for Ardent Concord, Wrought, and Gharn.
+  - Recommended IDs: Ardent Concord `0`, Wrought `1`, Gharn `2`, Seethe `3`, Veirn `4`, Vaelun `5`, Nimhara `6`, Virii `7`.
+  - Confirmed no `.qtn` schema change is needed for faction expansion because `FactionId` is already stored as an `Int32`.
+  - No code, stats, UI, schema, or gameplay behavior changed.
 - Kilnfall Sprint 33 completed:
   - Added a current repo placeholder under the Virii section of `handoff/KILNFALL_GAME_DIRECTION.md`.
   - Confirmed Virii are not playable in the current three-faction prototype.

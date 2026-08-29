@@ -1081,7 +1081,9 @@ Acceptance:
 
 ### Sprint 34: Decide Faction ID Expansion Strategy
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-29: added `handoff/FACTION_ID_EXPANSION_STRATEGY.md`. The decision is to extend the existing deterministic integer IDs into canonical Kilnfall constants while preserving `Tech`, `Fantasy`, and `Hybrid` as compatibility aliases for Ardent Concord, Wrought, and Gharn. No code, schema, stats, UI, or gameplay behavior changed.
 
 Goal: Choose how to support all eight Kilnfall powers.
 
