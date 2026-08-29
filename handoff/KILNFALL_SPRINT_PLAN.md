@@ -634,7 +634,7 @@ Implementation note:
 
 ### Sprint 20: Add Faction-Specific Supply Costs
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Let Countersign Post, Count Relay, and Tally Stone have distinct costs.
 
@@ -652,6 +652,19 @@ Acceptance:
 
 - Build command charges the correct faction-specific cost.
 - Refund/deconstruction uses the original paid cost correctly.
+
+Implementation note:
+
+- Added support-building costs to `FactionStats`.
+- Ardent Concord Countersign Post remains `100` Salvage / `50` Plate.
+- Wrought Count Relay now costs `120` Salvage / `70` Plate.
+- Gharn Tally Stone now costs `90` Salvage / `45` Plate.
+- `SupplyBuildingConstructionSystem` now checks, deducts, and stores faction-specific support-building costs.
+- Construction cancel and completed deconstruction refunds continue to use the stored original paid cost.
+- Worker build-mode HUD and placement failure feedback now read faction-specific support-building affordability.
+- Fixed placement preview affordability to check the active local player slot instead of always checking player `0`.
+- Existing construction timing, food provided, health, placement geometry validation, builder assignment, and deconstruction timing were unchanged.
+- No Quantum schema or CodeGen changes were required.
 
 ### Sprint 21: Add Faction-Specific Supply Cap Values
 

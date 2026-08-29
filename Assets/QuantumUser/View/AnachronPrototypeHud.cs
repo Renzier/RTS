@@ -20,8 +20,6 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private const int MaxTechTier = 3;
     private const int BaseWoodUpgradeCost = 200;
     private const int BaseIronUpgradeCost = 150;
-    private const int SupplyWoodCost = 100;
-    private const int SupplyIronCost = 50;
     private const int SupplyFoodProvided = 5;
     private const float ActionNotificationSeconds = 2.25f;
     private int _lastUpgradeSignal = int.MinValue;
@@ -984,7 +982,8 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         if (AnachronQuantumInput.BuildModeActive)
         {
-            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 30, RightPanelContentWidth, RowHeight), $"{GetSupplyBuildingDisplayName(frame, GetLocalPlayerIndex())}: {FormatResourcePair(SupplyWoodCost, SupplyIronCost)}", labelStyle);
+            FactionStats stats = FactionStats.ForPlayer(frame, GetLocalPlayerIndex());
+            GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 30, RightPanelContentWidth, RowHeight), $"{GetSupplyBuildingDisplayName(frame, GetLocalPlayerIndex())}: {FormatResourcePair(stats.SupplyBuildingWoodCost, stats.SupplyBuildingIronCost)}", labelStyle);
             GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 52, RightPanelContentWidth, RowHeight), $"+{SupplyFoodProvided} Holding - press C to place", labelStyle);
             GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 74, RightPanelContentWidth, RowHeight), AnachronBuildPlacementPreview.PlacementStatus, labelStyle);
             return;

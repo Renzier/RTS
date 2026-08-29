@@ -30,6 +30,17 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 20 completed:
+  - Added faction-specific support-building costs through `FactionStats`.
+  - Ardent Concord Countersign Post remains `100` Salvage / `50` Plate.
+  - Wrought Count Relay now costs `120` Salvage / `70` Plate.
+  - Gharn Tally Stone now costs `90` Salvage / `45` Plate.
+  - `SupplyBuildingConstructionSystem` now checks, deducts, and stores faction-specific support-building costs.
+  - Construction cancellation and completed deconstruction refunds continue to use the stored original paid cost.
+  - Worker build-mode HUD and placement failure feedback now read faction-specific support-building affordability.
+  - Placement preview affordability now checks the active local player slot instead of always checking player `0`.
+  - Existing construction timing, food provided, health, placement geometry validation, builder assignment, and deconstruction timing were unchanged.
+  - No Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 19 completed:
   - Added faction-specific worker production costs through `FactionStats`.
   - Ardent Concord Keelwatch Ranker remains `50` Salvage / `25` Plate / `1` Holding.

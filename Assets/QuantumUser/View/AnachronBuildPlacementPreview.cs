@@ -15,9 +15,6 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
     private const float GridSpacing = 1.5f;
     private const float GridLineThickness = 0.035f;
     private const float GridLineHeight = 0.04f;
-    private const int SupplyWoodCost = 100;
-    private const int SupplyIronCost = 50;
-
     public static string PlacementStatus { get; private set; } = string.Empty;
 
     private Renderer _previewRenderer;
@@ -174,9 +171,11 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
 
     private static bool TryGetPlacementStatus(Frame frame, Vector2 workerPosition, Vector2 buildPoint, out string status)
     {
-        if (TryGetPlayerEconomy(frame, 0, out PlayerEconomyState economyState) == false ||
-            economyState.Wood < SupplyWoodCost ||
-            economyState.Iron < SupplyIronCost)
+        int playerIndex = QuantumPhase0LocalSessionController.ActivePlayerSlot;
+        FactionStats stats = FactionStats.ForPlayer(frame, playerIndex);
+        if (TryGetPlayerEconomy(frame, playerIndex, out PlayerEconomyState economyState) == false ||
+            economyState.Wood < stats.SupplyBuildingWoodCost ||
+            economyState.Iron < stats.SupplyBuildingIronCost)
         {
             status = "Need more Salvage or Plate";
             return false;

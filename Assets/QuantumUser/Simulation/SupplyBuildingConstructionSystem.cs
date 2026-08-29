@@ -6,8 +6,6 @@ namespace Quantum
     {
         private const int BuildSupplyIntent = 4;
         private const int DeconstructSupplyIntent = 5;
-        private const int SupplyWoodCost = 100;
-        private const int SupplyIronCost = 50;
         private const int SupplyFoodProvided = 5;
         private const int SupplyBuildTicks = 600;
         private const int SupplyDeconstructTicks = 300;
@@ -38,11 +36,12 @@ namespace Quantum
 
             f.Global->LastUpgradeIntent = 0;
             int playerIndex = f.Global->LastInputPlayer;
+            FactionStats stats = FactionStats.ForPlayer(f, playerIndex);
 
             if (TryGetEconomyState(f, playerIndex, out EntityRef economyEntity, out PlayerEconomyState economyState) == false ||
                 economyState.IsDefeated ||
-                economyState.Wood < SupplyWoodCost ||
-                economyState.Iron < SupplyIronCost)
+                economyState.Wood < stats.SupplyBuildingWoodCost ||
+                economyState.Iron < stats.SupplyBuildingIronCost)
             {
                 return;
             }
@@ -54,8 +53,8 @@ namespace Quantum
             }
 
             PlayerEconomyState updatedEconomy = economyState;
-            updatedEconomy.Wood -= SupplyWoodCost;
-            updatedEconomy.Iron -= SupplyIronCost;
+            updatedEconomy.Wood -= stats.SupplyBuildingWoodCost;
+            updatedEconomy.Iron -= stats.SupplyBuildingIronCost;
             f.Set(economyEntity, updatedEconomy);
 
             EntityRef supplyEntity = CreateSupplyBuilding(f, playerIndex, f.Global->LastPointerWorld);
@@ -142,8 +141,8 @@ namespace Quantum
                 HasGrantedFood = false,
                 BuildTicksRemaining = SupplyBuildTicks,
                 BuildTicksTotal = SupplyBuildTicks,
-                WoodCost = SupplyWoodCost,
-                IronCost = SupplyIronCost,
+                WoodCost = stats.SupplyBuildingWoodCost,
+                IronCost = stats.SupplyBuildingIronCost,
                 HasRefunded = false,
                 IsDeconstructing = false,
                 DeconstructTicksRemaining = 0,
