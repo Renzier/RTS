@@ -6,8 +6,16 @@ namespace Quantum
     {
         public const int NeutralOwner = -1;
         public const int MaxHealth = 2000;
+        public const int CaptureRequired = 2000;
+        public const int CapturePerUnitTick = 5;
         public static readonly FPVector2 Position = new FPVector2(FP._0, FP.FromString("7.0"));
         public static readonly FP TargetRadius = FP.FromString("1.35");
         public static readonly FP SelectionRadius = FP.FromString("1.55");
+        public static readonly FP CaptureRadius = FP.FromString("5.0");
+
+        public static bool IsObjectivePosition(FPVector2 position)
+        {
+            return FPVector2.Distance(position, Position) <= FP.EN1;
+        }
     }
 }

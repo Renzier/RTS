@@ -61,7 +61,7 @@ namespace Quantum
 
         private static bool IsOwnedByInputPlayer(Frame f, EntityRef entity)
         {
-            if (IsNeutralQuillObjective(f, entity))
+            if (IsQuillObjective(f, entity))
             {
                 return true;
             }
@@ -84,10 +84,10 @@ namespace Quantum
             return false;
         }
 
-        private static bool IsNeutralQuillObjective(Frame f, EntityRef entity)
+        private static bool IsQuillObjective(Frame f, EntityRef entity)
         {
-            return f.Unsafe.TryGetPointer<Targetable>(entity, out Targetable* targetable) &&
-                   targetable->OwnerPlayer == QuillObjective.NeutralOwner;
+            return f.Unsafe.TryGetPointer<Transform2D>(entity, out Transform2D* transform) &&
+                   QuillObjective.IsObjectivePosition(transform->Position);
         }
 
         private static bool IsDeadOrDestroyed(Frame f, EntityRef entity)

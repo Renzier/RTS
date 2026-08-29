@@ -157,7 +157,7 @@ namespace Quantum
                     continue;
                 }
 
-                if (candidateTargetable.OwnerPlayer == QuillObjective.NeutralOwner)
+                if (IsQuillObjective(f, entity))
                 {
                     continue;
                 }
@@ -304,6 +304,12 @@ namespace Quantum
             }
 
             return false;
+        }
+
+        private static bool IsQuillObjective(Frame f, EntityRef entity)
+        {
+            return f.Unsafe.TryGetPointer<Transform2D>(entity, out Transform2D* transform) &&
+                   QuillObjective.IsObjectivePosition(transform->Position);
         }
 
         private static FPVector2 GetFormationOffset(int selectedMoveIndex)

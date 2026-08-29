@@ -811,7 +811,7 @@ Implementation note:
 
 ### Sprint 25: Quill Capture Progress
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Add ground-domain capture progress for the Quill waist.
 
@@ -833,6 +833,18 @@ Acceptance:
 - Capture progress changes deterministically.
 - UI shows neutral/owned/contested state.
 - Ownership survives normal gameplay until changed.
+
+Implementation note:
+
+- Added `QuillCaptureSystem` as a deterministic capture-progress loop.
+- The Quill objective remains schema-free by storing capture owner in the existing `Targetable.OwnerPlayer` field and capture progress in `Targetable.Health/MaxHealth`.
+- Live worker and hero units inside the Quill capture radius contribute to capture.
+- A single present faction drains capture progress from the current owner/neutral state; when progress reaches `0`, ownership switches to that faction and progress resets full.
+- Multiple factions inside the capture radius contest the objective and reset it to neutral/full progress for this first pass.
+- Selection, view, HUD, and attack targeting now identify the Quill by deterministic objective position so ownership changes do not make it unselectable or attackable.
+- Selected Quill HUD shows current owner/neutral state and capture progress.
+- No bonus, resource effect, victory condition, pathing effect, placement effect, or new Quantum schema was added.
+- No Quantum CodeGen changes were required.
 
 ### Sprint 26: Quill Ownership Bonus
 

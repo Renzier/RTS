@@ -568,7 +568,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
         foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
         {
-            if (entity == candidateEntity && targetable.OwnerPlayer == QuillObjective.NeutralOwner)
+            if (entity == candidateEntity && IsQuillObjective(frame, entity))
             {
                 health = targetable.Health;
                 maxHealth = targetable.MaxHealth;
@@ -633,7 +633,8 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         {
             if (entity == candidateEntity)
             {
-                return targetable.OwnerPlayer == QuillObjective.NeutralOwner;
+                return TryGetTransform(frame, entity, out Transform2D transform) &&
+                       QuillObjective.IsObjectivePosition(transform.Position);
             }
         }
 

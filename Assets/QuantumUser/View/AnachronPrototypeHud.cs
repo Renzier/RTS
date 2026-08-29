@@ -394,7 +394,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 8, RightPanelContentWidth, RowHeight), "Quill-Waist Landmark", headerStyle);
         DrawHealthBar(new Rect(panelRect.x + 12, panelRect.y + 32, RightPanelContentWidth, 18), quillTargetable.Health, quillTargetable.MaxHealth, labelStyle);
-        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 56, RightPanelContentWidth, RowHeight), "Neutral objective: no capture effect yet", labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 56, RightPanelContentWidth, RowHeight), GetQuillObjectiveStatus(frame, quillTargetable), labelStyle);
     }
 
     private static void DrawSupplyWorldTimers(Frame frame, GUIStyle labelStyle)
@@ -652,7 +652,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
         {
-            if (entity == candidateEntity && targetable.OwnerPlayer == QuillObjective.NeutralOwner)
+            if (entity == candidateEntity && IsQuillObjective(frame, entity))
             {
                 health = targetable.Health;
                 maxHealth = targetable.MaxHealth;
@@ -673,7 +673,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     {
         foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
         {
-            if (targetable.OwnerPlayer != QuillObjective.NeutralOwner || IsSelected(frame, entity) == false)
+            if (IsQuillObjective(frame, entity) == false || IsSelected(frame, entity) == false)
             {
                 continue;
             }
@@ -684,6 +684,28 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         quillTargetable = default;
         return false;
+    }
+
+    private static bool IsQuillObjective(Frame frame, EntityRef candidateEntity)
+    {
+        foreach ((EntityRef entity, Transform2D transform) in frame.GetComponentIterator<Transform2D>())
+        {
+            if (entity == candidateEntity)
+            {
+                return QuillObjective.IsObjectivePosition(transform.Position);
+            }
+        }
+
+        return false;
+    }
+
+    private static string GetQuillObjectiveStatus(Frame frame, Targetable quillTargetable)
+    {
+        string owner = quillTargetable.OwnerPlayer == QuillObjective.NeutralOwner
+            ? "Neutral"
+            : GetFactionName(frame, quillTargetable.OwnerPlayer);
+
+        return $"{owner}: capture {quillTargetable.Health}/{quillTargetable.MaxHealth}";
     }
 
     private static bool TryGetEconomyState(Frame frame, int playerIndex, out PlayerEconomyState economyState)
