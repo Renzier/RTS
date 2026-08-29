@@ -737,7 +737,7 @@ Implementation note:
 
 ### Sprint 23: Add Repair Command
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Add basic worker repair for damaged friendly buildings.
 
@@ -759,6 +759,18 @@ Acceptance:
 - Workers can repair friendly damaged buildings.
 - Repair costs/resources are deterministic.
 - Combat damage and death cleanup still work.
+
+Implementation note:
+
+- Added `WorkerRepairSystem` as a deterministic worker repair loop.
+- Right-clicking a damaged friendly main building or completed support building with selected live workers assigns those workers to repair.
+- Repair workers move near the target and only repair while within repair range.
+- Each assigned worker repairs `10` HP every `30` simulation ticks, spending `2` Salvage and `1` Plate per repair pulse.
+- Repair stops automatically when the target is fully repaired, destroyed, no longer repairable, or the worker dies.
+- Construction workers remain ignored by repair logic, so active foundation building is not interrupted.
+- Selected worker HUD and unit state text now distinguish repairing from building.
+- Existing Ardent Concord passive mend, combat damage, construction, cancellation, deconstruction, and death cleanup behavior were preserved.
+- No Quantum schema or CodeGen changes were required.
 
 ## Quill Objective Path
 

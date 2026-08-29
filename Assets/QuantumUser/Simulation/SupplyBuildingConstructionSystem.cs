@@ -210,8 +210,12 @@ namespace Quantum
                     continue;
                 }
 
-                supplyEntity = buildIntent.TargetBuilding;
-                return true;
+                if (f.Unsafe.TryGetPointer<SupplyBuilding>(buildIntent.TargetBuilding, out SupplyBuilding* supplyBuilding) &&
+                    supplyBuilding->IsConstructing)
+                {
+                    supplyEntity = buildIntent.TargetBuilding;
+                    return true;
+                }
             }
 
             supplyEntity = EntityRef.None;

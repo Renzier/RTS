@@ -26,6 +26,7 @@ namespace Quantum
             systems.Add(new BuildingTierSyncSystem());
             systems.Add(new PrototypeDebugDamageSystem());
             systems.Add(new ArdentConcordRepairSystem());
+            systems.Add(new WorkerRepairSystem());
             systems.Add(new HeroTechCombatStatsSystem());
             systems.Add(new HeroLifecycleSystem());
             systems.Add(new HeroRebuildSystem());

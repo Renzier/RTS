@@ -22,6 +22,7 @@ namespace Quantum
             bool hasAttackTarget = TryFindAttackTargetAtCommand(f, out EntityRef attackTargetEntity, out Targetable attackTarget, out FPVector2 attackTargetPosition);
             bool hasResourceTarget = TryFindResourceNodeAtCommand(f, out EntityRef resourceNodeEntity, out ResourceNode resourceNode, out FPVector2 resourceNodePosition);
             bool hasConstructionTarget = TryFindOwnedConstructionAtCommand(f, out EntityRef constructionTargetEntity);
+            bool hasRepairTarget = TryFindOwnedRepairTargetAtCommand(f, out EntityRef repairTargetEntity);
 
             f.Global->HasMoveCommandIntent = true;
             f.Global->MoveCommandPlayer = f.Global->LastInputPlayer;
@@ -41,6 +42,12 @@ namespace Quantum
 
             if (hasConstructionTarget &&
                 SupplyBuildingConstructionSystem.TryAssignSelectedWorkersToConstruction(f, f.Global->LastInputPlayer, constructionTargetEntity))
+            {
+                return;
+            }
+
+            if (hasRepairTarget &&
+                WorkerRepairSystem.TryAssignSelectedWorkersToRepair(f, f.Global->LastInputPlayer, repairTargetEntity))
             {
                 return;
             }
@@ -239,6 +246,59 @@ namespace Quantum
             }
 
             return found;
+        }
+
+        private static bool TryFindOwnedRepairTargetAtCommand(Frame f, out EntityRef targetEntity)
+        {
+            targetEntity = EntityRef.None;
+
+            FP bestDistance = AttackCommandRadius;
+            bool found = false;
+            foreach ((EntityRef entity, Targetable targetable) in f.GetComponentIterator<Targetable>())
+            {
+                if (targetable.OwnerPlayer != f.Global->LastInputPlayer ||
+                    targetable.Health <= 0 ||
+                    targetable.Health >= targetable.MaxHealth ||
+                    IsCompletedFriendlyBuilding(f, entity) == false)
+                {
+                    continue;
+                }
+
+                if (f.Unsafe.TryGetPointer<Transform2D>(entity, out Transform2D* transform) == false)
+                {
+                    continue;
+                }
+
+                FP distance = FPVector2.Distance(transform->Position, f.Global->LastPointerWorld);
+                if (distance > bestDistance + targetable.TargetRadius)
+                {
+                    continue;
+                }
+
+                bestDistance = distance;
+                targetEntity = entity;
+                found = true;
+            }
+
+            return found;
+        }
+
+        private static bool IsCompletedFriendlyBuilding(Frame f, EntityRef entity)
+        {
+            if (f.Unsafe.TryGetPointer<MainBuilding>(entity, out MainBuilding* mainBuilding))
+            {
+                return mainBuilding->Health > 0 && mainBuilding->Health < mainBuilding->MaxHealth;
+            }
+
+            if (f.Unsafe.TryGetPointer<SupplyBuilding>(entity, out SupplyBuilding* supplyBuilding))
+            {
+                return supplyBuilding->Health > 0 &&
+                       supplyBuilding->Health < supplyBuilding->MaxHealth &&
+                       supplyBuilding->IsConstructing == false &&
+                       supplyBuilding->IsDeconstructing == false;
+            }
+
+            return false;
         }
 
         private static FPVector2 GetFormationOffset(int selectedMoveIndex)

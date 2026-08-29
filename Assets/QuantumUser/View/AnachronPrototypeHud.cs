@@ -492,6 +492,51 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         return "Keelwatch Ranker";
     }
 
+    private static string GetBuildingWorkTargetName(Frame frame, EntityRef targetEntity)
+    {
+        foreach ((EntityRef entity, MainBuilding mainBuilding) in frame.GetComponentIterator<MainBuilding>())
+        {
+            if (entity == targetEntity)
+            {
+                return GetMainBuildingDisplayName(frame, mainBuilding.OwnerPlayer);
+            }
+        }
+
+        foreach ((EntityRef entity, SupplyBuilding supplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
+        {
+            if (entity == targetEntity)
+            {
+                return GetSupplyBuildingDisplayName(frame, supplyBuilding.OwnerPlayer);
+            }
+        }
+
+        return "building";
+    }
+
+    private static bool IsRepairWorkTarget(Frame frame, EntityRef targetEntity)
+    {
+        foreach ((EntityRef entity, MainBuilding mainBuilding) in frame.GetComponentIterator<MainBuilding>())
+        {
+            if (entity == targetEntity)
+            {
+                return mainBuilding.Health > 0 && mainBuilding.Health < mainBuilding.MaxHealth;
+            }
+        }
+
+        foreach ((EntityRef entity, SupplyBuilding supplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
+        {
+            if (entity == targetEntity)
+            {
+                return supplyBuilding.Health > 0 &&
+                       supplyBuilding.Health < supplyBuilding.MaxHealth &&
+                       supplyBuilding.IsConstructing == false &&
+                       supplyBuilding.IsDeconstructing == false;
+            }
+        }
+
+        return false;
+    }
+
     private static bool TryGetSelectedMainBuilding(Frame frame, out MainBuilding mainBuilding, out int buildingTier)
     {
         foreach ((EntityRef entity, MainBuilding candidateMainBuilding) in frame.GetComponentIterator<MainBuilding>())
@@ -997,6 +1042,13 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 8, RightPanelContentWidth, RowHeight), "Selected Worker", headerStyle);
         if (isBuilding)
         {
+            if (IsRepairWorkTarget(frame, buildIntent.TargetBuilding))
+            {
+                GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 30, RightPanelContentWidth, RowHeight), $"Repairing {GetBuildingWorkTargetName(frame, buildIntent.TargetBuilding)}", labelStyle);
+                GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 52, RightPanelContentWidth, RowHeight), "Repair cost: 2 Salvage / 1 Plate", labelStyle);
+                return;
+            }
+
             GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 30, RightPanelContentWidth, RowHeight), $"Building {GetSupplyBuildingDisplayName(frame, GetLocalPlayerIndex())}", labelStyle);
             GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 52, RightPanelContentWidth, RowHeight), "Cancel construction: full refund - press X", labelStyle);
             return;
@@ -1097,6 +1149,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         if (TryGetWorkerBuildIntent(frame, entity, out WorkerBuildIntent buildIntent) && buildIntent.IsBuilding)
         {
+            if (IsRepairWorkTarget(frame, buildIntent.TargetBuilding))
+            {
+                return $"Repairing {GetBuildingWorkTargetName(frame, buildIntent.TargetBuilding)}";
+            }
+
             return TryGetUnitOwner(frame, entity, out int ownerPlayer) ? $"Building {GetSupplyBuildingDisplayName(frame, ownerPlayer)}" : "Building support";
         }
 

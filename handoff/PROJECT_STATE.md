@@ -30,6 +30,16 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 23 completed:
+  - Added `WorkerRepairSystem` as a deterministic worker repair loop.
+  - Right-clicking a damaged friendly main building or completed support building with selected live workers assigns those workers to repair.
+  - Repair workers move near the target and only repair while within repair range.
+  - Each assigned worker repairs `10` HP every `30` simulation ticks, spending `2` Salvage and `1` Plate per repair pulse.
+  - Repair stops automatically when the target is fully repaired, destroyed, no longer repairable, or the worker dies.
+  - Construction workers remain ignored by repair logic, so active foundation building is not interrupted.
+  - Selected worker HUD and unit state text now distinguish repairing from building.
+  - Existing Ardent Concord passive mend, combat damage, construction, cancellation, deconstruction, and death cleanup behavior were preserved.
+  - No Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 22 completed:
   - Added deterministic multi-worker construction speed without changing the Quantum schema.
   - Right-clicking an owned, in-progress support foundation assigns selected live workers to help build it.
