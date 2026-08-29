@@ -953,7 +953,9 @@ Acceptance:
 
 ### Sprint 29: Ardent Concord Pathfinder Scope Note
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-29: added `handoff/ARDENT_CONCORD_PATHFINDER_SCOPE.md`. The note defines Ardent Concord as the first mission-quality "prove the loop" faction, lists current repo mappings and identity, orders production-quality priorities, and preserves Wrought/Gharn as active prototype opponents. No schema, balance, or gameplay behavior changed.
 
 Goal: Make Ardent Concord the first mission-quality faction target, matching First Hand guidance.
 
@@ -1426,7 +1428,7 @@ Use this order first:
 9. Sprint 50: Add Smoke Test Checklist.
 10. Sprint 9: Rename Prototype Scenario Concept.
 11. Sprint 28: Quantum MovementDomain Architecture Note. `[x]`
-12. Sprint 29: Ardent Concord Pathfinder Scope Note.
+12. Sprint 29: Ardent Concord Pathfinder Scope Note. `[x]`
 13. Sprint 30: Grain/Cast/Seal Data Contract Note.
 
 After that, choose between map identity work, pathing stability, or first Ardent Concord mechanics. Do not start domain expansion or Virii implementation before the relevant architecture/data-contract notes exist.

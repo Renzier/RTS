@@ -30,6 +30,15 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 29 completed:
+  - Added `handoff/ARDENT_CONCORD_PATHFINDER_SCOPE.md`.
+  - Defined Ardent Concord as the first mission-quality pathfinder faction for proving core RTS loops before broad roster expansion.
+  - Clarified that `FactionId.Tech` remains the deterministic code ID for Ardent Concord for now.
+  - Captured the current Ardent identity: balanced costs, durable workers/heroes, standard Countersign Post Holding, passive building mend, compact standardized visuals, and grey-blue/brass/orange presentation.
+  - Ordered production-quality priorities: command feel, readability, economy, combat, sustain identity, Quill objective flow, and later Mission 1 / "Slack Water" framing.
+  - Listed first Ardent behaviors to harden: Keelwatch Ranker, Ledger House, Countersign Post, Concord Marshal, passive mend, and Quill ownership/victory flow.
+  - Preserved Wrought and Gharn as active prototype opponents and contrast factions, not abandoned factions.
+  - No schema, balance, or gameplay behavior changed.
 - Quill victory correction completed:
   - Capturing the Quill now grants the existing ownership resource trickle as the immediate buff.
   - The Quill victory timer only advances when the owner has no live enemy workers or heroes inside the Quill capture radius.
