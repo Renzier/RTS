@@ -30,6 +30,16 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 28 completed:
+  - Added `handoff/MOVEMENT_DOMAIN_QUANTUM_NOTE.md`.
+  - Adapted First Hand's MovementDomain direction to this Photon Quantum prototype as a deterministic simulation-owned routing contract.
+  - Documented Ground, Air, Underwater, and Orbit representation expectations for future Quantum work.
+  - Kept Ground as the current implicit default for all live prototype entities.
+  - Recommended deferring a schema component/field until the first live multi-domain gameplay sprint needs it.
+  - Identified shared systems that should not fork by domain: ownership, faction identity, health/death, selection, command input, economy, tech/hero/production state, and shared objectives.
+  - Identified likely domain-specific routing areas: movement/pathing, targeting, detection/vision, production/spawning, camera presentation, and map constraints.
+  - Pointed to the current `MoveIntent.MovementMode` pattern as the local precedent for deterministic integer-based routing.
+  - No Quantum schema, CodeGen, or gameplay behavior changed.
 - Kilnfall Sprint 27 completed:
   - Added `QuillVictorySystem` as an optional prototype hold-to-win condition.
   - `QuillObjective.VictoryEnabled` currently enables the rule.

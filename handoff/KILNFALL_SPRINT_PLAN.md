@@ -918,7 +918,9 @@ Implementation note:
 
 ### Sprint 28: Quantum MovementDomain Architecture Note
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-28: added `handoff/MOVEMENT_DOMAIN_QUANTUM_NOTE.md`. The note keeps current gameplay Ground-only by default, maps Ground/Air/Underwater/Orbit to a future deterministic Quantum routing contract, identifies shared versus domain-specific systems, and recommends deferring schema until live multi-domain gameplay needs it. No schema or gameplay behavior changed.
 
 Goal: Adapt First Hand's MovementDomain direction to this Photon Quantum prototype before adding air, underwater, or orbit systems.
 
@@ -1415,7 +1417,7 @@ Use this order first:
 8. Sprint 8: Update Construction Visual States.
 9. Sprint 50: Add Smoke Test Checklist.
 10. Sprint 9: Rename Prototype Scenario Concept.
-11. Sprint 28: Quantum MovementDomain Architecture Note.
+11. Sprint 28: Quantum MovementDomain Architecture Note. `[x]`
 12. Sprint 29: Ardent Concord Pathfinder Scope Note.
 13. Sprint 30: Grain/Cast/Seal Data Contract Note.
 
