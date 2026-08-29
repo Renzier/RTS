@@ -389,12 +389,13 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return;
         }
 
-        Rect panelRect = new Rect(Screen.width - RightPanelWidth - 20, 456, RightPanelWidth, 92);
+        Rect panelRect = new Rect(Screen.width - RightPanelWidth - 20, 456, RightPanelWidth, 112);
         DrawPanel(panelRect);
 
         GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 8, RightPanelContentWidth, RowHeight), "Quill-Waist Landmark", headerStyle);
         DrawHealthBar(new Rect(panelRect.x + 12, panelRect.y + 32, RightPanelContentWidth, 18), quillTargetable.Health, quillTargetable.MaxHealth, labelStyle);
         GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 56, RightPanelContentWidth, RowHeight), GetQuillObjectiveStatus(frame, quillTargetable), labelStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 78, RightPanelContentWidth, RowHeight), GetQuillObjectiveBonusLabel(quillTargetable), labelStyle);
     }
 
     private static void DrawSupplyWorldTimers(Frame frame, GUIStyle labelStyle)
@@ -706,6 +707,16 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             : GetFactionName(frame, quillTargetable.OwnerPlayer);
 
         return $"{owner}: capture {quillTargetable.Health}/{quillTargetable.MaxHealth}";
+    }
+
+    private static string GetQuillObjectiveBonusLabel(Targetable quillTargetable)
+    {
+        if (quillTargetable.OwnerPlayer == QuillObjective.NeutralOwner)
+        {
+            return "Bonus inactive while neutral";
+        }
+
+        return $"+{QuillObjective.ResourceTrickleWood} Salvage / +{QuillObjective.ResourceTrickleIron} Plate every {FormatTicksAsSeconds(QuillObjective.ResourceTrickleIntervalTicks)}";
     }
 
     private static bool TryGetEconomyState(Frame frame, int playerIndex, out PlayerEconomyState economyState)

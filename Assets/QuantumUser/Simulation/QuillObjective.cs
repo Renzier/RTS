@@ -8,6 +8,9 @@ namespace Quantum
         public const int MaxHealth = 2000;
         public const int CaptureRequired = 2000;
         public const int CapturePerUnitTick = 5;
+        public const int ResourceTrickleIntervalTicks = 180;
+        public const int ResourceTrickleWood = 15;
+        public const int ResourceTrickleIron = 8;
         public static readonly FPVector2 Position = new FPVector2(FP._0, FP.FromString("7.0"));
         public static readonly FP TargetRadius = FP.FromString("1.35");
         public static readonly FP SelectionRadius = FP.FromString("1.55");

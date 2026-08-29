@@ -30,6 +30,15 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 26 completed:
+  - Added a simple deterministic Quill ownership resource trickle.
+  - A non-neutral Quill owner receives `+15` Salvage and `+8` Plate every `180` simulation ticks.
+  - Neutral or contested Quill state grants no bonus.
+  - The bonus is applied from `QuillCaptureSystem`, using the current Quill `Targetable.OwnerPlayer`.
+  - Losing ownership stops the bonus immediately because the next pulse reads the current owner.
+  - Selected Quill HUD now displays whether the bonus is inactive or the current trickle amount/rate.
+  - No vision, production discount, command range, victory condition, pathing effect, placement effect, or new Quantum schema was added.
+  - No Quantum CodeGen changes were required.
 - Kilnfall Sprint 25 completed:
   - Added `QuillCaptureSystem` as a deterministic capture-progress loop.
   - The Quill objective remains schema-free by storing capture owner in existing `Targetable.OwnerPlayer` and capture progress in `Targetable.Health/MaxHealth`.

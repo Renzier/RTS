@@ -11,6 +11,8 @@ namespace Quantum
                 return;
             }
 
+            GrantOwnershipBonus(f, quillTargetable.OwnerPlayer);
+
             int capturingPlayer = GetCapturingPlayer(f);
             if (capturingPlayer == int.MinValue)
             {
@@ -41,6 +43,29 @@ namespace Quantum
             }
 
             f.Set(quillEntity, updatedTargetable);
+        }
+
+        private static void GrantOwnershipBonus(Frame f, int ownerPlayer)
+        {
+            if (ownerPlayer == QuillObjective.NeutralOwner ||
+                f.Number % QuillObjective.ResourceTrickleIntervalTicks != 0)
+            {
+                return;
+            }
+
+            foreach ((EntityRef entity, PlayerEconomyState economyState) in f.GetComponentIterator<PlayerEconomyState>())
+            {
+                if (economyState.PlayerIndex != ownerPlayer || economyState.IsDefeated)
+                {
+                    continue;
+                }
+
+                PlayerEconomyState updatedEconomy = economyState;
+                updatedEconomy.Wood += QuillObjective.ResourceTrickleWood;
+                updatedEconomy.Iron += QuillObjective.ResourceTrickleIron;
+                f.Set(entity, updatedEconomy);
+                return;
+            }
         }
 
         private static int GetCapturingPlayer(Frame f)

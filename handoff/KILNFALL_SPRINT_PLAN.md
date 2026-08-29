@@ -848,7 +848,7 @@ Implementation note:
 
 ### Sprint 26: Quill Ownership Bonus
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Give captured Quill waist one simple benefit.
 
@@ -866,6 +866,17 @@ Acceptance:
 
 - Bonus applies only to current Quill owner.
 - Losing the Quill removes the bonus cleanly.
+
+Implementation note:
+
+- Added a simple deterministic Quill ownership resource trickle.
+- A non-neutral Quill owner receives `+15` Salvage and `+8` Plate every `180` simulation ticks.
+- Neutral or contested Quill state grants no bonus.
+- The bonus is applied from `QuillCaptureSystem`, using the current Quill `Targetable.OwnerPlayer`.
+- Losing ownership stops the bonus immediately because the next pulse reads the current owner.
+- Selected Quill HUD now displays whether the bonus is inactive or the current trickle amount/rate.
+- No vision, production discount, command range, victory condition, pathing effect, placement effect, or new Quantum schema was added.
+- No Quantum CodeGen changes were required.
 
 ### Sprint 27: Quill-Based Victory Toggle
 
