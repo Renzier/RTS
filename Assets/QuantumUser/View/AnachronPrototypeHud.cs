@@ -706,7 +706,8 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             ? "Neutral"
             : GetFactionName(frame, quillTargetable.OwnerPlayer);
 
-        return $"{owner}: capture {quillTargetable.Health}/{quillTargetable.MaxHealth}";
+        string progressLabel = quillTargetable.OwnerPlayer == QuillObjective.NeutralOwner ? "capture" : "victory hold";
+        return $"{owner}: {progressLabel} {quillTargetable.Health}/{quillTargetable.MaxHealth}";
     }
 
     private static string GetQuillObjectiveBonusLabel(Targetable quillTargetable)
@@ -1177,7 +1178,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return;
         }
 
-        string message = localPlayerDefeated ? "DEFEAT - Main Building Destroyed" : "VICTORY - Enemy Main Buildings Destroyed";
+        string message = GetMatchBannerMessage(frame, localPlayerDefeated);
         Color panelColor = localPlayerDefeated ? DefeatPanelColor : VictoryPanelColor;
 
         GUIStyle bannerStyle = new GUIStyle(GUI.skin.label);
@@ -1189,6 +1190,43 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         Rect rect = new Rect((Screen.width - 560) * 0.5f, 18, 560, 48);
         DrawPanel(rect, panelColor);
         GUI.Label(rect, message, bannerStyle);
+    }
+
+    private static string GetMatchBannerMessage(Frame frame, bool localPlayerDefeated)
+    {
+        if (TryGetQuillVictoryOwner(frame, out int quillOwner))
+        {
+            if (quillOwner == GetLocalPlayerIndex())
+            {
+                return "VICTORY - Quill-Waist Held";
+            }
+
+            if (localPlayerDefeated)
+            {
+                return "DEFEAT - Enemy Held the Quill-Waist";
+            }
+        }
+
+        return localPlayerDefeated ? "DEFEAT - Main Building Destroyed" : "VICTORY - Enemy Main Buildings Destroyed";
+    }
+
+    private static bool TryGetQuillVictoryOwner(Frame frame, out int ownerPlayer)
+    {
+        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        {
+            if (IsQuillObjective(frame, entity) == false ||
+                targetable.OwnerPlayer == QuillObjective.NeutralOwner ||
+                targetable.Health > 0)
+            {
+                continue;
+            }
+
+            ownerPlayer = targetable.OwnerPlayer;
+            return true;
+        }
+
+        ownerPlayer = QuillObjective.NeutralOwner;
+        return false;
     }
 
     private static int CountActivePlayers(Frame frame)

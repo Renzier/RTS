@@ -24,22 +24,29 @@ namespace Quantum
             {
                 updatedTargetable.OwnerPlayer = QuillObjective.NeutralOwner;
                 updatedTargetable.Health = QuillObjective.CaptureRequired;
+                updatedTargetable.MaxHealth = QuillObjective.CaptureRequired;
                 f.Set(quillEntity, updatedTargetable);
                 return;
             }
 
             if (updatedTargetable.OwnerPlayer == capturingPlayer)
             {
-                updatedTargetable.Health = QuillObjective.CaptureRequired;
                 f.Set(quillEntity, updatedTargetable);
                 return;
+            }
+
+            if (updatedTargetable.MaxHealth != QuillObjective.CaptureRequired)
+            {
+                updatedTargetable.Health = QuillObjective.CaptureRequired;
+                updatedTargetable.MaxHealth = QuillObjective.CaptureRequired;
             }
 
             updatedTargetable.Health -= QuillObjective.CapturePerUnitTick;
             if (updatedTargetable.Health <= 0)
             {
                 updatedTargetable.OwnerPlayer = capturingPlayer;
-                updatedTargetable.Health = QuillObjective.CaptureRequired;
+                updatedTargetable.Health = QuillObjective.VictoryHoldTicks;
+                updatedTargetable.MaxHealth = QuillObjective.VictoryHoldTicks;
             }
 
             f.Set(quillEntity, updatedTargetable);

@@ -30,6 +30,18 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 27 completed:
+  - Added `QuillVictorySystem` as an optional prototype hold-to-win condition.
+  - `QuillObjective.VictoryEnabled` currently enables the rule.
+  - Capturing the Quill starts a `1800` tick victory hold timer.
+  - While a non-neutral owner keeps the Quill, the timer counts down deterministically.
+  - Enemy recapture swaps the Quill back to the capture meter before progress is drained, so recapture time does not depend on the remaining victory timer.
+  - When the timer reaches `0`, all non-owner players are marked defeated, reusing the existing match-end banner and defeated-player cleanup flow.
+  - `MainBaseDefeatSystem` now treats defeat as sticky so Quill-based defeat is not undone by living main buildings on the next tick.
+  - Selected Quill HUD now labels owned progress as `victory hold`.
+  - Match banner now distinguishes Quill victory/defeat from main-building defeat.
+  - Main-base defeat remains available and unchanged as a separate way to end the match.
+  - No new Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 26 completed:
   - Added a simple deterministic Quill ownership resource trickle.
   - A non-neutral Quill owner receives `+15` Salvage and `+8` Plate every `180` simulation ticks.

@@ -28,6 +28,7 @@ namespace Quantum
             systems.Add(new ArdentConcordRepairSystem());
             systems.Add(new WorkerRepairSystem());
             systems.Add(new QuillCaptureSystem());
+            systems.Add(new QuillVictorySystem());
             systems.Add(new HeroTechCombatStatsSystem());
             systems.Add(new HeroLifecycleSystem());
             systems.Add(new HeroRebuildSystem());

@@ -6,6 +6,11 @@ namespace Quantum
         {
             foreach ((EntityRef playerEntity, PlayerEconomyState economyState) in f.GetComponentIterator<PlayerEconomyState>())
             {
+                if (economyState.IsDefeated)
+                {
+                    continue;
+                }
+
                 bool hasAnyMainBase = false;
                 bool hasLivingMainBase = false;
 
