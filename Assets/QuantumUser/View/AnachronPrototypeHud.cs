@@ -706,7 +706,12 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             ? "Neutral"
             : GetFactionName(frame, quillTargetable.OwnerPlayer);
 
-        string progressLabel = quillTargetable.OwnerPlayer == QuillObjective.NeutralOwner ? "capture" : "victory hold";
+        string progressLabel = quillTargetable.OwnerPlayer == QuillObjective.NeutralOwner
+            ? "capture"
+            : HasEnemyInQuillRadius(frame, quillTargetable.OwnerPlayer)
+                ? "contested hold"
+                : "victory hold";
+
         return $"{owner}: {progressLabel} {quillTargetable.Health}/{quillTargetable.MaxHealth}";
     }
 
@@ -717,7 +722,29 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Bonus inactive while neutral";
         }
 
-        return $"+{QuillObjective.ResourceTrickleWood} Salvage / +{QuillObjective.ResourceTrickleIron} Plate every {FormatTicksAsSeconds(QuillObjective.ResourceTrickleIntervalTicks)}";
+        return $"Ownership buff: +{QuillObjective.ResourceTrickleWood} Salvage / +{QuillObjective.ResourceTrickleIron} Plate every {FormatTicksAsSeconds(QuillObjective.ResourceTrickleIntervalTicks)}";
+    }
+
+    private static bool HasEnemyInQuillRadius(Frame frame, int ownerPlayer)
+    {
+        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        {
+            if (unitIdentity.OwnerPlayer == ownerPlayer ||
+                unitIdentity.UnitKind != UnitKind.Worker && unitIdentity.UnitKind != UnitKind.Hero ||
+                IsPlayerDefeated(frame, unitIdentity.OwnerPlayer) ||
+                IsDeadUnit(frame, entity))
+            {
+                continue;
+            }
+
+            if (TryGetTransform(frame, entity, out Transform2D transform) &&
+                FPVector2.Distance(transform.Position, QuillObjective.Position) <= QuillObjective.CaptureRadius)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static bool TryGetEconomyState(Frame frame, int playerIndex, out PlayerEconomyState economyState)

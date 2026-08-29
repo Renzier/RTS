@@ -30,6 +30,15 @@
 
 ## Most Recent Work
 
+- Quill victory correction completed:
+  - Capturing the Quill now grants the existing ownership resource trickle as the immediate buff.
+  - The Quill victory timer only advances when the owner has no live enemy workers or heroes inside the Quill capture radius.
+  - Enemy presence pauses the timer instead of allowing a capture-only win.
+  - Existing Quill ownership is not neutralized while the owner still has live forces contesting the area.
+  - Enemies must clear or force out the owner before neutralizing/recapturing the Quill, matching the intended "captured and area defeated" win condition.
+  - Selected Quill HUD now shows `contested hold` when enemy presence is blocking victory progress.
+  - Selected Quill HUD now labels the trickle as an `Ownership buff`.
+  - No Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 28 completed:
   - Added `handoff/MOVEMENT_DOMAIN_QUANTUM_NOTE.md`.
   - Adapted First Hand's MovementDomain direction to this Photon Quantum prototype as a deterministic simulation-owned routing contract.

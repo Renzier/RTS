@@ -1,5 +1,7 @@
 namespace Quantum
 {
+    using Photon.Deterministic;
+
     public unsafe class QuillVictorySystem : SystemMainThread
     {
         public override void Update(Frame f)
@@ -17,6 +19,12 @@ namespace Quantum
             {
                 updatedTargetable.MaxHealth = QuillObjective.VictoryHoldTicks;
                 updatedTargetable.Health = QuillObjective.VictoryHoldTicks;
+            }
+
+            if (HasEnemyInCaptureRadius(f, updatedTargetable.OwnerPlayer))
+            {
+                f.Set(quillEntity, updatedTargetable);
+                return;
             }
 
             if (updatedTargetable.Health > 0)
@@ -66,6 +74,33 @@ namespace Quantum
             quillEntity = EntityRef.None;
             quillTargetable = default;
             return false;
+        }
+
+        private static bool HasEnemyInCaptureRadius(Frame f, int ownerPlayer)
+        {
+            foreach ((EntityRef entity, UnitIdentity unitIdentity) in f.GetComponentIterator<UnitIdentity>())
+            {
+                if (unitIdentity.OwnerPlayer == ownerPlayer ||
+                    unitIdentity.UnitKind != UnitKind.Worker && unitIdentity.UnitKind != UnitKind.Hero ||
+                    IsPlayerDefeated(f, unitIdentity.OwnerPlayer) ||
+                    IsDeadUnit(f, entity))
+                {
+                    continue;
+                }
+
+                if (f.Unsafe.TryGetPointer<Transform2D>(entity, out Transform2D* transform) &&
+                    FPVector2.Distance(transform->Position, QuillObjective.Position) <= QuillObjective.CaptureRadius)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool IsDeadUnit(Frame f, EntityRef entity)
+        {
+            return f.Unsafe.TryGetPointer<UnitHealth>(entity, out UnitHealth* unitHealth) && unitHealth->IsDead;
         }
 
         private static bool IsPlayerDefeated(Frame f, int playerIndex)

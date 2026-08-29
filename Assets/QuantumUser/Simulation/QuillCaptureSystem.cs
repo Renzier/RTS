@@ -13,23 +13,28 @@ namespace Quantum
 
             GrantOwnershipBonus(f, quillTargetable.OwnerPlayer);
 
-            int capturingPlayer = GetCapturingPlayer(f);
-            if (capturingPlayer == int.MinValue)
+            AreaControl areaControl = GetAreaControl(f);
+            if (areaControl.HasAnyPlayer == false)
             {
                 return;
             }
 
             Targetable updatedTargetable = quillTargetable;
-            if (capturingPlayer == QuillObjective.NeutralOwner)
+            if (areaControl.IsContested)
             {
-                updatedTargetable.OwnerPlayer = QuillObjective.NeutralOwner;
-                updatedTargetable.Health = QuillObjective.CaptureRequired;
-                updatedTargetable.MaxHealth = QuillObjective.CaptureRequired;
+                if (updatedTargetable.OwnerPlayer == QuillObjective.NeutralOwner ||
+                    areaControl.HasPlayer(updatedTargetable.OwnerPlayer) == false)
+                {
+                    updatedTargetable.OwnerPlayer = QuillObjective.NeutralOwner;
+                    updatedTargetable.Health = QuillObjective.CaptureRequired;
+                    updatedTargetable.MaxHealth = QuillObjective.CaptureRequired;
+                }
+
                 f.Set(quillEntity, updatedTargetable);
                 return;
             }
 
-            if (updatedTargetable.OwnerPlayer == capturingPlayer)
+            if (updatedTargetable.OwnerPlayer == areaControl.SinglePlayer)
             {
                 f.Set(quillEntity, updatedTargetable);
                 return;
@@ -44,7 +49,7 @@ namespace Quantum
             updatedTargetable.Health -= QuillObjective.CapturePerUnitTick;
             if (updatedTargetable.Health <= 0)
             {
-                updatedTargetable.OwnerPlayer = capturingPlayer;
+                updatedTargetable.OwnerPlayer = areaControl.SinglePlayer;
                 updatedTargetable.Health = QuillObjective.VictoryHoldTicks;
                 updatedTargetable.MaxHealth = QuillObjective.VictoryHoldTicks;
             }
@@ -75,9 +80,9 @@ namespace Quantum
             }
         }
 
-        private static int GetCapturingPlayer(Frame f)
+        private static AreaControl GetAreaControl(Frame f)
         {
-            int playerIndex = int.MinValue;
+            AreaControl areaControl = default;
             foreach ((EntityRef entity, UnitIdentity unitIdentity) in f.GetComponentIterator<UnitIdentity>())
             {
                 if (unitIdentity.UnitKind != UnitKind.Worker && unitIdentity.UnitKind != UnitKind.Hero)
@@ -96,19 +101,49 @@ namespace Quantum
                     continue;
                 }
 
-                if (playerIndex == int.MinValue)
-                {
-                    playerIndex = unitIdentity.OwnerPlayer;
-                    continue;
-                }
-
-                if (playerIndex != unitIdentity.OwnerPlayer)
-                {
-                    return QuillObjective.NeutralOwner;
-                }
+                areaControl.AddPlayer(unitIdentity.OwnerPlayer);
             }
 
-            return playerIndex;
+            return areaControl;
+        }
+
+        private struct AreaControl
+        {
+            public bool HasAnyPlayer;
+            public bool IsContested;
+            public int SinglePlayer;
+            private int _playerMask;
+
+            public void AddPlayer(int playerIndex)
+            {
+                if (HasAnyPlayer == false)
+                {
+                    HasAnyPlayer = true;
+                    SinglePlayer = playerIndex;
+                    _playerMask = 1 << playerIndex;
+                    return;
+                }
+
+                int playerBit = 1 << playerIndex;
+                if ((_playerMask & playerBit) != 0)
+                {
+                    return;
+                }
+
+                IsContested = true;
+                SinglePlayer = int.MinValue;
+                _playerMask |= playerBit;
+            }
+
+            public bool HasPlayer(int playerIndex)
+            {
+                if (HasAnyPlayer == false)
+                {
+                    return false;
+                }
+
+                return (_playerMask & (1 << playerIndex)) != 0;
+            }
         }
 
         private static bool TryGetQuillObjective(Frame f, out EntityRef quillEntity, out Targetable quillTargetable)

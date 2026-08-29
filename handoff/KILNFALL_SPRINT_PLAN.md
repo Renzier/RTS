@@ -914,6 +914,14 @@ Implementation note:
 - Main-base defeat remains available and unchanged as a separate way to end the match.
 - No new Quantum schema or CodeGen changes were required.
 
+Correction note, 2026-08-29:
+
+- Capturing the Quill now grants the ownership resource trickle, but does not by itself advance the victory timer through enemy presence.
+- Quill victory hold progress pauses while enemy workers or heroes are alive inside the Quill capture radius.
+- Contested ownership no longer clears an existing owner if that owner still has forces in the radius; the enemy must clear or force out the owner before neutralizing/recapturing.
+- Selected Quill HUD labels owned-but-contested progress as `contested hold` and calls the trickle an `Ownership buff`.
+- No new Quantum schema or CodeGen changes were required.
+
 ## Architecture Gates From First Hand
 
 ### Sprint 28: Quantum MovementDomain Architecture Note
