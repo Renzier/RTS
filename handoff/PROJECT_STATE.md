@@ -30,6 +30,16 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 21 completed:
+  - Added faction-specific support-building Holding values through `FactionStats`.
+  - Ardent Concord Countersign Post remains `+5` Holding.
+  - Wrought Count Relay now grants `+4` Holding.
+  - Gharn Tally Stone now grants `+6` Holding.
+  - `SupplyBuildingConstructionSystem` stores the faction-specific Holding value on each support building at creation.
+  - Completion grants the stored value and deconstruction/removal subtracts the stored value, preserving self-consistent existing buildings.
+  - Worker build-mode HUD now displays the faction-specific Holding value before placement.
+  - Existing support-building cost, health, construction timing, refund math, placement validation, and builder assignment were unchanged.
+  - No Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 20 completed:
   - Added faction-specific support-building costs through `FactionStats`.
   - Ardent Concord Countersign Post remains `100` Salvage / `50` Plate.

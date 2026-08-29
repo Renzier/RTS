@@ -6,7 +6,6 @@ namespace Quantum
     {
         private const int BuildSupplyIntent = 4;
         private const int DeconstructSupplyIntent = 5;
-        private const int SupplyFoodProvided = 5;
         private const int SupplyBuildTicks = 600;
         private const int SupplyDeconstructTicks = 300;
         private const int ConstructionCancelRefundPercent = 100;
@@ -134,7 +133,7 @@ namespace Quantum
             f.Set(entity, new SupplyBuilding
             {
                 OwnerPlayer = ownerPlayer,
-                FoodProvided = SupplyFoodProvided,
+                FoodProvided = stats.SupplyBuildingFoodProvided,
                 Health = 1,
                 MaxHealth = stats.SupplyBuildingMaxHealth,
                 IsConstructing = true,

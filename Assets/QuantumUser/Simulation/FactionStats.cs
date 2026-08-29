@@ -14,8 +14,9 @@ namespace Quantum
         public readonly int SupplyBuildingMaxHealth;
         public readonly int SupplyBuildingWoodCost;
         public readonly int SupplyBuildingIronCost;
+        public readonly int SupplyBuildingFoodProvided;
 
-        private FactionStats(int workerMaxHealth, int workerWoodCost, int workerIronCost, int workerFoodCost, int heroMaxHealth, int heroBaseDamage, int heroDamagePerTier, int holdGroundDamageBonus, int mainBaseMaxHealth, int supplyBuildingMaxHealth, int supplyBuildingWoodCost, int supplyBuildingIronCost)
+        private FactionStats(int workerMaxHealth, int workerWoodCost, int workerIronCost, int workerFoodCost, int heroMaxHealth, int heroBaseDamage, int heroDamagePerTier, int holdGroundDamageBonus, int mainBaseMaxHealth, int supplyBuildingMaxHealth, int supplyBuildingWoodCost, int supplyBuildingIronCost, int supplyBuildingFoodProvided)
         {
             WorkerMaxHealth = workerMaxHealth;
             WorkerWoodCost = workerWoodCost;
@@ -29,6 +30,7 @@ namespace Quantum
             SupplyBuildingMaxHealth = supplyBuildingMaxHealth;
             SupplyBuildingWoodCost = supplyBuildingWoodCost;
             SupplyBuildingIronCost = supplyBuildingIronCost;
+            SupplyBuildingFoodProvided = supplyBuildingFoodProvided;
         }
 
         public static FactionStats ForFaction(int factionId)
@@ -36,15 +38,15 @@ namespace Quantum
             int normalizedFaction = FactionId.Normalize(factionId);
             if (normalizedFaction == FactionId.Fantasy)
             {
-                return new FactionStats(90, 65, 35, 1, 280, 55, 12, 0, 1800, 650, 120, 70);
+                return new FactionStats(90, 65, 35, 1, 280, 55, 12, 0, 1800, 650, 120, 70, 4);
             }
 
             if (normalizedFaction == FactionId.Hybrid)
             {
-                return new FactionStats(105, 40, 20, 1, 310, 48, 15, 8, 1500, 500, 90, 45);
+                return new FactionStats(105, 40, 20, 1, 310, 48, 15, 8, 1500, 500, 90, 45, 6);
             }
 
-            return new FactionStats(115, 50, 25, 1, 330, 42, 18, 0, 1650, 500, 100, 50);
+            return new FactionStats(115, 50, 25, 1, 330, 42, 18, 0, 1650, 500, 100, 50, 5);
         }
 
         public static FactionStats ForPlayer(Frame f, int playerIndex)

@@ -668,7 +668,7 @@ Implementation note:
 
 ### Sprint 21: Add Faction-Specific Supply Cap Values
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Let supply buildings grant different capacity by faction.
 
@@ -688,6 +688,18 @@ Acceptance:
 
 - Completed supply grants correct faction-specific cap.
 - Deconstruction removes the correct amount.
+
+Implementation note:
+
+- Added support-building Holding values to `FactionStats`.
+- Ardent Concord Countersign Post remains `+5` Holding.
+- Wrought Count Relay now grants `+4` Holding.
+- Gharn Tally Stone now grants `+6` Holding.
+- `SupplyBuildingConstructionSystem` now stores the faction-specific Holding value on each support building when it is created.
+- Completion grants the stored value and deconstruction/removal subtracts the stored value, so existing completed buildings stay self-consistent.
+- Worker build-mode HUD now displays the faction-specific Holding value before placement.
+- Existing support-building cost, health, construction timing, refund math, placement validation, and builder assignment were unchanged.
+- No Quantum schema or CodeGen changes were required.
 
 ### Sprint 22: Add Multi-Worker Construction Speed
 
