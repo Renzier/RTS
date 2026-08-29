@@ -36,14 +36,19 @@ namespace Quantum
         public static FactionStats ForFaction(int factionId)
         {
             int normalizedFaction = FactionId.Normalize(factionId);
-            if (normalizedFaction == FactionId.Fantasy)
+            if (normalizedFaction == FactionId.Wrought)
             {
                 return new FactionStats(90, 65, 35, 1, 280, 55, 12, 0, 1800, 650, 120, 70, 4);
             }
 
-            if (normalizedFaction == FactionId.Hybrid)
+            if (normalizedFaction == FactionId.Gharn)
             {
                 return new FactionStats(105, 40, 20, 1, 310, 48, 15, 8, 1500, 500, 90, 45, 6);
+            }
+
+            if (normalizedFaction == FactionId.Seethe)
+            {
+                return new FactionStats(95, 55, 40, 1, 300, 46, 16, 0, 1550, 520, 110, 65, 5);
             }
 
             return new FactionStats(115, 50, 25, 1, 330, 42, 18, 0, 1650, 500, 100, 50, 5);
@@ -59,7 +64,7 @@ namespace Quantum
                 }
             }
 
-            return ForFaction(FactionId.Tech);
+            return ForFaction(FactionId.ArdentConcord);
         }
 
         public int HeroDamageForTier(int techTier)

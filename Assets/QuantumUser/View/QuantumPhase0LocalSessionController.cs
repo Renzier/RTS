@@ -7,18 +7,20 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
   private enum StartPlayerSlot {
     P0ArdentConcord = 0,
     P1Wrought = 1,
-    P2Gharn = 2
+    P2Gharn = 2,
+    P3Seethe = 3
   }
 
   [SerializeField] private int seed = 1;
   [SerializeField] private StartPlayerSlot startAs = StartPlayerSlot.P0ArdentConcord;
   private const string StartPlayerSlotPreferenceKey = "Anachron.StartPlayerSlot";
+  private const int MaxStartPlayerSlot = 3;
 
   private QuantumRunnerLocalDebug _localDebugRunner;
   public static int ActivePlayerSlot { get; private set; }
 
   private void Awake() {
-    startAs = (StartPlayerSlot)Mathf.Clamp(PlayerPrefs.GetInt(StartPlayerSlotPreferenceKey, (int)startAs), 0, 2);
+    startAs = (StartPlayerSlot)Mathf.Clamp(PlayerPrefs.GetInt(StartPlayerSlotPreferenceKey, (int)startAs), 0, MaxStartPlayerSlot);
     ActivePlayerSlot = (int)startAs;
 
     _localDebugRunner = GetComponent<QuantumRunnerLocalDebug>();
@@ -46,12 +48,13 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
   }
 
   private void OnGUI() {
-    Rect panelRect = new Rect(Screen.width - 250, 12, 238, 118);
+    Rect panelRect = new Rect(Screen.width - 250, 12, 238, 144);
     DrawPanel(panelRect, new Color(0.02f, 0.025f, 0.03f, 0.88f));
     GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 8, 214, 20), "Start As");
     DrawStartButton(new Rect(panelRect.x + 12, panelRect.y + 34, 214, 22), StartPlayerSlot.P0ArdentConcord, "P0 Ardent Concord");
     DrawStartButton(new Rect(panelRect.x + 12, panelRect.y + 60, 214, 22), StartPlayerSlot.P1Wrought, "P1 Wrought");
     DrawStartButton(new Rect(panelRect.x + 12, panelRect.y + 86, 214, 22), StartPlayerSlot.P2Gharn, "P2 Gharn");
+    DrawStartButton(new Rect(panelRect.x + 12, panelRect.y + 112, 214, 22), StartPlayerSlot.P3Seethe, "P3 Seethe");
   }
 
   private void DrawStartButton(Rect rect, StartPlayerSlot slot, string label) {

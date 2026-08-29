@@ -22,14 +22,24 @@
 - Right-click movement, NavMesh movement requests, gather/deposit loops, economy state, combat, health, death cleanup, and main-base defeat exist.
 - Tech upgrades, building tiers, singleton hero lifecycle, hero rebuild, and HUD feedback exist.
 - Phase 3 faction foundation exists:
-  - Faction IDs: Tech, Fantasy, Hybrid.
+  - Faction IDs: Ardent Concord, Wrought, Gharn, Seethe.
+  - Compatibility aliases remain: Tech -> Ardent Concord, Fantasy -> Wrought, Hybrid -> Gharn.
   - Player faction state entities are bootstrapped deterministically.
-  - Prototype player assignment: P0 Tech, P1 Fantasy, P2 Hybrid.
+  - Prototype player assignment: P0 Ardent Concord, P1 Wrought, P2 Gharn, P3 Seethe.
   - Faction-specific worker HP, hero HP, hero damage scaling, and main base HP.
   - Faction-specific display names and primitive silhouettes in the view layer.
 
 ## Most Recent Work
 
+- Kilnfall Sprint 35 completed:
+  - Added Seethe as canonical `FactionId.Seethe = 3`.
+  - Preserved `Tech`, `Fantasy`, and `Hybrid` as compatibility aliases.
+  - Added first-pass Seethe stats for workers, heroes, main base, and support building costs/Holding.
+  - Added P3 Seethe to the bootstrap scenario with a Reading Kiln, three Harrowmouth workers, and The Incipit hero.
+  - Added P3 Seethe to the local Start As selector.
+  - HUD/debug labels now show Seethe, Reading Kiln, Pattern Archive, Harrowmouth, The Incipit, and `Tell: Pattern`.
+  - Primitive presentation now includes Seethe color, foundation color, and shape/scale choices.
+  - No Seethe Working Set mechanic was added.
 - Kilnfall Sprint 34 completed:
   - Added `handoff/FACTION_ID_EXPANSION_STRATEGY.md`.
   - Chose to extend the current deterministic integer `FactionId` constants into canonical Kilnfall IDs.

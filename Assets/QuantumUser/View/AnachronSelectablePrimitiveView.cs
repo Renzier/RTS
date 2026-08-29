@@ -10,9 +10,10 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static readonly Color EnemyUnitColor = new Color(0.95f, 0.18f, 0.18f, 1.0f);
     private static readonly Color HeroColor = new Color(1.0f, 0.55f, 0.16f, 1.0f);
     private static readonly Color EnemyHeroColor = new Color(1.0f, 0.12f, 0.55f, 1.0f);
-    private static readonly Color TechColor = new Color(0.42f, 0.55f, 0.64f, 1.0f);
-    private static readonly Color FantasyColor = new Color(0.82f, 0.72f, 0.34f, 1.0f);
-    private static readonly Color HybridColor = new Color(0.76f, 0.16f, 0.09f, 1.0f);
+    private static readonly Color ArdentConcordColor = new Color(0.42f, 0.55f, 0.64f, 1.0f);
+    private static readonly Color WroughtColor = new Color(0.82f, 0.72f, 0.34f, 1.0f);
+    private static readonly Color GharnColor = new Color(0.76f, 0.16f, 0.09f, 1.0f);
+    private static readonly Color SeetheColor = new Color(0.28f, 0.66f, 0.42f, 1.0f);
     private static readonly Color WoodColor = new Color(0.05f, 0.85f, 0.22f, 1.0f);
     private static readonly Color IronColor = new Color(0.75f, 0.78f, 0.86f, 1.0f);
     private static readonly Color BaseColor = new Color(0.1f, 0.45f, 1.0f, 1.0f);
@@ -24,6 +25,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static readonly Color ConcordFoundationColor = new Color(0.78f, 0.68f, 0.42f, 1.0f);
     private static readonly Color WroughtFoundationColor = new Color(0.38f, 0.36f, 0.26f, 1.0f);
     private static readonly Color GharnFoundationColor = new Color(0.36f, 0.12f, 0.08f, 1.0f);
+    private static readonly Color SeetheFoundationColor = new Color(0.24f, 0.44f, 0.34f, 1.0f);
     private static readonly Color SupplyDeconstructionColor = new Color(0.95f, 0.38f, 0.12f, 1.0f);
     private static readonly Color ActiveTargetColor = new Color(1.0f, 0.08f, 0.08f, 1.0f);
     private static readonly Color AttackerMarkerColor = new Color(1.0f, 0.62f, 0.08f, 1.0f);
@@ -359,14 +361,19 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
         int factionId = GetFactionId(frame, GetOwnerPlayer(frame, entity));
         bool isHero = IsHero(frame, entity);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return isHero ? new Vector3(0.95f, 1.25f, 0.95f) : new Vector3(0.72f, 0.5f, 0.72f);
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return isHero ? new Vector3(1.05f, 0.95f, 1.05f) : new Vector3(0.82f, 0.36f, 0.82f);
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return isHero ? new Vector3(0.86f, 1.32f, 0.86f) : new Vector3(0.68f, 0.72f, 0.68f);
         }
 
         return isHero ? new Vector3(0.9f, 0.82f, 0.9f) : new Vector3(0.7f, 0.24f, 0.7f);
@@ -379,7 +386,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             if (supplyEntity == entity)
             {
                 int factionId = GetFactionId(frame, supplyBuilding.OwnerPlayer);
-                if (factionId == FactionId.Fantasy)
+                if (factionId == FactionId.Wrought)
                 {
                     if (supplyBuilding.IsDeconstructing)
                     {
@@ -389,7 +396,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
                     return supplyBuilding.IsConstructing ? new Vector3(1.28f, 0.2f, 1.28f) : new Vector3(1.18f, 1.05f, 1.18f);
                 }
 
-                if (factionId == FactionId.Hybrid)
+                if (factionId == FactionId.Gharn)
                 {
                     if (supplyBuilding.IsDeconstructing)
                     {
@@ -397,6 +404,16 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
                     }
 
                     return supplyBuilding.IsConstructing ? new Vector3(1.45f, 0.18f, 1.45f) : new Vector3(1.45f, 0.62f, 1.45f);
+                }
+
+                if (factionId == FactionId.Seethe)
+                {
+                    if (supplyBuilding.IsDeconstructing)
+                    {
+                        return new Vector3(1.08f, 0.54f, 1.08f);
+                    }
+
+                    return supplyBuilding.IsConstructing ? new Vector3(1.18f, 0.2f, 1.18f) : new Vector3(1.08f, 0.92f, 1.08f);
                 }
 
                 if (supplyBuilding.IsDeconstructing)
@@ -433,12 +450,17 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             }
 
             int factionId = GetFactionId(frame, ownerPlayer);
-            if (factionId == FactionId.Fantasy)
+            if (factionId == FactionId.Wrought)
             {
                 return PrimitiveType.Cube;
             }
 
-            if (factionId == FactionId.Hybrid)
+            if (factionId == FactionId.Gharn)
+            {
+                return PrimitiveType.Cylinder;
+            }
+
+            if (factionId == FactionId.Seethe)
             {
                 return PrimitiveType.Cylinder;
             }
@@ -447,14 +469,19 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         int unitFactionId = GetFactionId(frame, GetOwnerPlayer(frame, entity));
-        if (unitFactionId == FactionId.Fantasy)
+        if (unitFactionId == FactionId.Wrought)
         {
             return PrimitiveType.Cylinder;
         }
 
-        if (unitFactionId == FactionId.Hybrid)
+        if (unitFactionId == FactionId.Gharn)
         {
             return PrimitiveType.Capsule;
+        }
+
+        if (unitFactionId == FactionId.Seethe)
+        {
+            return PrimitiveType.Sphere;
         }
 
         return PrimitiveType.Cube;
@@ -726,14 +753,19 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static Color GetSupplyFoundationColor(Frame frame, int ownerPlayer)
     {
         int factionId = GetFactionId(frame, ownerPlayer);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return WroughtFoundationColor;
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return GharnFoundationColor;
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return SeetheFoundationColor;
         }
 
         return ConcordFoundationColor;
@@ -757,17 +789,22 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static Color GetFactionColor(Frame frame, int playerIndex)
     {
         int factionId = GetFactionId(frame, playerIndex);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
-            return FantasyColor;
+            return WroughtColor;
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
-            return HybridColor;
+            return GharnColor;
         }
 
-        return TechColor;
+        if (factionId == FactionId.Seethe)
+        {
+            return SeetheColor;
+        }
+
+        return ArdentConcordColor;
     }
 
     private static int GetFactionId(Frame frame, int playerIndex)
@@ -780,7 +817,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             }
         }
 
-        return FactionId.Tech;
+        return FactionId.ArdentConcord;
     }
 
     private void UpdateTargetMarkers(Frame frame)

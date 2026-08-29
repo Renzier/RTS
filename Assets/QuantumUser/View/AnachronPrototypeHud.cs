@@ -503,14 +503,19 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private static string GetWorkerDisplayName(Frame frame, int playerIndex)
     {
         int factionId = GetFactionId(frame, playerIndex);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return "Wright";
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return "Sinterjack";
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return "Harrowmouth";
         }
 
         return "Keelwatch Ranker";
@@ -815,14 +820,19 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 continue;
             }
 
-            if (factionState.FactionId == FactionId.Fantasy)
+            if (factionState.FactionId == FactionId.Wrought)
             {
                 return "Wrought";
             }
 
-            if (factionState.FactionId == FactionId.Hybrid)
+            if (factionState.FactionId == FactionId.Gharn)
             {
                 return "Gharn";
+            }
+
+            if (factionState.FactionId == FactionId.Seethe)
+            {
+                return "Seethe";
             }
 
             return "Ardent Concord";
@@ -834,14 +844,19 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private static string GetMainBuildingDisplayName(Frame frame, int playerIndex)
     {
         int factionId = GetFactionId(frame, playerIndex);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return "Longhold Node";
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return "Oathpyre";
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return "Reading Kiln";
         }
 
         return "Ledger House";
@@ -850,14 +865,19 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private static string GetSupplyBuildingDisplayName(Frame frame, int playerIndex)
     {
         int factionId = GetFactionId(frame, playerIndex);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return "Count Relay";
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return "Tally Stone";
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return "Pattern Archive";
         }
 
         return "Countersign Post";
@@ -877,14 +897,19 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private static string GetFactionTellLabel(Frame frame, int playerIndex)
     {
         int factionId = GetFactionId(frame, playerIndex);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return "Count";
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return "Burr";
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return "Pattern";
         }
 
         return "Countersign";
@@ -1403,27 +1428,37 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         int factionId = GetFactionId(frame, unitIdentity.OwnerPlayer);
         if (unitIdentity.UnitKind == UnitKind.Hero)
         {
-            if (factionId == FactionId.Fantasy)
+            if (factionId == FactionId.Wrought)
             {
                 return "Wrought Overseer";
             }
 
-            if (factionId == FactionId.Hybrid)
+            if (factionId == FactionId.Gharn)
             {
                 return "Tally Captain";
+            }
+
+            if (factionId == FactionId.Seethe)
+            {
+                return "The Incipit";
             }
 
             return "Concord Marshal";
         }
 
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return "Wright";
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return "Sinterjack";
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return "Harrowmouth";
         }
 
         return "Keelwatch Ranker";
@@ -1439,7 +1474,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             }
         }
 
-        return FactionId.Tech;
+        return FactionId.ArdentConcord;
     }
 
     private static string GetUnitHealth(Frame frame, EntityRef candidateEntity)

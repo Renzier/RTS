@@ -2,23 +2,33 @@ namespace Quantum
 {
     public static class FactionId
     {
-        public const int Tech = 0;
-        public const int Fantasy = 1;
-        public const int Hybrid = 2;
+        public const int ArdentConcord = 0;
+        public const int Wrought = 1;
+        public const int Gharn = 2;
+        public const int Seethe = 3;
+
+        public const int Tech = ArdentConcord;
+        public const int Fantasy = Wrought;
+        public const int Hybrid = Gharn;
 
         public static int Normalize(int factionId)
         {
-            if (factionId == Fantasy)
+            if (factionId == Wrought)
             {
-                return Fantasy;
+                return Wrought;
             }
 
-            if (factionId == Hybrid)
+            if (factionId == Gharn)
             {
-                return Hybrid;
+                return Gharn;
             }
 
-            return Tech;
+            if (factionId == Seethe)
+            {
+                return Seethe;
+            }
+
+            return ArdentConcord;
         }
     }
 }

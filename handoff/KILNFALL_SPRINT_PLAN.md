@@ -1098,7 +1098,9 @@ Acceptance:
 
 ### Sprint 35: Add Seethe As Fourth Power
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-29: added Seethe as canonical `FactionId.Seethe = 3` while preserving `Tech`, `Fantasy`, and `Hybrid` compatibility aliases. The bootstrap scenario now includes P3 Seethe with a Reading Kiln, three Harrowmouth workers, and The Incipit hero; the local Start As panel can select P3 Seethe. Seethe has first-pass basic stats, HUD/debug labels, primitive colors/shapes, and Pattern Archive support-building presentation. No Working Set mechanic was added.
 
 Goal: Add Seethe as a selectable/assignable faction.
 

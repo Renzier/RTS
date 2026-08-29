@@ -75,14 +75,19 @@ public sealed class AnachronPlayerStateDebugOverlay : QuantumMonoBehaviour
                 continue;
             }
 
-            if (factionState.FactionId == FactionId.Fantasy)
+            if (factionState.FactionId == FactionId.Wrought)
             {
                 return "Wrought";
             }
 
-            if (factionState.FactionId == FactionId.Hybrid)
+            if (factionState.FactionId == FactionId.Gharn)
             {
                 return "Gharn";
+            }
+
+            if (factionState.FactionId == FactionId.Seethe)
+            {
+                return "Seethe";
             }
 
             return "Ardent Concord";
@@ -94,14 +99,19 @@ public sealed class AnachronPlayerStateDebugOverlay : QuantumMonoBehaviour
     private static string GetMainBuildingDisplayName(Frame frame, int playerIndex)
     {
         int factionId = GetFactionId(frame, playerIndex);
-        if (factionId == FactionId.Fantasy)
+        if (factionId == FactionId.Wrought)
         {
             return "Longhold Node";
         }
 
-        if (factionId == FactionId.Hybrid)
+        if (factionId == FactionId.Gharn)
         {
             return "Oathpyre";
+        }
+
+        if (factionId == FactionId.Seethe)
+        {
+            return "Reading Kiln";
         }
 
         return "Ledger House";
@@ -117,6 +127,6 @@ public sealed class AnachronPlayerStateDebugOverlay : QuantumMonoBehaviour
             }
         }
 
-        return FactionId.Tech;
+        return FactionId.ArdentConcord;
     }
 }

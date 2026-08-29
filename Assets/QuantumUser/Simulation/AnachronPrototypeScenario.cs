@@ -8,9 +8,10 @@ namespace Quantum
 
         public static readonly PlayerSpawn[] Players =
         {
-            new PlayerSpawn(0, FactionId.Tech, 500, 300, 3, 10),
-            new PlayerSpawn(1, FactionId.Fantasy, 500, 300, 3, 10),
-            new PlayerSpawn(2, FactionId.Hybrid, 500, 300, 3, 10)
+            new PlayerSpawn(0, FactionId.ArdentConcord, 500, 300, 3, 10),
+            new PlayerSpawn(1, FactionId.Wrought, 500, 300, 3, 10),
+            new PlayerSpawn(2, FactionId.Gharn, 500, 300, 3, 10),
+            new PlayerSpawn(3, FactionId.Seethe, 500, 300, 3, 10)
         };
 
         public static readonly WorkerSpawn[] Workers =
@@ -23,21 +24,26 @@ namespace Quantum
             new WorkerSpawn(6, 1, -15, 12),
             new WorkerSpawn(7, 2, 15, 12),
             new WorkerSpawn(8, 2, 17, 12),
-            new WorkerSpawn(9, 2, 19, 12)
+            new WorkerSpawn(9, 2, 19, 12),
+            new WorkerSpawn(10, 3, -2, 29),
+            new WorkerSpawn(11, 3, 0, 29),
+            new WorkerSpawn(12, 3, 2, 29)
         };
 
         public static readonly HeroSpawn[] Heroes =
         {
             new HeroSpawn(100, 0, 0, -16),
             new HeroSpawn(101, 1, -17, 11),
-            new HeroSpawn(102, 2, 17, 11)
+            new HeroSpawn(102, 2, 17, 11),
+            new HeroSpawn(103, 3, 0, 28)
         };
 
         public static readonly MainBaseSpawn[] MainBases =
         {
             new MainBaseSpawn(0, 0, -13),
             new MainBaseSpawn(1, -17, 14),
-            new MainBaseSpawn(2, 17, 14)
+            new MainBaseSpawn(2, 17, 14),
+            new MainBaseSpawn(3, 0, 31)
         };
 
         public static readonly ResourceNodeSpawn[] ResourceNodes =
