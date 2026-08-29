@@ -6,7 +6,13 @@ Purpose: keep this local Photon Quantum prototype aligned with The First Hand / 
 
 ## Sync Principle
 
-Use the local repo as the implementation source of truth and The First Hand / online board as the product-planning source of truth.
+Use the GitHub-backed local repo as the implementation source of truth and The First Hand / online board as the product-planning source of truth.
+
+Current repository:
+
+- Local path: `/Users/douglasgordy/Documents/Anachron`
+- GitHub remote: `https://github.com/Renzier/RTS.git`
+- Branch: local `main` tracking `origin/main`
 
 Do not paste raw local handoff files directly into the site when they contain absolute paths, private environment details, or low-level implementation notes. Instead, publish a cleaned export snapshot.
 

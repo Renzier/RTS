@@ -4,7 +4,8 @@
 
 - Project path: `/Users/douglasgordy/Documents/Anachron`
 - Engine stack: Unity 6 view layer + Photon Quantum deterministic simulation.
-- Repo status: this folder did not report as a git repository via `git status`.
+- Repo status: Git repository on local `main`, tracking GitHub remote `origin/main`.
+- GitHub remote: `https://github.com/Renzier/RTS.git`
 - Core design: micro-heavy RTS prototype with up to three players, Tech/Fantasy/Hybrid factions, workers, heroes, resources, tech tiers, main base defeat, and supply construction.
 
 ## Non-Negotiable Architecture
@@ -29,6 +30,18 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 18 completed:
+  - Added a first-pass Gharn hold-ground combat identity.
+  - Gharn heroes gain `+8` attack damage only when they are fighting without an active move target.
+  - Chasing into attack range does not receive the bonus; once movement is cleared in range, subsequent attacks receive it.
+  - Ardent Concord and Wrought hold-ground bonus values are `0`.
+  - The bonus is limited to combat units, currently heroes, and does not apply to buildings.
+  - No Quantum schema, CodeGen, movement mode, target acquisition, cooldown, or base hero damage values changed.
+- GitHub repository setup:
+  - Local project is connected to GitHub repository `Renzier/RTS`.
+  - Remote `origin` is `https://github.com/Renzier/RTS.git`.
+  - Local `main` tracks `origin/main`.
+  - Initial repository push was completed with commit `02db73e Initial commit`.
 - Added online sync support:
   - `handoff/ONLINE_SYNC_PLAN.md` defines how local sprint/project state should sync to The First Hand / online tracker without leaking local paths or credentials.
   - `handoff/ONLINE_STATUS_EXPORT.md` is the first clean drop-in status snapshot for the online project board.

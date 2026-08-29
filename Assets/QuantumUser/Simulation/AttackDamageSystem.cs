@@ -44,7 +44,7 @@ namespace Quantum
                     continue;
                 }
 
-                targetable->Health -= updatedAttackIntent.Damage;
+                targetable->Health -= GetAttackDamage(f, attackerEntity, updatedAttackIntent.Damage);
                 if (targetable->Health < 0)
                 {
                     targetable->Health = 0;
@@ -157,6 +157,27 @@ namespace Quantum
             }
 
             return unitIdentity->UnitKind == UnitKind.Hero;
+        }
+
+        private static int GetAttackDamage(Frame f, EntityRef attackerEntity, int baseDamage)
+        {
+            if (IsHoldingGround(f, attackerEntity) == false ||
+                f.Unsafe.TryGetPointer<UnitIdentity>(attackerEntity, out UnitIdentity* unitIdentity) == false)
+            {
+                return baseDamage;
+            }
+
+            return baseDamage + FactionStats.ForPlayer(f, unitIdentity->OwnerPlayer).HoldGroundDamageBonus;
+        }
+
+        private static bool IsHoldingGround(Frame f, EntityRef entity)
+        {
+            if (f.Unsafe.TryGetPointer<MoveIntent>(entity, out MoveIntent* moveIntent) == false)
+            {
+                return true;
+            }
+
+            return moveIntent->HasTarget == false;
         }
 
         private static bool IsAttackerDefeated(Frame f, EntityRef entity)

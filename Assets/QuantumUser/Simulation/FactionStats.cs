@@ -6,15 +6,17 @@ namespace Quantum
         public readonly int HeroMaxHealth;
         public readonly int HeroBaseDamage;
         public readonly int HeroDamagePerTier;
+        public readonly int HoldGroundDamageBonus;
         public readonly int MainBaseMaxHealth;
         public readonly int SupplyBuildingMaxHealth;
 
-        private FactionStats(int workerMaxHealth, int heroMaxHealth, int heroBaseDamage, int heroDamagePerTier, int mainBaseMaxHealth, int supplyBuildingMaxHealth)
+        private FactionStats(int workerMaxHealth, int heroMaxHealth, int heroBaseDamage, int heroDamagePerTier, int holdGroundDamageBonus, int mainBaseMaxHealth, int supplyBuildingMaxHealth)
         {
             WorkerMaxHealth = workerMaxHealth;
             HeroMaxHealth = heroMaxHealth;
             HeroBaseDamage = heroBaseDamage;
             HeroDamagePerTier = heroDamagePerTier;
+            HoldGroundDamageBonus = holdGroundDamageBonus;
             MainBaseMaxHealth = mainBaseMaxHealth;
             SupplyBuildingMaxHealth = supplyBuildingMaxHealth;
         }
@@ -24,15 +26,15 @@ namespace Quantum
             int normalizedFaction = FactionId.Normalize(factionId);
             if (normalizedFaction == FactionId.Fantasy)
             {
-                return new FactionStats(90, 280, 55, 12, 1800, 650);
+                return new FactionStats(90, 280, 55, 12, 0, 1800, 650);
             }
 
             if (normalizedFaction == FactionId.Hybrid)
             {
-                return new FactionStats(105, 310, 48, 15, 1500, 500);
+                return new FactionStats(105, 310, 48, 15, 8, 1500, 500);
             }
 
-            return new FactionStats(115, 330, 42, 18, 1650, 500);
+            return new FactionStats(115, 330, 42, 18, 0, 1650, 500);
         }
 
         public static FactionStats ForPlayer(Frame f, int playerIndex)

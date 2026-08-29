@@ -565,7 +565,7 @@ Implementation note:
 
 ### Sprint 18: Gharn Hold-Ground Combat Identity
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Give Gharn a simple first-pass ground identity.
 
@@ -586,6 +586,15 @@ Acceptance:
 - Gharn units get the bonus only under the chosen condition.
 - Moving cancels or prevents the bonus.
 - Combat remains deterministic.
+
+Implementation note:
+
+- Added a first-pass Gharn hold-ground damage bonus through `FactionStats.HoldGroundDamageBonus`.
+- Gharn heroes gain `+8` attack damage only when they have no active move target.
+- Chasing into range does not receive the bonus; once `AttackTargetingSystem` clears movement because the hero is in range, subsequent attacks receive the bonus.
+- Ardent Concord and Wrought hold-ground bonus values are `0`.
+- The effect is limited to combat units, currently heroes, and does not apply to buildings.
+- No Quantum schema, CodeGen, movement mode, target acquisition, cooldown, or base hero damage values changed.
 
 ## Production Depth
 
