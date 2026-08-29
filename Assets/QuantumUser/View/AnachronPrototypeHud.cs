@@ -20,9 +20,6 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private const int MaxTechTier = 3;
     private const int BaseWoodUpgradeCost = 200;
     private const int BaseIronUpgradeCost = 150;
-    private const int WorkerWoodCost = 50;
-    private const int WorkerIronCost = 25;
-    private const int WorkerFoodCost = 1;
     private const int SupplyWoodCost = 100;
     private const int SupplyIronCost = 50;
     private const int SupplyFoodProvided = 5;
@@ -463,22 +460,23 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private static string GetWorkerProductionLabel(Frame frame, int playerIndex)
     {
         string workerName = GetWorkerDisplayName(frame, playerIndex);
+        FactionStats stats = FactionStats.ForPlayer(frame, playerIndex);
         if (TryGetEconomyState(frame, playerIndex, out PlayerEconomyState economyState) == false)
         {
             return $"Train {workerName}: economy missing";
         }
 
-        if (economyState.FoodUsed + WorkerFoodCost > economyState.FoodCap)
+        if (economyState.FoodUsed + stats.WorkerFoodCost > economyState.FoodCap)
         {
             return $"Train {workerName}: need Holding";
         }
 
-        if (economyState.Wood < WorkerWoodCost || economyState.Iron < WorkerIronCost)
+        if (economyState.Wood < stats.WorkerWoodCost || economyState.Iron < stats.WorkerIronCost)
         {
-            return $"Train {workerName}: need {GetResourceShortfall(economyState, WorkerWoodCost, WorkerIronCost)}";
+            return $"Train {workerName}: need {GetResourceShortfall(economyState, stats.WorkerWoodCost, stats.WorkerIronCost)}";
         }
 
-        return $"Train {workerName}: {FormatResourcePair(WorkerWoodCost, WorkerIronCost)} - press B";
+        return $"Train {workerName}: {FormatResourcePair(stats.WorkerWoodCost, stats.WorkerIronCost)} - press B";
     }
 
     private static string GetWorkerDisplayName(Frame frame, int playerIndex)

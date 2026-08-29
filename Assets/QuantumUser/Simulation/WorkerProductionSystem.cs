@@ -5,9 +5,6 @@ namespace Quantum
     public unsafe class WorkerProductionSystem : SystemMainThread
     {
         private const int TrainWorkerIntent = 3;
-        private const int WorkerWoodCost = 50;
-        private const int WorkerIronCost = 25;
-        private const int WorkerFoodCost = 1;
 
         public override void Update(Frame f)
         {
@@ -18,12 +15,13 @@ namespace Quantum
 
             f.Global->LastUpgradeIntent = 0;
             int playerIndex = f.Global->LastInputPlayer;
+            FactionStats stats = FactionStats.ForPlayer(f, playerIndex);
 
             if (TryGetEconomyState(f, playerIndex, out EntityRef economyEntity, out PlayerEconomyState economyState) == false ||
                 economyState.IsDefeated ||
-                economyState.Wood < WorkerWoodCost ||
-                economyState.Iron < WorkerIronCost ||
-                economyState.FoodUsed + WorkerFoodCost > economyState.FoodCap)
+                economyState.Wood < stats.WorkerWoodCost ||
+                economyState.Iron < stats.WorkerIronCost ||
+                economyState.FoodUsed + stats.WorkerFoodCost > economyState.FoodCap)
             {
                 return;
             }
@@ -34,9 +32,9 @@ namespace Quantum
             }
 
             PlayerEconomyState updatedEconomy = economyState;
-            updatedEconomy.Wood -= WorkerWoodCost;
-            updatedEconomy.Iron -= WorkerIronCost;
-            updatedEconomy.FoodUsed += WorkerFoodCost;
+            updatedEconomy.Wood -= stats.WorkerWoodCost;
+            updatedEconomy.Iron -= stats.WorkerIronCost;
+            updatedEconomy.FoodUsed += stats.WorkerFoodCost;
             f.Set(economyEntity, updatedEconomy);
 
             CreateWorker(f, playerIndex, GetNextUnitId(f), spawnPosition);

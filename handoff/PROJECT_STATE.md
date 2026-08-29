@@ -30,6 +30,15 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 19 completed:
+  - Added faction-specific worker production costs through `FactionStats`.
+  - Ardent Concord Keelwatch Ranker remains `50` Salvage / `25` Plate / `1` Holding.
+  - Wrought Wright now costs `65` Salvage / `35` Plate / `1` Holding.
+  - Gharn Sinterjack now costs `40` Salvage / `20` Plate / `1` Holding.
+  - `WorkerProductionSystem` now checks and deducts faction-specific worker costs.
+  - Main-building HUD worker-production labels now use the same faction-specific costs and shortfall values.
+  - Existing worker max health, spawn placement, food-cap behavior, selection, movement, and gathering behavior were unchanged.
+  - No Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 18 completed:
   - Added a first-pass Gharn hold-ground combat identity.
   - Gharn heroes gain `+8` attack damage only when they are fighting without an active move target.

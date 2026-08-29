@@ -600,7 +600,7 @@ Implementation note:
 
 ### Sprint 19: Add Faction-Specific Worker Costs
 
-Status: `[ ]`
+Status: `[x]`
 
 Goal: Let each initial faction have slightly different worker economy tuning.
 
@@ -620,6 +620,17 @@ Acceptance:
 
 - Worker production costs are faction-aware.
 - HUD affordability feedback still works.
+
+Implementation note:
+
+- Added worker production costs to `FactionStats`.
+- Ardent Concord Keelwatch Ranker remains `50` Salvage / `25` Plate / `1` Holding.
+- Wrought Wright now costs `65` Salvage / `35` Plate / `1` Holding.
+- Gharn Sinterjack now costs `40` Salvage / `20` Plate / `1` Holding.
+- `WorkerProductionSystem` now checks and deducts faction-specific worker costs.
+- Main-building HUD worker-production labels now read the same faction-specific costs and shortfall values.
+- Existing worker max health, spawn placement, food-cap behavior, selection, movement, and gathering behavior were unchanged.
+- No Quantum schema or CodeGen changes were required.
 
 ### Sprint 20: Add Faction-Specific Supply Costs
 
