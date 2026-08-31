@@ -302,12 +302,13 @@ Prototype translation:
 - Supply building: Platen, Sounding Node, Skinline Updraft Node.
 - Visual language: ash/silt/wreckage bodies, wrong seams, blank identity, copied silhouettes, silent gaps.
 
-Current repo placeholder:
+Current repo status:
 
-- Virii are not playable in the current three-faction prototype.
-- Do not add a Virii `FactionId` until a dedicated faction-expansion/codegen sprint.
+- Virii are assignable as the eighth prototype faction.
+- `FactionId.Virii = 7`.
 - Future Virii implementation should build on `handoff/GRAIN_CAST_SEAL_CONTRACT.md`.
 - First hooks should observe `GrainState`, copy Cast through a shared path, and fail Seal/Tell checks that require true belonging.
+- No Rubbing, Sounding, Take, Fold, Platen, copying, or infiltration mechanic is implemented yet.
 - Placeholder names to preserve for later: The Fold, Platen Node, Sounding Node, Skinline Updraft Node, A Draft, Kin-shape.
 
 Known force references:

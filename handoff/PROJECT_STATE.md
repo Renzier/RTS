@@ -22,15 +22,23 @@
 - Right-click movement, NavMesh movement requests, gather/deposit loops, economy state, combat, health, death cleanup, and main-base defeat exist.
 - Tech upgrades, building tiers, singleton hero lifecycle, hero rebuild, and HUD feedback exist.
 - Phase 3 faction foundation exists:
-  - Faction IDs: Ardent Concord, Wrought, Gharn, Seethe, Veirn, Vaelun, Nimhara.
+  - Faction IDs: Ardent Concord, Wrought, Gharn, Seethe, Veirn, Vaelun, Nimhara, Virii.
   - Compatibility aliases remain: Tech -> Ardent Concord, Fantasy -> Wrought, Hybrid -> Gharn.
   - Player faction state entities are bootstrapped deterministically.
-  - Prototype player assignment: P0 Ardent Concord, P1 Wrought, P2 Gharn, P3 Seethe, P4 Veirn, P5 Vaelun, P6 Nimhara.
+  - Prototype player assignment: P0 Ardent Concord, P1 Wrought, P2 Gharn, P3 Seethe, P4 Veirn, P5 Vaelun, P6 Nimhara, P7 Virii.
   - Faction-specific worker HP, hero HP, hero damage scaling, and main base HP.
   - Faction-specific display names and primitive silhouettes in the view layer.
 
 ## Most Recent Work
 
+- Kilnfall Sprint 39 completed:
+  - Added Virii as canonical `FactionId.Virii = 7`.
+  - Added first-pass Virii stats for workers, heroes, main base, and support building costs/Holding.
+  - Added P7 Virii to the bootstrap scenario with The Fold, three A Draft workers, and a Kin-shape hero.
+  - Added P7 Virii to the local Start As selector.
+  - HUD/debug labels now show Virii, The Fold, Platen Node, A Draft, Kin-shape, and `Tell: False Cast`.
+  - Primitive presentation now includes Virii color, foundation color, and shape/scale choices.
+  - No Virii Rubbing/copying/infiltration mechanic was added.
 - Kilnfall Sprint 38 completed:
   - Added Nimhara as canonical `FactionId.Nimhara = 6`.
   - Added first-pass Nimhara stats for workers, heroes, main base, and support building costs/Holding.

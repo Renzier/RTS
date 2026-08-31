@@ -66,6 +66,11 @@ namespace Quantum
                 return new FactionStats(100, 45, 45, 1, 290, 44, 20, 0, 1600, 540, 95, 75, 5);
             }
 
+            if (normalizedFaction == FactionId.Virii)
+            {
+                return new FactionStats(90, 50, 50, 1, 260, 38, 18, 0, 1400, 460, 100, 80, 5);
+            }
+
             return new FactionStats(115, 50, 25, 1, 330, 42, 18, 0, 1650, 500, 100, 50, 5);
         }
 

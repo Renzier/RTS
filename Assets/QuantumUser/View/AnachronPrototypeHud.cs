@@ -533,6 +533,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Sillwright";
         }
 
+        if (factionId == FactionId.Virii)
+        {
+            return "A Draft";
+        }
+
         return "Keelwatch Ranker";
     }
 
@@ -865,6 +870,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "Nimhara";
             }
 
+            if (factionState.FactionId == FactionId.Virii)
+            {
+                return "Virii";
+            }
+
             return "Ardent Concord";
         }
 
@@ -904,6 +914,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Tidewood Grove";
         }
 
+        if (factionId == FactionId.Virii)
+        {
+            return "The Fold";
+        }
+
         return "Ledger House";
     }
 
@@ -938,6 +953,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Nimhara)
         {
             return "Tide Marker";
+        }
+
+        if (factionId == FactionId.Virii)
+        {
+            return "Platen Node";
         }
 
         return "Countersign Post";
@@ -985,6 +1005,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Nimhara)
         {
             return "Draw";
+        }
+
+        if (factionId == FactionId.Virii)
+        {
+            return "False Cast";
         }
 
         return "Countersign";
@@ -1533,6 +1558,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "Nine-Note Warden";
             }
 
+            if (factionId == FactionId.Virii)
+            {
+                return "Kin-shape";
+            }
+
             return "Concord Marshal";
         }
 
@@ -1564,6 +1594,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Nimhara)
         {
             return "Sillwright";
+        }
+
+        if (factionId == FactionId.Virii)
+        {
+            return "A Draft";
         }
 
         return "Keelwatch Ranker";

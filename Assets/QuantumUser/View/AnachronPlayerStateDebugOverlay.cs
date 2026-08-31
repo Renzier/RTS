@@ -105,6 +105,11 @@ public sealed class AnachronPlayerStateDebugOverlay : QuantumMonoBehaviour
                 return "Nimhara";
             }
 
+            if (factionState.FactionId == FactionId.Virii)
+            {
+                return "Virii";
+            }
+
             return "Ardent Concord";
         }
 
@@ -142,6 +147,11 @@ public sealed class AnachronPlayerStateDebugOverlay : QuantumMonoBehaviour
         if (factionId == FactionId.Nimhara)
         {
             return "Tidewood Grove";
+        }
+
+        if (factionId == FactionId.Virii)
+        {
+            return "The Fold";
         }
 
         return "Ledger House";

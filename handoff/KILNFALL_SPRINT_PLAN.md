@@ -1177,7 +1177,9 @@ Acceptance:
 
 ### Sprint 39: Add Virii As Eighth Power
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-30: added Virii as canonical `FactionId.Virii = 7`. The bootstrap scenario now includes P7 Virii with The Fold, three A Draft workers, and a Kin-shape hero; the local Start As panel can select P7 Virii. Virii has first-pass basic stats, HUD/debug labels, primitive colors/shapes, and Platen Node support-building presentation. No Rubbing/copying mechanic was added.
 
 Goal: Add Virii as a selectable/assignable faction.
 
