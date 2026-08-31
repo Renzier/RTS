@@ -31,6 +31,12 @@
 
 ## Most Recent Work
 
+- Quill objective correction completed:
+  - Moved the active prototype Quill objective to center `(0, 0)`.
+  - Disabled Quill hold-to-win so owning the Quill no longer directly defeats other players.
+  - Quill ownership remains useful through the existing Salvage/Plate trickle buff.
+  - HUD wording now presents owned Quill state as `secured buff` or `contested control`, not a match-ending timer.
+  - Added `handoff/QUILL_OBJECTIVE_LAYOUT_NOTE.md` with current start distance checks and future multi-Quill tower pressure direction.
 - Kilnfall Sprint 41 completed:
   - Added `Assets/QuantumUser/Simulation/MovementDomain.cs` with deterministic Ground/Air/Underwater/Orbit constants.
   - Added `UnitKind.AirScout`.
@@ -148,11 +154,11 @@
   - No schema, balance, or gameplay behavior changed.
 - Quill victory correction completed:
   - Capturing the Quill now grants the existing ownership resource trickle as the immediate buff.
-  - The Quill victory timer only advances when the owner has no live enemy workers or heroes inside the Quill capture radius.
-  - Enemy presence pauses the timer instead of allowing a capture-only win.
+  - A later correction disabled Quill hold-to-win entirely; owning the Quill no longer directly defeats other players.
+  - Enemy presence now marks Quill ownership as contested control instead of pausing a match-ending timer.
   - Existing Quill ownership is not neutralized while the owner still has live forces contesting the area.
   - Enemies must clear or force out the owner before neutralizing/recapturing the Quill, matching the intended "captured and area defeated" win condition.
-  - Selected Quill HUD now shows `contested hold` when enemy presence is blocking victory progress.
+  - Selected Quill HUD now shows `contested control` when enemy presence contests the owner.
   - Selected Quill HUD now labels the trickle as an `Ownership buff`.
   - No Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 28 completed:
@@ -165,17 +171,13 @@
   - Identified likely domain-specific routing areas: movement/pathing, targeting, detection/vision, production/spawning, camera presentation, and map constraints.
   - Pointed to the current `MoveIntent.MovementMode` pattern as the local precedent for deterministic integer-based routing.
   - No Quantum schema, CodeGen, or gameplay behavior changed.
-- Kilnfall Sprint 27 completed:
-  - Added `QuillVictorySystem` as an optional prototype hold-to-win condition.
-  - `QuillObjective.VictoryEnabled` currently enables the rule.
-  - Capturing the Quill starts a `1800` tick victory hold timer.
-  - While a non-neutral owner keeps the Quill, the timer counts down deterministically.
-  - Enemy recapture swaps the Quill back to the capture meter before progress is drained, so recapture time does not depend on the remaining victory timer.
-  - When the timer reaches `0`, all non-owner players are marked defeated, reusing the existing match-end banner and defeated-player cleanup flow.
-  - `MainBaseDefeatSystem` now treats defeat as sticky so Quill-based defeat is not undone by living main buildings on the next tick.
-  - Selected Quill HUD now labels owned progress as `victory hold`.
-  - Match banner now distinguishes Quill victory/defeat from main-building defeat.
-  - Main-base defeat remains available and unchanged as a separate way to end the match.
+- Kilnfall Sprint 27 completed, later corrected:
+  - Added `QuillVictorySystem` as an optional prototype hold-to-win experiment.
+  - `QuillObjective.VictoryEnabled` is now `false`, so the rule is disabled.
+  - Capturing the Quill no longer starts a match-ending defeat timer.
+  - Quill ownership remains valuable through its Salvage/Plate resource trickle buff.
+  - Selected Quill HUD now labels owned progress as `secured buff` or `contested control`.
+  - Main-base destruction remains the active way to defeat players.
   - No new Quantum schema or CodeGen changes were required.
 - Kilnfall Sprint 26 completed:
   - Added a simple deterministic Quill ownership resource trickle.

@@ -20,6 +20,8 @@ Read these before changing behavior. The list is intentionally short to save fre
   - Decision note for extending current deterministic integer faction IDs into all eight Kilnfall powers.
 - `handoff/AIR_DOMAIN_STUB.md`
   - Decision note for first Air-domain representation before live air movement or units.
+- `handoff/QUILL_OBJECTIVE_LAYOUT_NOTE.md`
+  - Current Quill objective rule/layout correction and future multi-tower/map-expansion direction.
 - `# RTS Master Project Document For Anachron`
   - Project architecture, phases, and hard determinism rules.
 - `phase3_progress.md`

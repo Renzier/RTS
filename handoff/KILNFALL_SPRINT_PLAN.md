@@ -897,29 +897,25 @@ Likely files:
 
 Acceptance:
 
-- A player can win by holding the Quill long enough.
+- Historical prototype only: a player could win by holding the Quill long enough before the later correction disabled hold-to-win.
 - Existing main-base defeat does not regress.
 
 Implementation note:
 
-- Added `QuillVictorySystem` as an optional prototype hold-to-win condition.
-- `QuillObjective.VictoryEnabled` currently enables the rule.
-- Capturing the Quill starts a `1800` tick victory hold timer.
-- While a non-neutral owner keeps the Quill, the timer counts down deterministically.
-- Enemy recapture swaps the Quill back to the capture meter before progress is drained, so recapture time does not depend on the remaining victory timer.
-- When the timer reaches `0`, all non-owner players are marked defeated, reusing the existing match-end banner and defeated-player cleanup flow.
-- `MainBaseDefeatSystem` now treats defeat as sticky so Quill-based defeat is not undone by living main buildings on the next tick.
-- Selected Quill HUD now labels owned progress as `victory hold`.
-- Match banner now distinguishes Quill victory/defeat from main-building defeat.
-- Main-base defeat remains available and unchanged as a separate way to end the match.
+- Added `QuillVictorySystem` as an optional prototype hold-to-win experiment.
+- A later correction set `QuillObjective.VictoryEnabled = false`, so the rule is disabled.
+- Capturing the Quill no longer starts a match-ending defeat timer.
+- Quill ownership remains valuable through its Salvage/Plate resource trickle buff.
+- Selected Quill HUD now labels owned progress as `secured buff` or `contested control`.
+- Main-base destruction remains the active way to defeat players.
 - No new Quantum schema or CodeGen changes were required.
 
 Correction note, 2026-08-29:
 
-- Capturing the Quill now grants the ownership resource trickle, but does not by itself advance the victory timer through enemy presence.
-- Quill victory hold progress pauses while enemy workers or heroes are alive inside the Quill capture radius.
+- Capturing the Quill grants the ownership resource trickle, but does not by itself advance a victory timer.
+- Quill hold-to-win is disabled; defeating players still requires destroying their main bases.
 - Contested ownership no longer clears an existing owner if that owner still has forces in the radius; the enemy must clear or force out the owner before neutralizing/recapturing.
-- Selected Quill HUD labels owned-but-contested progress as `contested hold` and calls the trickle an `Ownership buff`.
+- Selected Quill HUD labels owned-but-contested control as `contested control` and calls secured ownership a buff.
 - No new Quantum schema or CodeGen changes were required.
 
 ## Architecture Gates From First Hand

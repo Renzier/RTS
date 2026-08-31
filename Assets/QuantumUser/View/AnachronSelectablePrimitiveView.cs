@@ -270,7 +270,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         CreateLandmarkPrimitive(root.transform, "MereWest", PrimitiveType.Cube, new Vector3(-42.0f, -0.12f, 0.0f), new Vector3(6.0f, 0.04f, 82.0f), MereBoundaryColor);
         CreateLandmarkPrimitive(root.transform, "QuillWaistSpire", PrimitiveType.Cylinder, new Vector3(0.0f, 2.1f, 22.0f), new Vector3(0.8f, 2.1f, 0.8f), QuillMarkerColor);
         CreateLandmarkPrimitive(root.transform, "QuillWaistRing", PrimitiveType.Cylinder, new Vector3(0.0f, 0.08f, 22.0f), new Vector3(4.4f, 0.06f, 4.4f), ShardRidgeColor);
-        CreateLandmarkPrimitive(root.transform, "CentralQuillWaistRing", PrimitiveType.Cylinder, new Vector3(0.0f, 0.06f, 7.0f), new Vector3(2.8f, 0.04f, 2.8f), QuillMarkerColor);
+        CreateLandmarkPrimitive(root.transform, "CentralQuillWaistRing", PrimitiveType.Cylinder, new Vector3(0.0f, 0.06f, 0.0f), new Vector3(2.8f, 0.04f, 2.8f), QuillMarkerColor);
         CreateLandmarkPrimitive(root.transform, "ShardRidgeWest", PrimitiveType.Cube, new Vector3(-16.0f, 0.08f, 18.0f), new Vector3(8.0f, 0.16f, 1.0f), ShardRidgeColor);
         CreateLandmarkPrimitive(root.transform, "ShardRidgeEast", PrimitiveType.Cube, new Vector3(16.0f, 0.08f, 18.0f), new Vector3(8.0f, 0.16f, 1.0f), ShardRidgeColor);
     }

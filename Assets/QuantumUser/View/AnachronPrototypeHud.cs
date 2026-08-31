@@ -743,8 +743,8 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         string progressLabel = quillTargetable.OwnerPlayer == QuillObjective.NeutralOwner
             ? "capture"
             : HasEnemyInQuillRadius(frame, quillTargetable.OwnerPlayer)
-                ? "contested hold"
-                : "victory hold";
+                ? "contested control"
+                : "secured buff";
 
         return $"{owner}: {progressLabel} {quillTargetable.Health}/{quillTargetable.MaxHealth}";
     }
@@ -1404,10 +1404,7 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "VICTORY - Quill-Waist Held";
             }
 
-            if (localPlayerDefeated)
-            {
-                return "DEFEAT - Enemy Held the Quill-Waist";
-            }
+            return "Quill-Waist Secured";
         }
 
         return localPlayerDefeated ? "DEFEAT - Main Building Destroyed" : "VICTORY - Enemy Main Buildings Destroyed";
@@ -1415,6 +1412,12 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
     private static bool TryGetQuillVictoryOwner(Frame frame, out int ownerPlayer)
     {
+        if (QuillObjective.VictoryEnabled == false)
+        {
+            ownerPlayer = QuillObjective.NeutralOwner;
+            return false;
+        }
+
         foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
         {
             if (IsQuillObjective(frame, entity) == false ||

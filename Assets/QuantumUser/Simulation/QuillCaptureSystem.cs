@@ -50,8 +50,8 @@ namespace Quantum
             if (updatedTargetable.Health <= 0)
             {
                 updatedTargetable.OwnerPlayer = areaControl.SinglePlayer;
-                updatedTargetable.Health = QuillObjective.VictoryHoldTicks;
-                updatedTargetable.MaxHealth = QuillObjective.VictoryHoldTicks;
+                updatedTargetable.Health = QuillObjective.MaxHealth;
+                updatedTargetable.MaxHealth = QuillObjective.MaxHealth;
             }
 
             f.Set(quillEntity, updatedTargetable);

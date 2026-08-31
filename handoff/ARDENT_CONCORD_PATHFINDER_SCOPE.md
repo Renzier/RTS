@@ -45,7 +45,7 @@ Polish Ardent Concord loops in this order:
 3. Economy loop: Keelwatch Ranker production, Salvage/Plate/Holding costs, gathering cadence, dropoff clarity, support-building placement, and worker repair spending.
 4. Combat loop: Concord Marshal survivability, attack range/damage readability, target feedback, death cleanup, and main-building defeat behavior.
 5. Ardent sustain identity: passive mend presentation, repair-worker feedback, Countersign Post resilience, and later paired/countersignature hooks.
-6. Objective loop: Quill capture, ownership buff, contested hold, and hold-to-win as an Ardent-led objective/tutorial target.
+6. Objective loop: Quill capture, ownership buff, contested control, and future multi-tower pressure as an Ardent-led objective/tutorial target.
 7. Mission framing: Ardent Concord Mission 1 / "Slack Water" scope once economy/construction/combat and Quill objective behavior are stable.
 
 ## First Mechanics To Make Production-Quality
