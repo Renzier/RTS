@@ -518,6 +518,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Harrowmouth";
         }
 
+        if (factionId == FactionId.Veirn)
+        {
+            return "Cauled";
+        }
+
         return "Keelwatch Ranker";
     }
 
@@ -835,6 +840,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "Seethe";
             }
 
+            if (factionState.FactionId == FactionId.Veirn)
+            {
+                return "Veirn";
+            }
+
             return "Ardent Concord";
         }
 
@@ -859,6 +869,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Reading Kiln";
         }
 
+        if (factionId == FactionId.Veirn)
+        {
+            return "Ledger Furnace";
+        }
+
         return "Ledger House";
     }
 
@@ -878,6 +893,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Seethe)
         {
             return "Pattern Archive";
+        }
+
+        if (factionId == FactionId.Veirn)
+        {
+            return "Keth House";
         }
 
         return "Countersign Post";
@@ -910,6 +930,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Seethe)
         {
             return "Pattern";
+        }
+
+        if (factionId == FactionId.Veirn)
+        {
+            return "Keth";
         }
 
         return "Countersign";
@@ -1443,6 +1468,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "The Incipit";
             }
 
+            if (factionId == FactionId.Veirn)
+            {
+                return "Ordal Executor";
+            }
+
             return "Concord Marshal";
         }
 
@@ -1459,6 +1489,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Seethe)
         {
             return "Harrowmouth";
+        }
+
+        if (factionId == FactionId.Veirn)
+        {
+            return "Cauled";
         }
 
         return "Keelwatch Ranker";

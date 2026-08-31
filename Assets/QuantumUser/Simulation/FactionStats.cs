@@ -51,6 +51,11 @@ namespace Quantum
                 return new FactionStats(95, 55, 40, 1, 300, 46, 16, 0, 1550, 520, 110, 65, 5);
             }
 
+            if (normalizedFaction == FactionId.Veirn)
+            {
+                return new FactionStats(85, 35, 55, 1, 270, 52, 14, 0, 1450, 480, 80, 85, 5);
+            }
+
             return new FactionStats(115, 50, 25, 1, 330, 42, 18, 0, 1650, 500, 100, 50, 5);
         }
 

@@ -1123,7 +1123,9 @@ Acceptance:
 
 ### Sprint 36: Add Veirn As Fifth Power
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-30: added Veirn as canonical `FactionId.Veirn = 4`. The bootstrap scenario now includes P4 Veirn with a Ledger Furnace, three Cauled workers, and an Ordal Executor hero; the local Start As panel can select P4 Veirn. Veirn has first-pass basic stats, HUD/debug labels, primitive colors/shapes, and Keth House support-building presentation. No debt mechanic was added.
 
 Goal: Add Veirn as a selectable/assignable faction.
 

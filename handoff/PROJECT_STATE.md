@@ -22,15 +22,23 @@
 - Right-click movement, NavMesh movement requests, gather/deposit loops, economy state, combat, health, death cleanup, and main-base defeat exist.
 - Tech upgrades, building tiers, singleton hero lifecycle, hero rebuild, and HUD feedback exist.
 - Phase 3 faction foundation exists:
-  - Faction IDs: Ardent Concord, Wrought, Gharn, Seethe.
+  - Faction IDs: Ardent Concord, Wrought, Gharn, Seethe, Veirn.
   - Compatibility aliases remain: Tech -> Ardent Concord, Fantasy -> Wrought, Hybrid -> Gharn.
   - Player faction state entities are bootstrapped deterministically.
-  - Prototype player assignment: P0 Ardent Concord, P1 Wrought, P2 Gharn, P3 Seethe.
+  - Prototype player assignment: P0 Ardent Concord, P1 Wrought, P2 Gharn, P3 Seethe, P4 Veirn.
   - Faction-specific worker HP, hero HP, hero damage scaling, and main base HP.
   - Faction-specific display names and primitive silhouettes in the view layer.
 
 ## Most Recent Work
 
+- Kilnfall Sprint 36 completed:
+  - Added Veirn as canonical `FactionId.Veirn = 4`.
+  - Added first-pass Veirn stats for workers, heroes, main base, and support building costs/Holding.
+  - Added P4 Veirn to the bootstrap scenario with a Ledger Furnace, three Cauled workers, and an Ordal Executor hero.
+  - Added P4 Veirn to the local Start As selector.
+  - HUD/debug labels now show Veirn, Ledger Furnace, Keth House, Cauled, Ordal Executor, and `Tell: Keth`.
+  - Primitive presentation now includes Veirn color, foundation color, and shape/scale choices.
+  - No Veirn debt mechanic was added.
 - Kilnfall Sprint 35 completed:
   - Added Seethe as canonical `FactionId.Seethe = 3`.
   - Preserved `Tech`, `Fantasy`, and `Hybrid` as compatibility aliases.
