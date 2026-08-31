@@ -1226,7 +1226,7 @@ Scope:
 - Add local resource pairs near each faction.
 - Expand build placement limits to match the larger map.
 - Widen the camera default enough to read the expanded arena.
-- Keep terrain blockers visual-only until deterministic pathing blockers are intentionally added.
+- Keep movement/pathing terrain blockers deferred until deterministic pathing blockers are intentionally added.
 
 Acceptance:
 
@@ -1235,6 +1235,27 @@ Acceptance:
 - Players have visible and buildable room around their starting bases.
 
 Follow-up note, 2026-08-31: starting camera focus now uses the active Start As faction for all eight expanded-map starts, camera pan clamps match the expanded map instead of the old 36-unit prototype bounds, runtime player setup passes the selected Start As slot, and the prototype HUD top-left panel shows only the current faction economy/tech/hero/owned units until a real HUD is built.
+
+### Sprint 44: Add First Terrain Build Blockers
+
+Status: `[x]`
+
+Implementation note, 2026-08-31: added `TerrainBlockers` as a shared simulation helper for the expanded map's west/east shard-mountain zones. Support-building validation and the Unity placement preview now both reject those zones, with the preview showing `Blocked by terrain`. Movement/pathing blockers are still deferred, so this does not alter air scout movement or ground command routing.
+
+Goal: Make the first mountain/shard terrain zones matter for base growth without taking on full deterministic obstacle pathing yet.
+
+Scope:
+
+- Add shared terrain blocker coordinates.
+- Reject support-building placement inside those zones.
+- Surface the same result in the build placement preview.
+- Keep air scouts unaffected.
+
+Acceptance:
+
+- A worker cannot place support buildings inside the shard-mountain zones.
+- Preview feedback matches deterministic validation.
+- No schema or CodeGen changes are required.
 
 ## Domain Expansion
 

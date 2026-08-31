@@ -194,6 +194,12 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
             return false;
         }
 
+        if (TerrainBlockers.BlocksGroundBuild(buildPoint.x, buildPoint.y))
+        {
+            status = "Blocked by terrain";
+            return false;
+        }
+
         foreach ((EntityRef entity, ResourceNode resourceNode) in frame.GetComponentIterator<ResourceNode>())
         {
             if (IsTooClose(frame, entity, buildPoint, PlacementRadius + 1.25f))

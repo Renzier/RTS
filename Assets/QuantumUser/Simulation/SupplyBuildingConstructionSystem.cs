@@ -595,6 +595,11 @@ namespace Quantum
                 return false;
             }
 
+            if (TerrainBlockers.BlocksGroundBuild(buildPoint))
+            {
+                return false;
+            }
+
             foreach ((EntityRef entity, ResourceNode resourceNode) in f.GetComponentIterator<ResourceNode>())
             {
                 if (IsTooCloseToTransform(f, entity, buildPoint, PlacementRadius + FP.FromString("1.25")))
