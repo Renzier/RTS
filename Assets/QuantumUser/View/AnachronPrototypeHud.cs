@@ -528,6 +528,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Hollowguard";
         }
 
+        if (factionId == FactionId.Nimhara)
+        {
+            return "Sillwright";
+        }
+
         return "Keelwatch Ranker";
     }
 
@@ -855,6 +860,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "Vaelun";
             }
 
+            if (factionState.FactionId == FactionId.Nimhara)
+            {
+                return "Nimhara";
+            }
+
             return "Ardent Concord";
         }
 
@@ -889,6 +899,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Ration Vault";
         }
 
+        if (factionId == FactionId.Nimhara)
+        {
+            return "Tidewood Grove";
+        }
+
         return "Ledger House";
     }
 
@@ -918,6 +933,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Vaelun)
         {
             return "Appetite Tender";
+        }
+
+        if (factionId == FactionId.Nimhara)
+        {
+            return "Tide Marker";
         }
 
         return "Countersign Post";
@@ -960,6 +980,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Vaelun)
         {
             return "Want";
+        }
+
+        if (factionId == FactionId.Nimhara)
+        {
+            return "Draw";
         }
 
         return "Countersign";
@@ -1503,6 +1528,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "Nightshear";
             }
 
+            if (factionId == FactionId.Nimhara)
+            {
+                return "Nine-Note Warden";
+            }
+
             return "Concord Marshal";
         }
 
@@ -1529,6 +1559,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Vaelun)
         {
             return "Hollowguard";
+        }
+
+        if (factionId == FactionId.Nimhara)
+        {
+            return "Sillwright";
         }
 
         return "Keelwatch Ranker";

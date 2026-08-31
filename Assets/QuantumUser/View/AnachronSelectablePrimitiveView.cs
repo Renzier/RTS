@@ -16,6 +16,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static readonly Color SeetheColor = new Color(0.28f, 0.66f, 0.42f, 1.0f);
     private static readonly Color VeirnColor = new Color(0.92f, 0.28f, 0.12f, 1.0f);
     private static readonly Color VaelunColor = new Color(0.08f, 0.09f, 0.12f, 1.0f);
+    private static readonly Color NimharaColor = new Color(0.42f, 0.72f, 0.86f, 1.0f);
     private static readonly Color WoodColor = new Color(0.05f, 0.85f, 0.22f, 1.0f);
     private static readonly Color IronColor = new Color(0.75f, 0.78f, 0.86f, 1.0f);
     private static readonly Color BaseColor = new Color(0.1f, 0.45f, 1.0f, 1.0f);
@@ -30,6 +31,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static readonly Color SeetheFoundationColor = new Color(0.24f, 0.44f, 0.34f, 1.0f);
     private static readonly Color VeirnFoundationColor = new Color(0.34f, 0.08f, 0.04f, 1.0f);
     private static readonly Color VaelunFoundationColor = new Color(0.18f, 0.18f, 0.22f, 1.0f);
+    private static readonly Color NimharaFoundationColor = new Color(0.22f, 0.36f, 0.42f, 1.0f);
     private static readonly Color SupplyDeconstructionColor = new Color(0.95f, 0.38f, 0.12f, 1.0f);
     private static readonly Color ActiveTargetColor = new Color(1.0f, 0.08f, 0.08f, 1.0f);
     private static readonly Color AttackerMarkerColor = new Color(1.0f, 0.62f, 0.08f, 1.0f);
@@ -390,6 +392,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             return isHero ? new Vector3(1.08f, 0.76f, 1.08f) : new Vector3(0.9f, 0.48f, 0.9f);
         }
 
+        if (factionId == FactionId.Nimhara)
+        {
+            return isHero ? new Vector3(0.78f, 1.18f, 0.78f) : new Vector3(0.64f, 0.54f, 0.64f);
+        }
+
         return isHero ? new Vector3(0.9f, 0.82f, 0.9f) : new Vector3(0.7f, 0.24f, 0.7f);
     }
 
@@ -448,6 +455,16 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
                     }
 
                     return supplyBuilding.IsConstructing ? new Vector3(1.5f, 0.14f, 1.5f) : new Vector3(1.32f, 0.5f, 1.32f);
+                }
+
+                if (factionId == FactionId.Nimhara)
+                {
+                    if (supplyBuilding.IsDeconstructing)
+                    {
+                        return new Vector3(1.22f, 0.48f, 1.22f);
+                    }
+
+                    return supplyBuilding.IsConstructing ? new Vector3(1.34f, 0.16f, 1.34f) : new Vector3(1.22f, 0.74f, 1.22f);
                 }
 
                 if (supplyBuilding.IsDeconstructing)
@@ -509,6 +526,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
                 return PrimitiveType.Cube;
             }
 
+            if (factionId == FactionId.Nimhara)
+            {
+                return PrimitiveType.Cylinder;
+            }
+
             return PrimitiveType.Cube;
         }
 
@@ -536,6 +558,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         if (unitFactionId == FactionId.Vaelun)
         {
             return PrimitiveType.Cube;
+        }
+
+        if (unitFactionId == FactionId.Nimhara)
+        {
+            return PrimitiveType.Cylinder;
         }
 
         return PrimitiveType.Cube;
@@ -832,6 +859,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             return VaelunFoundationColor;
         }
 
+        if (factionId == FactionId.Nimhara)
+        {
+            return NimharaFoundationColor;
+        }
+
         return ConcordFoundationColor;
     }
 
@@ -876,6 +908,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         if (factionId == FactionId.Vaelun)
         {
             return VaelunColor;
+        }
+
+        if (factionId == FactionId.Nimhara)
+        {
+            return NimharaColor;
         }
 
         return ArdentConcordColor;

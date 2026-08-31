@@ -13,7 +13,8 @@ namespace Quantum
             new PlayerSpawn(2, FactionId.Gharn, 500, 300, 3, 10),
             new PlayerSpawn(3, FactionId.Seethe, 500, 300, 3, 10),
             new PlayerSpawn(4, FactionId.Veirn, 500, 300, 3, 10),
-            new PlayerSpawn(5, FactionId.Vaelun, 500, 300, 3, 10)
+            new PlayerSpawn(5, FactionId.Vaelun, 500, 300, 3, 10),
+            new PlayerSpawn(6, FactionId.Nimhara, 500, 300, 3, 10)
         };
 
         public static readonly WorkerSpawn[] Workers =
@@ -35,7 +36,10 @@ namespace Quantum
             new WorkerSpawn(15, 4, -27, -3),
             new WorkerSpawn(16, 5, 27, -3),
             new WorkerSpawn(17, 5, 29, -3),
-            new WorkerSpawn(18, 5, 31, -3)
+            new WorkerSpawn(18, 5, 31, -3),
+            new WorkerSpawn(19, 6, -2, -31),
+            new WorkerSpawn(20, 6, 0, -31),
+            new WorkerSpawn(21, 6, 2, -31)
         };
 
         public static readonly HeroSpawn[] Heroes =
@@ -45,7 +49,8 @@ namespace Quantum
             new HeroSpawn(102, 2, 17, 11),
             new HeroSpawn(103, 3, 0, 28),
             new HeroSpawn(104, 4, -29, -4),
-            new HeroSpawn(105, 5, 29, -4)
+            new HeroSpawn(105, 5, 29, -4),
+            new HeroSpawn(106, 6, 0, -30)
         };
 
         public static readonly MainBaseSpawn[] MainBases =
@@ -55,7 +60,8 @@ namespace Quantum
             new MainBaseSpawn(2, 17, 14),
             new MainBaseSpawn(3, 0, 31),
             new MainBaseSpawn(4, -29, -1),
-            new MainBaseSpawn(5, 29, -1)
+            new MainBaseSpawn(5, 29, -1),
+            new MainBaseSpawn(6, 0, -33)
         };
 
         public static readonly ResourceNodeSpawn[] ResourceNodes =

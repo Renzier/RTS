@@ -61,6 +61,11 @@ namespace Quantum
                 return new FactionStats(120, 70, 30, 1, 360, 40, 12, 0, 1750, 700, 130, 55, 4);
             }
 
+            if (normalizedFaction == FactionId.Nimhara)
+            {
+                return new FactionStats(100, 45, 45, 1, 290, 44, 20, 0, 1600, 540, 95, 75, 5);
+            }
+
             return new FactionStats(115, 50, 25, 1, 330, 42, 18, 0, 1650, 500, 100, 50, 5);
         }
 

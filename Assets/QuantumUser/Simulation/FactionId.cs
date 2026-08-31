@@ -8,6 +8,7 @@ namespace Quantum
         public const int Seethe = 3;
         public const int Veirn = 4;
         public const int Vaelun = 5;
+        public const int Nimhara = 6;
 
         public const int Tech = ArdentConcord;
         public const int Fantasy = Wrought;
@@ -38,6 +39,11 @@ namespace Quantum
             if (factionId == Vaelun)
             {
                 return Vaelun;
+            }
+
+            if (factionId == Nimhara)
+            {
+                return Nimhara;
             }
 
             return ArdentConcord;

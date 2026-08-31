@@ -1159,7 +1159,9 @@ Acceptance:
 
 ### Sprint 38: Add Nimhara As Seventh Power
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-30: added Nimhara as canonical `FactionId.Nimhara = 6`. The bootstrap scenario now includes P6 Nimhara with a Tidewood Grove, three Sillwright workers, and a Nine-Note Warden hero; the local Start As panel can select P6 Nimhara. Nimhara has first-pass basic stats, HUD/debug labels, primitive colors/shapes, and Tide Marker support-building presentation. No Draw/Falls mechanic was added.
 
 Goal: Add Nimhara as a selectable/assignable faction.
 
