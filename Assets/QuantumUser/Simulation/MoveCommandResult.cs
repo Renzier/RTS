@@ -11,5 +11,6 @@ namespace Quantum
         public const int InvalidEndPosition = 6;
         public const int NoPathFound = 7;
         public const int PathTooLong = 8;
+        public const int BlockedByTerrain = 9;
     }
 }

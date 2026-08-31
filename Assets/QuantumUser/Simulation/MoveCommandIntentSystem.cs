@@ -137,9 +137,18 @@ namespace Quantum
 
                 ClearGatherIntent(f, entity);
 
+                FPVector2 moveTarget = f.Global->LastPointerWorld + GetFormationOffset(selectedMoveIndex);
+                if (IsAirScout(f, entity) == false && TerrainBlockers.BlocksGroundMovement(moveTarget))
+                {
+                    moveIntent->HasTarget = false;
+                    SetEntityCommandDebug(f, entity, false, MoveCommandResult.BlockedByTerrain, moveTarget);
+                    selectedMoveIndex++;
+                    continue;
+                }
+
                 moveIntent->HasTarget = true;
                 moveIntent->MovementMode = GetMovementMode(f, entity);
-                moveIntent->TargetWorld = f.Global->LastPointerWorld + GetFormationOffset(selectedMoveIndex);
+                moveIntent->TargetWorld = moveTarget;
                 selectedMoveIndex++;
             }
         }
@@ -433,6 +442,21 @@ namespace Quantum
             }
 
             return unitHealth->IsDead;
+        }
+
+        private static void SetEntityCommandDebug(Frame f, EntityRef entity, bool accepted, int result, FPVector2 targetWorld)
+        {
+            if (f.Unsafe.TryGetPointer<CommandIntentDebug>(entity, out CommandIntentDebug* commandIntentDebug) == false)
+            {
+                return;
+            }
+
+            commandIntentDebug->HasMoveCommandIntent = true;
+            commandIntentDebug->WasMoveCommandAccepted = accepted;
+            commandIntentDebug->WasMoveCommandRejected = accepted == false;
+            commandIntentDebug->MoveCommandPlayer = f.Global->LastInputPlayer;
+            commandIntentDebug->MoveCommandResult = result;
+            commandIntentDebug->MoveCommandTargetWorld = targetWorld;
         }
 
         private static bool HasLiveAttackTarget(Frame f, EntityRef targetEntity)

@@ -18,6 +18,12 @@ namespace Quantum
                    IsInsideRect(position, EastShardMinX - BuildBuffer, EastShardMaxX + BuildBuffer, ShardMinY - BuildBuffer, ShardMaxY + BuildBuffer);
         }
 
+        public static bool BlocksGroundMovement(FPVector2 position)
+        {
+            return IsInsideRect(position, WestShardMinX, WestShardMaxX, ShardMinY, ShardMaxY) ||
+                   IsInsideRect(position, EastShardMinX, EastShardMaxX, ShardMinY, ShardMaxY);
+        }
+
         public static bool BlocksGroundBuild(float x, float y)
         {
             return IsInsideRect(x, y, -25.8f, -18.2f, -10.8f, 10.8f) ||

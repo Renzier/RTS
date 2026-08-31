@@ -1257,6 +1257,27 @@ Acceptance:
 - Preview feedback matches deterministic validation.
 - No schema or CodeGen changes are required.
 
+### Sprint 45: Block Ground Movement Targets In Terrain
+
+Status: `[x]`
+
+Implementation note, 2026-08-31: added `TerrainBlockers.BlocksGroundMovement` for the shard-mountain zone bodies and rejected generic ground-unit move targets inside those zones. Air scouts remain unaffected and can still move through the terrain. Blocked ground targets report `MoveCommandResult.BlockedByTerrain` in command debug.
+
+Goal: Stop ground units from being directly commanded into mountain/shard terrain without taking on full pathfinding around terrain yet.
+
+Scope:
+
+- Add movement blocker checks to generic right-click move commands.
+- Keep attack/resource command behavior unchanged.
+- Keep air scouts exempt.
+- Use command debug to report terrain rejection.
+
+Acceptance:
+
+- Ground units do not accept generic move targets inside shard-mountain terrain.
+- Air scouts still accept movement through those zones.
+- No schema or CodeGen changes are required.
+
 ## Domain Expansion
 
 ### Sprint 40: Air Domain Design Stub
@@ -1296,7 +1317,7 @@ Acceptance:
 - Unit can be produced or spawned.
 - It does not break ground movement/pathing.
 
-### Sprint 44: Underwater Domain Design Stub
+### Sprint 46: Underwater Domain Design Stub
 
 Status: `[ ]`
 
@@ -1312,7 +1333,7 @@ Acceptance:
 
 - A short architecture note exists.
 
-### Sprint 45: Add First Underwater Objective Prototype
+### Sprint 47: Add First Underwater Objective Prototype
 
 Status: `[ ]`
 
@@ -1327,7 +1348,7 @@ Acceptance:
 
 - Objective exists without disrupting ground RTS flow.
 
-### Sprint 46: Orbit Domain Design Stub
+### Sprint 48: Orbit Domain Design Stub
 
 Status: `[ ]`
 
@@ -1343,7 +1364,7 @@ Acceptance:
 
 - A short architecture note exists.
 
-### Sprint 45: Add First Orbital Support Prototype
+### Sprint 49: Add First Orbital Support Prototype
 
 Status: `[ ]`
 
@@ -1360,7 +1381,7 @@ Acceptance:
 
 ## Campaign And Story Layer
 
-### Sprint 46: Add Ardent Concord Mission 1 Scope
+### Sprint 53: Add Ardent Concord Mission 1 Scope
 
 Status: `[ ]`
 

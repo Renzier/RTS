@@ -31,11 +31,15 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 45 completed:
+  - Shard-mountain terrain zones now reject generic ground movement command targets.
+  - Air scouts can still receive movement commands through terrain zones.
+  - Blocked movement targets write `MoveCommandResult.BlockedByTerrain` to command debug.
 - Kilnfall Sprint 44 completed:
   - Added `Assets/QuantumUser/Simulation/TerrainBlockers.cs` as the shared terrain-blocking helper.
   - The west/east shard-mountain landmarks now block support-building placement with a deterministic rule.
   - The build placement preview uses the same blocker helper and reports `Blocked by terrain`.
-  - Movement/pathing blockers are still intentionally deferred; air scouts remain unaffected.
+  - Pathfinding around terrain blockers is still intentionally deferred; air scouts remain unaffected.
 - HUD and camera follow-up completed:
   - Starting camera focus now uses the active Start As faction for all eight expanded-map starts.
   - Camera pan clamps now match the expanded map instead of forcing focus back into the old 36-unit prototype bounds.
