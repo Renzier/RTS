@@ -1525,6 +1525,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
     private static string GetUnitDisplayName(Frame frame, UnitIdentity unitIdentity)
     {
+        if (unitIdentity.UnitKind == UnitKind.AirScout)
+        {
+            return "Rubbing-Kite";
+        }
+
         int factionId = GetFactionId(frame, unitIdentity.OwnerPlayer);
         if (unitIdentity.UnitKind == UnitKind.Hero)
         {

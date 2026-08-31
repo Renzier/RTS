@@ -22,6 +22,11 @@ namespace Quantum
                 LinkHeroState(f, hero.OwnerPlayer, heroEntity);
             }
 
+            foreach (AnachronPrototypeScenario.AirScoutSpawn airScout in AnachronPrototypeScenario.AirScouts)
+            {
+                CreateAirScout(f, airScout);
+            }
+
             foreach (AnachronPrototypeScenario.MainBaseSpawn mainBase in AnachronPrototypeScenario.MainBases)
             {
                 CreateMainBuilding(f, mainBase);
@@ -252,6 +257,67 @@ namespace Quantum
             f.Set(entity, new NavMeshSteeringAgent());
 
             return entity;
+        }
+
+        private static void CreateAirScout(Frame f, AnachronPrototypeScenario.AirScoutSpawn airScout)
+        {
+            EntityRef entity = f.Create();
+
+            f.Set(entity, new UnitIdentity
+            {
+                UnitId = airScout.UnitId,
+                OwnerPlayer = airScout.OwnerPlayer,
+                UnitKind = UnitKind.AirScout
+            });
+
+            f.Set(entity, new UnitHealth
+            {
+                Health = 80,
+                MaxHealth = 80,
+                IsDead = false
+            });
+
+            f.Set(entity, new Targetable
+            {
+                OwnerPlayer = airScout.OwnerPlayer,
+                Health = 80,
+                MaxHealth = 80,
+                TargetRadius = FP.FromString("0.65")
+            });
+
+            f.Set(entity, new Selectable
+            {
+                IsSelected = false,
+                SelectionRadius = FP.FromString("0.9")
+            });
+
+            f.Set(entity, new Transform2D
+            {
+                Position = airScout.Position,
+                Rotation = FP._0
+            });
+
+            f.Set(entity, new SelectionCandidate
+            {
+                ScreenPosition = FPVector2.Zero
+            });
+
+            f.Set(entity, new CommandIntentDebug
+            {
+                HasMoveCommandIntent = false,
+                WasMoveCommandAccepted = false,
+                WasMoveCommandRejected = false,
+                MoveCommandPlayer = -1,
+                MoveCommandResult = 0,
+                MoveCommandTargetWorld = FPVector2.Zero
+            });
+
+            f.Set(entity, new MoveIntent
+            {
+                HasTarget = false,
+                MovementMode = MovementMode.StraightLineFallback,
+                TargetWorld = FPVector2.Zero
+            });
         }
 
         private static void LinkHeroState(Frame f, int ownerPlayer, EntityRef heroEntity)

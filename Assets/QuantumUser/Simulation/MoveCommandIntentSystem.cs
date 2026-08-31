@@ -119,7 +119,9 @@ namespace Quantum
                     attackIntent->IsInRange = false;
                 }
 
-                if (hasResourceTarget && f.Unsafe.TryGetPointer<GatherIntent>(entity, out GatherIntent* gatherIntent))
+                if (IsAirScout(f, entity) == false &&
+                    hasResourceTarget &&
+                    f.Unsafe.TryGetPointer<GatherIntent>(entity, out GatherIntent* gatherIntent))
                 {
                     gatherIntent->HasTarget = true;
                     gatherIntent->TargetNode = resourceNodeEntity;
@@ -136,7 +138,7 @@ namespace Quantum
                 ClearGatherIntent(f, entity);
 
                 moveIntent->HasTarget = true;
-                moveIntent->MovementMode = MovementMode.QuantumNavMesh;
+                moveIntent->MovementMode = GetMovementMode(f, entity);
                 moveIntent->TargetWorld = f.Global->LastPointerWorld + GetFormationOffset(selectedMoveIndex);
                 selectedMoveIndex++;
             }
@@ -406,6 +408,21 @@ namespace Quantum
             }
 
             return unitIdentity->UnitKind == UnitKind.Hero;
+        }
+
+        private static int GetMovementMode(Frame f, EntityRef entity)
+        {
+            return IsAirScout(f, entity) ? MovementMode.StraightLineFallback : MovementMode.QuantumNavMesh;
+        }
+
+        private static bool IsAirScout(Frame f, EntityRef entity)
+        {
+            if (f.Unsafe.TryGetPointer<UnitIdentity>(entity, out UnitIdentity* unitIdentity) == false)
+            {
+                return false;
+            }
+
+            return unitIdentity->UnitKind == UnitKind.AirScout;
         }
 
         private static bool IsDeadUnit(Frame f, EntityRef entity)

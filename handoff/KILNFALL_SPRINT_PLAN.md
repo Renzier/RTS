@@ -1216,7 +1216,9 @@ Acceptance:
 
 ### Sprint 41: Add First Air Scout Unit
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-31: added deterministic `MovementDomain` constants and `UnitKind.AirScout`, then bootstrapped one Ardent Concord Rubbing-Kite near P0. The Rubbing-Kite is selectable, targetable, scout-only, has 80 HP, uses straight-line fallback movement so it avoids ground NavMesh/path blockers, ignores worker resource-gather commands, and renders with view-only height/air silhouette. No `.qtn` schema, production path, attack behavior, or full air system was added.
 
 Goal: Add one simple air-style unit, likely Ardent Concord Rubbing-Kite.
 

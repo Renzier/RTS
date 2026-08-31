@@ -17,6 +17,8 @@ Recommended first values:
 
 Do not add the schema component in this sprint. The current prototype remains Ground-only in live simulation until Sprint 41 or another explicit gameplay sprint creates the first air unit.
 
+Current status after Sprint 41: one Ardent Concord Rubbing-Kite is bootstrapped as a scout-only `UnitKind.AirScout`. It proves the Air presentation and straight-line movement path without adding a schema-level MovementDomain field yet.
+
 ## Air Representation
 
 Air units should be normal Quantum entities with the same shared contracts as ground units:

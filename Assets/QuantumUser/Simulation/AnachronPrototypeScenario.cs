@@ -58,6 +58,11 @@ namespace Quantum
             new HeroSpawn(107, 7, -4, 5)
         };
 
+        public static readonly AirScoutSpawn[] AirScouts =
+        {
+            new AirScoutSpawn(200, 0, 4, -17)
+        };
+
         public static readonly MainBaseSpawn[] MainBases =
         {
             new MainBaseSpawn(0, 0, -13),
@@ -126,6 +131,24 @@ namespace Quantum
             public readonly int Y;
 
             public HeroSpawn(int unitId, int ownerPlayer, int x, int y)
+            {
+                UnitId = unitId;
+                OwnerPlayer = ownerPlayer;
+                X = x;
+                Y = y;
+            }
+
+            public FPVector2 Position => new FPVector2(X, Y);
+        }
+
+        public readonly struct AirScoutSpawn
+        {
+            public readonly int UnitId;
+            public readonly int OwnerPlayer;
+            public readonly int X;
+            public readonly int Y;
+
+            public AirScoutSpawn(int unitId, int ownerPlayer, int x, int y)
             {
                 UnitId = unitId;
                 OwnerPlayer = ownerPlayer;

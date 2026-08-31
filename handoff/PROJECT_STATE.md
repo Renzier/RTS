@@ -31,6 +31,16 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 41 completed:
+  - Added `Assets/QuantumUser/Simulation/MovementDomain.cs` with deterministic Ground/Air/Underwater/Orbit constants.
+  - Added `UnitKind.AirScout`.
+  - Bootstrapped one Ardent Concord Rubbing-Kite near P0.
+  - The Rubbing-Kite is selectable, targetable, scout-only, and has 80 HP.
+  - Normal right-click movement keeps AirScout on straight-line fallback instead of switching it to ground NavMesh movement.
+  - AirScout ignores worker resource-gather command routing.
+  - Primitive view renders AirScout as an elevated capsule with view-only height.
+  - HUD unit list displays it as `Rubbing-Kite`.
+  - No `.qtn` schema, production path, attack behavior, or full air system was added.
 - Kilnfall Sprint 40 completed:
   - Added `handoff/AIR_DOMAIN_STUB.md`.
   - Chose layer-based deterministic `MovementDomain` representation for Air.

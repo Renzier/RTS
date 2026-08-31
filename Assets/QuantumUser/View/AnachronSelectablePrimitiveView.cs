@@ -367,6 +367,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             return new Vector3(0.8f, 0.05f, 0.8f);
         }
 
+        if (IsAirScout(frame, entity))
+        {
+            return new Vector3(0.58f, 0.18f, 1.15f);
+        }
+
         int factionId = GetFactionId(frame, GetOwnerPlayer(frame, entity));
         bool isHero = IsHero(frame, entity);
         if (factionId == FactionId.Wrought)
@@ -557,6 +562,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         int unitFactionId = GetFactionId(frame, GetOwnerPlayer(frame, entity));
+        if (IsAirScout(frame, entity))
+        {
+            return PrimitiveType.Capsule;
+        }
+
         if (unitFactionId == FactionId.Wrought)
         {
             return PrimitiveType.Cylinder;
@@ -600,6 +610,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         if (IsQuillObjective(frame, entity))
         {
             return new Vector3(0.0f, 0.85f, 0.0f);
+        }
+
+        if (IsAirScout(frame, entity))
+        {
+            return new Vector3(0.0f, 1.65f, 0.0f);
         }
 
         return isEconomyEntity ? new Vector3(0.0f, 0.5f, 0.0f) : Vector3.zero;
@@ -752,6 +767,19 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             if (entity == candidateEntity)
             {
                 return unitIdentity.UnitKind == UnitKind.Hero;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool IsAirScout(Frame frame, EntityRef candidateEntity)
+    {
+        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        {
+            if (entity == candidateEntity)
+            {
+                return unitIdentity.UnitKind == UnitKind.AirScout;
             }
         }
 

@@ -48,6 +48,10 @@ Read these before changing behavior. The list is intentionally short to save fre
   - Prototype map layout, spawn/resource positions, and likely map bounds constants.
 - `Assets/QuantumUser/Simulation/FactionId.cs`
   - Faction constants and labels.
+- `Assets/QuantumUser/Simulation/MovementDomain.cs`
+  - Deterministic domain constants for Ground/Air/Underwater/Orbit.
+- `Assets/QuantumUser/Simulation/UnitKind.cs`
+  - Unit kind constants, including worker, hero, and first air scout.
 - `Assets/QuantumUser/Simulation/FactionStats.cs`
   - Faction-specific deterministic tuning.
 - `Assets/QuantumUser/Simulation/SelectionSystem.cs`
