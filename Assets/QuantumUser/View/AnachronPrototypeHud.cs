@@ -523,6 +523,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Cauled";
         }
 
+        if (factionId == FactionId.Vaelun)
+        {
+            return "Hollowguard";
+        }
+
         return "Keelwatch Ranker";
     }
 
@@ -845,6 +850,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "Veirn";
             }
 
+            if (factionState.FactionId == FactionId.Vaelun)
+            {
+                return "Vaelun";
+            }
+
             return "Ardent Concord";
         }
 
@@ -874,6 +884,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
             return "Ledger Furnace";
         }
 
+        if (factionId == FactionId.Vaelun)
+        {
+            return "Ration Vault";
+        }
+
         return "Ledger House";
     }
 
@@ -898,6 +913,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Veirn)
         {
             return "Keth House";
+        }
+
+        if (factionId == FactionId.Vaelun)
+        {
+            return "Appetite Tender";
         }
 
         return "Countersign Post";
@@ -935,6 +955,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Veirn)
         {
             return "Keth";
+        }
+
+        if (factionId == FactionId.Vaelun)
+        {
+            return "Want";
         }
 
         return "Countersign";
@@ -1473,6 +1498,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
                 return "Ordal Executor";
             }
 
+            if (factionId == FactionId.Vaelun)
+            {
+                return "Nightshear";
+            }
+
             return "Concord Marshal";
         }
 
@@ -1494,6 +1524,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         if (factionId == FactionId.Veirn)
         {
             return "Cauled";
+        }
+
+        if (factionId == FactionId.Vaelun)
+        {
+            return "Hollowguard";
         }
 
         return "Keelwatch Ranker";

@@ -1141,7 +1141,9 @@ Acceptance:
 
 ### Sprint 37: Add Vaelun As Sixth Power
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-30: added Vaelun as canonical `FactionId.Vaelun = 5`. The bootstrap scenario now includes P5 Vaelun with a Ration Vault, three Hollowguard workers, and a Nightshear hero; the local Start As panel can select P5 Vaelun. Vaelun has first-pass basic stats, HUD/debug labels, primitive colors/shapes, and Appetite Tender support-building presentation. No Appetite mechanic was added.
 
 Goal: Add Vaelun as a selectable/assignable faction.
 

@@ -95,6 +95,11 @@ public sealed class AnachronPlayerStateDebugOverlay : QuantumMonoBehaviour
                 return "Veirn";
             }
 
+            if (factionState.FactionId == FactionId.Vaelun)
+            {
+                return "Vaelun";
+            }
+
             return "Ardent Concord";
         }
 
@@ -122,6 +127,11 @@ public sealed class AnachronPlayerStateDebugOverlay : QuantumMonoBehaviour
         if (factionId == FactionId.Veirn)
         {
             return "Ledger Furnace";
+        }
+
+        if (factionId == FactionId.Vaelun)
+        {
+            return "Ration Vault";
         }
 
         return "Ledger House";

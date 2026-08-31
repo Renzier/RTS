@@ -7,6 +7,7 @@ namespace Quantum
         public const int Gharn = 2;
         public const int Seethe = 3;
         public const int Veirn = 4;
+        public const int Vaelun = 5;
 
         public const int Tech = ArdentConcord;
         public const int Fantasy = Wrought;
@@ -32,6 +33,11 @@ namespace Quantum
             if (factionId == Veirn)
             {
                 return Veirn;
+            }
+
+            if (factionId == Vaelun)
+            {
+                return Vaelun;
             }
 
             return ArdentConcord;

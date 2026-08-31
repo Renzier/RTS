@@ -56,6 +56,11 @@ namespace Quantum
                 return new FactionStats(85, 35, 55, 1, 270, 52, 14, 0, 1450, 480, 80, 85, 5);
             }
 
+            if (normalizedFaction == FactionId.Vaelun)
+            {
+                return new FactionStats(120, 70, 30, 1, 360, 40, 12, 0, 1750, 700, 130, 55, 4);
+            }
+
             return new FactionStats(115, 50, 25, 1, 330, 42, 18, 0, 1650, 500, 100, 50, 5);
         }
 
