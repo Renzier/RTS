@@ -31,6 +31,11 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 46 completed:
+  - Added `handoff/UNDERWATER_DOMAIN_STUB.md`.
+  - Chose the same layer-based deterministic `MovementDomain` model for Underwater/root play.
+  - Defined pressure, stealth/noise, Quill-root, and first underwater objective guidance.
+  - No live gameplay, schema, CodeGen, movement, targeting, or view behavior changed.
 - Kilnfall Sprint 45 completed:
   - Shard-mountain terrain zones now reject generic ground movement command targets.
   - Air scouts can still receive movement commands through terrain zones.

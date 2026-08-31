@@ -1319,7 +1319,9 @@ Acceptance:
 
 ### Sprint 46: Underwater Domain Design Stub
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-31: added `handoff/UNDERWATER_DOMAIN_STUB.md`. The note keeps Underwater/root play on the same layer-based deterministic `MovementDomain` model as Air, defers schema until live underwater gameplay needs domain-aware routing, and records pressure, stealth/noise, Quill-root, and first underwater objective guidance. No gameplay, schema, CodeGen, movement, targeting, or view behavior changed.
 
 Goal: Add design and code placeholders for underwater/root domain.
 
