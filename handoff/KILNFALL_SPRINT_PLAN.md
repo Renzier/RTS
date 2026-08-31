@@ -1214,7 +1214,7 @@ Acceptance:
 
 Status: `[x]`
 
-Implementation note, 2026-08-31: spread all eight faction starts into a wider ring, moved workers/heroes/AirScout near the new starts, added one local Salvage/Plate pair for every faction, widened support-building placement to a 68-unit half-extent, enlarged the runtime ground/view boundary, widened the default RTS camera FOV, and added first-pass channel/mountain landmarks as view-only map identity.
+Implementation note, 2026-08-31: spread all eight faction starts into a wider ring, moved workers/heroes near the new starts, added one scout-only AirScout near each faction start, added one local Salvage/Plate pair for every faction, widened support-building placement to a 68-unit half-extent, enlarged the runtime ground/view boundary, widened the default RTS camera FOV, and added first-pass channel/mountain landmarks as view-only map identity.
 
 Goal: Give every faction room to grow without starting on top of another faction or the central Quill.
 
@@ -1222,6 +1222,7 @@ Scope:
 
 - Move eight main bases into a larger ring around the Quill.
 - Place starting workers and heroes near their faction's base.
+- Keep the air proof visible by placing one scout-only AirScout near each faction start.
 - Add local resource pairs near each faction.
 - Expand build placement limits to match the larger map.
 - Widen the camera default enough to read the expanded arena.

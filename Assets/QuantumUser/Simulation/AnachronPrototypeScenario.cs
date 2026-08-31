@@ -60,7 +60,14 @@ namespace Quantum
 
         public static readonly AirScoutSpawn[] AirScouts =
         {
-            new AirScoutSpawn(200, 0, 4, -52)
+            new AirScoutSpawn(200, 0, 4, -52),
+            new AirScoutSpawn(201, 1, -34, -38),
+            new AirScoutSpawn(202, 2, 34, -38),
+            new AirScoutSpawn(203, 3, -54, 4),
+            new AirScoutSpawn(204, 4, 54, 4),
+            new AirScoutSpawn(205, 5, -34, 38),
+            new AirScoutSpawn(206, 6, 34, 38),
+            new AirScoutSpawn(207, 7, 4, 52)
         };
 
         public static readonly MainBaseSpawn[] MainBases =

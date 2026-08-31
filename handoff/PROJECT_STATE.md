@@ -35,6 +35,7 @@
   - Expanded the eight-faction bootstrap map so the factions no longer start on top of each other.
   - Moved main bases into a wider ring around the central Quill: P0 `(0, -55)`, P1 `(-40, -40)`, P2 `(40, -40)`, P3 `(-58, 0)`, P4 `(58, 0)`, P5 `(-40, 40)`, P6 `(40, 40)`, and P7 `(0, 55)`.
   - Moved each faction's three starting workers and hero next to its new base position.
+  - Added one scout-only AirScout near each faction start so the air proof remains visible across the larger map.
   - Added a local Salvage/Plate pair near every faction start, expanding the bootstrap resources from 6 nodes to 16 nodes.
   - Widened support-building placement from 38 to 68 units of half-extent so players can actually grow into the larger map.
   - Enlarged the runtime ground/view boundary and added first-pass visual channel/mountain obstacles as map landmarks only.
