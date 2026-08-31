@@ -18,6 +18,8 @@ Read these before changing behavior. The list is intentionally short to save fre
   - Small, one-feature-at-a-time sprint roadmap for converting the prototype safely.
 - `handoff/FACTION_ID_EXPANSION_STRATEGY.md`
   - Decision note for extending current deterministic integer faction IDs into all eight Kilnfall powers.
+- `handoff/AIR_DOMAIN_STUB.md`
+  - Decision note for first Air-domain representation before live air movement or units.
 - `# RTS Master Project Document For Anachron`
   - Project architecture, phases, and hard determinism rules.
 - `phase3_progress.md`

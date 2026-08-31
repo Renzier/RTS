@@ -31,6 +31,13 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 40 completed:
+  - Added `handoff/AIR_DOMAIN_STUB.md`.
+  - Chose layer-based deterministic `MovementDomain` representation for Air.
+  - Kept the current live simulation Ground-only until the first explicit air-unit sprint.
+  - Rejected lane-based or full spatial 3D movement for the first air proof.
+  - Pointed Sprint 41 toward one scout-style Air unit, likely Ardent Concord's Rubbing-Kite.
+  - No code, schema, movement, targeting, or gameplay behavior changed.
 - Kilnfall Sprint 39 completed:
   - Added Virii as canonical `FactionId.Virii = 7`.
   - Added first-pass Virii stats for workers, heroes, main base, and support building costs/Holding.

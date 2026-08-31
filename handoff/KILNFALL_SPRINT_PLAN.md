@@ -1197,7 +1197,9 @@ Acceptance:
 
 ### Sprint 40: Air Domain Design Stub
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-30: added `handoff/AIR_DOMAIN_STUB.md`. The note chooses layer-based deterministic MovementDomain representation for Air, keeps current live simulation Ground-only, rejects lane-based or full spatial 3D movement for the first proof, and points Sprint 41 toward one scout-style Air unit. No code, schema, movement, targeting, or gameplay behavior changed.
 
 Goal: Add design and code placeholders for air without changing gameplay.
 
