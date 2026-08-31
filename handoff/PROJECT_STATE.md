@@ -31,6 +31,9 @@
 
 ## Most Recent Work
 
+- HUD and camera follow-up completed:
+  - Starting camera focus now uses the active Start As faction for all eight expanded-map starts.
+  - The prototype HUD top-left panel now shows only the current faction's economy, tech, hero, and owned units instead of listing every faction.
 - Kilnfall Sprint 43 completed:
   - Expanded the eight-faction bootstrap map so the factions no longer start on top of each other.
   - Moved main bases into a wider ring around the central Quill: P0 `(0, -55)`, P1 `(-40, -40)`, P2 `(40, -40)`, P3 `(-58, 0)`, P4 `(58, 0)`, P5 `(-40, 40)`, P6 `(40, 40)`, and P7 `(0, 55)`.

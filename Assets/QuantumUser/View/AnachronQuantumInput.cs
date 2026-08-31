@@ -334,13 +334,33 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private static Vector3 GetStartingCameraFocus() {
     int playerSlot = QuantumPhase0LocalSessionController.ActivePlayerSlot;
     if (playerSlot == 1) {
-      return new Vector3(-17.0f, 0.0f, 14.0f);
+      return new Vector3(-40.0f, 0.0f, -40.0f);
     }
 
     if (playerSlot == 2) {
-      return new Vector3(17.0f, 0.0f, 14.0f);
+      return new Vector3(40.0f, 0.0f, -40.0f);
     }
 
-    return new Vector3(0.0f, 0.0f, -13.0f);
+    if (playerSlot == 3) {
+      return new Vector3(-58.0f, 0.0f, 0.0f);
+    }
+
+    if (playerSlot == 4) {
+      return new Vector3(58.0f, 0.0f, 0.0f);
+    }
+
+    if (playerSlot == 5) {
+      return new Vector3(-40.0f, 0.0f, 40.0f);
+    }
+
+    if (playerSlot == 6) {
+      return new Vector3(40.0f, 0.0f, 40.0f);
+    }
+
+    if (playerSlot == 7) {
+      return new Vector3(0.0f, 0.0f, 55.0f);
+    }
+
+    return new Vector3(0.0f, 0.0f, -55.0f);
   }
 }

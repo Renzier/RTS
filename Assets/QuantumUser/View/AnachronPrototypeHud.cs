@@ -61,36 +61,34 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         UpdateActionNotification(frame);
         DrawActionNotification(headerStyle);
 
+        int localPlayerIndex = GetLocalPlayerIndex();
         int rowCount = CountHudRows(frame);
         DrawPanel(new Rect(12, 58, 430, 22 + rowCount * RowHeight));
-        GUI.Label(new Rect(24, 64, 390, RowHeight), "Prototype Status", headerStyle);
+        GUI.Label(new Rect(24, 64, 390, RowHeight), $"P{localPlayerIndex} {GetFactionName(frame, localPlayerIndex)}", headerStyle);
 
         int row = 1;
-        foreach ((EntityRef entity, PlayerEconomyState state) in frame.GetComponentIterator<PlayerEconomyState>())
+        if (TryGetEconomyState(frame, localPlayerIndex, out PlayerEconomyState state))
         {
             string status = state.IsDefeated ? "DEFEATED" : "Active";
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"P{state.PlayerIndex} {GetFactionName(frame, state.PlayerIndex)} {status}: S {state.Wood}  P {state.Iron}  H {state.FoodUsed}/{state.FoodCap}  T{GetTechTier(frame, state.PlayerIndex)}", labelStyle);
+            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{status}: S {state.Wood}  P {state.Iron}  H {state.FoodUsed}/{state.FoodCap}", labelStyle);
             row++;
         }
 
-        foreach ((EntityRef entity, PlayerTechState techState) in frame.GetComponentIterator<PlayerTechState>())
+        if (TryGetTechState(frame, localPlayerIndex, out PlayerTechState techState))
         {
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"P{techState.PlayerIndex} Tech: T{techState.TechTier}  {GetUpgradeProgressLabel(techState)}", labelStyle);
+            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"Tech: T{techState.TechTier}  {GetUpgradeProgressLabel(techState)}", labelStyle);
             row++;
         }
 
-        foreach ((EntityRef entity, PlayerHeroState heroState) in frame.GetComponentIterator<PlayerHeroState>())
+        if (TryGetHeroState(frame, localPlayerIndex, out PlayerHeroState heroState))
         {
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"P{heroState.PlayerIndex} Hero: {GetHeroStatusLabel(heroState)} L{heroState.HeroLevel} HP {heroState.HeroHealth}/{heroState.HeroMaxHealth} {GetHeroResultName(heroState.LastHeroResult)}", labelStyle);
+            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"Hero: {GetHeroStatusLabel(heroState)} L{heroState.HeroLevel} HP {heroState.HeroHealth}/{heroState.HeroMaxHealth} {GetHeroResultName(heroState.LastHeroResult)}", labelStyle);
             row++;
         }
 
-        GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"Main Buildings: {GetBaseSummary(frame)}", labelStyle);
-        row++;
-
-        GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{AnachronPrototypeScenario.ScenarioName}: {CountResources(frame)} resources  {CountBases(frame)} bases  {CountSupplyBuildings(frame)} support", labelStyle);
+        GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{AnachronPrototypeScenario.ScenarioName}", labelStyle);
         row += 2;
-        GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), "Player Units", headerStyle);
+        GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), "Units", headerStyle);
         row++;
 
         foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
@@ -210,10 +208,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private static int CountHudRows(Frame frame)
     {
         int rows = 1;
-        rows += CountEconomyStates(frame);
-        rows += CountTechStates(frame);
-        rows += CountHeroStates(frame);
-        rows += 4;
+        int localPlayerIndex = GetLocalPlayerIndex();
+        rows += TryGetEconomyState(frame, localPlayerIndex, out _) ? 1 : 0;
+        rows += TryGetTechState(frame, localPlayerIndex, out _) ? 1 : 0;
+        rows += TryGetHeroState(frame, localPlayerIndex, out _) ? 1 : 0;
+        rows += 3;
         rows += CountPlayerUnits(frame);
         return rows;
     }

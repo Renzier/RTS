@@ -1234,6 +1234,8 @@ Acceptance:
 - No faction starts inside or near the Quill capture radius.
 - Players have visible and buildable room around their starting bases.
 
+Follow-up note, 2026-08-31: starting camera focus now uses the active Start As faction for all eight expanded-map starts, and the prototype HUD top-left panel shows only the current faction economy/tech/hero/owned units until a real HUD is built.
+
 ## Domain Expansion
 
 ### Sprint 40: Air Domain Design Stub
