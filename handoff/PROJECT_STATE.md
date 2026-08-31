@@ -31,6 +31,11 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 48 completed:
+  - Added `handoff/ORBIT_DOMAIN_STUB.md`.
+  - Chose the same layer-based deterministic `MovementDomain` model for Orbit/anchor play.
+  - Defined command disruption, Quill anchor, and first orbital support guidance.
+  - No live gameplay, schema, CodeGen, movement, targeting, command, or view behavior changed.
 - Kilnfall Sprint 47 completed:
   - Added `Assets/QuantumUser/Simulation/RootObjective.cs`.
   - Bootstrapped a neutral selectable/targetable Root Access objective at `(0, 36)`.

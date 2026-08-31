@@ -1354,7 +1354,9 @@ Acceptance:
 
 ### Sprint 48: Orbit Domain Design Stub
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-31: added `handoff/ORBIT_DOMAIN_STUB.md`. The note keeps Orbit/anchor play on the same layer-based deterministic `MovementDomain` model as Air and Underwater/root play, defers schema until live orbit gameplay needs domain-aware routing/state, and records command disruption, Quill anchor, and first orbital support guidance. No gameplay, schema, CodeGen, movement, targeting, command, or view behavior changed.
 
 Goal: Add design and code placeholders for orbit/anchor domain.
 
