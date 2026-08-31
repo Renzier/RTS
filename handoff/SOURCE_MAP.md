@@ -74,6 +74,8 @@ Read these before changing behavior. The list is intentionally short to save fre
   - Supply placement, construction, builder assignment, cancellation/refund, and deconstruction.
 - `Assets/QuantumUser/Simulation/TerrainBlockers.cs`
   - Shared deterministic terrain blocker zones for gameplay validation.
+- `Assets/QuantumUser/Simulation/RootObjective.cs`
+  - First Underwater/root objective constants and placement.
 - `Assets/QuantumUser/Simulation/AttackTargetingSystem.cs`
   - Target selection for attacks.
 - `Assets/QuantumUser/Simulation/AttackDamageSystem.cs`

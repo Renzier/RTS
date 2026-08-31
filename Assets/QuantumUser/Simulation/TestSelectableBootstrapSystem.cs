@@ -38,6 +38,7 @@ namespace Quantum
             }
 
             CreateQuillObjective(f);
+            CreateRootObjective(f);
         }
 
         private static void CreatePlayerState(Frame f, AnachronPrototypeScenario.PlayerSpawn player)
@@ -425,6 +426,36 @@ namespace Quantum
             {
                 IsSelected = false,
                 SelectionRadius = QuillObjective.SelectionRadius
+            });
+
+            f.Set(entity, new SelectionCandidate
+            {
+                ScreenPosition = FPVector2.Zero
+            });
+        }
+
+        private static void CreateRootObjective(Frame f)
+        {
+            EntityRef entity = f.Create();
+
+            f.Set(entity, new Transform2D
+            {
+                Position = RootObjective.Position,
+                Rotation = FP._0
+            });
+
+            f.Set(entity, new Targetable
+            {
+                OwnerPlayer = RootObjective.NeutralOwner,
+                Health = RootObjective.MaxHealth,
+                MaxHealth = RootObjective.MaxHealth,
+                TargetRadius = RootObjective.TargetRadius
+            });
+
+            f.Set(entity, new Selectable
+            {
+                IsSelected = false,
+                SelectionRadius = RootObjective.SelectionRadius
             });
 
             f.Set(entity, new SelectionCandidate

@@ -31,6 +31,11 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 47 completed:
+  - Added `Assets/QuantumUser/Simulation/RootObjective.cs`.
+  - Bootstrapped a neutral selectable/targetable Root Access objective at `(0, 36)`.
+  - Root Access uses existing generic selectable/targetable rendering until the next view polish pass.
+  - No capture, pressure, underwater unit, schema, CodeGen, or gameplay rule was added.
 - Kilnfall Sprint 46 completed:
   - Added `handoff/UNDERWATER_DOMAIN_STUB.md`.
   - Chose the same layer-based deterministic `MovementDomain` model for Underwater/root play.

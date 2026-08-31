@@ -1337,7 +1337,9 @@ Acceptance:
 
 ### Sprint 47: Add First Underwater Objective Prototype
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-08-31: added `RootObjective` constants and bootstrapped one neutral selectable/targetable Root Access objective at `(0, 36)`, aligned with the north channel landmark. Root Access uses the existing generic selectable/targetable rendering until the next view polish pass. No capture, pressure, underwater unit, schema, CodeGen, or gameplay rule was added.
 
 Goal: Represent underwater control with a simple off-map or map-edge objective.
 
