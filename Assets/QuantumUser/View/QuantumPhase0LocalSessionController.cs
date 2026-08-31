@@ -47,7 +47,7 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
 
   private RuntimePlayer BuildRuntimePlayer() {
     return new RuntimePlayer {
-      Phase0PlayerSlot = 0
+      Phase0PlayerSlot = (int)startAs
     };
   }
 

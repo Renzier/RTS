@@ -33,6 +33,8 @@
 
 - HUD and camera follow-up completed:
   - Starting camera focus now uses the active Start As faction for all eight expanded-map starts.
+  - Camera pan clamps now match the expanded map instead of forcing focus back into the old 36-unit prototype bounds.
+  - Runtime player setup now passes the selected Start As slot instead of always reporting slot 0.
   - The prototype HUD top-left panel now shows only the current faction's economy, tech, hero, and owned units instead of listing every faction.
 - Kilnfall Sprint 43 completed:
   - Expanded the eight-faction bootstrap map so the factions no longer start on top of each other.

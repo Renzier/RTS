@@ -12,6 +12,7 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private const float CameraZoomSpeed = 1.5f;
   private const float MinFieldOfView = 28.0f;
   private const float MaxFieldOfView = 78.0f;
+  private const float CameraPanHalfExtent = 68.0f;
   public static float LastUpgradePressedTime { get; private set; }
   public static float LastRebuildPressedTime { get; private set; }
   public static float LastTrainWorkerPressedTime { get; private set; }
@@ -36,6 +37,7 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private bool _debugDamageQueued;
   private Vector3 _cameraFocus = Vector3.zero;
   private float _fieldOfView = 58.0f;
+  private int _lastCameraPlayerSlot = -1;
 
   private void OnEnable() {
     QuantumCallback.Subscribe(this, (CallbackPollInput callback) => PollInput(callback));
@@ -46,10 +48,11 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   }
 
   private void Start() {
-    _cameraFocus = GetStartingCameraFocus();
+    SyncCameraFocusToActivePlayer();
   }
 
   private void Update() {
+    SyncCameraFocusToActivePlayer();
     UpdateCameraControls();
     ConfigureRtsCamera();
 
@@ -310,8 +313,8 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
     }
 
     _cameraFocus += pan * (CameraPanSpeed * Time.deltaTime);
-    _cameraFocus.x = Mathf.Clamp(_cameraFocus.x, -36.0f, 36.0f);
-    _cameraFocus.z = Mathf.Clamp(_cameraFocus.z, -36.0f, 36.0f);
+    _cameraFocus.x = Mathf.Clamp(_cameraFocus.x, -CameraPanHalfExtent, CameraPanHalfExtent);
+    _cameraFocus.z = Mathf.Clamp(_cameraFocus.z, -CameraPanHalfExtent, CameraPanHalfExtent);
 
     float scroll = UnityEngine.Input.mouseScrollDelta.y;
     if (Mathf.Abs(scroll) > 0.001f) {
@@ -331,8 +334,17 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
     camera.transform.rotation = CameraRotation;
   }
 
-  private static Vector3 GetStartingCameraFocus() {
+  private void SyncCameraFocusToActivePlayer() {
     int playerSlot = QuantumPhase0LocalSessionController.ActivePlayerSlot;
+    if (_lastCameraPlayerSlot == playerSlot) {
+      return;
+    }
+
+    _lastCameraPlayerSlot = playerSlot;
+    _cameraFocus = GetStartingCameraFocus(playerSlot);
+  }
+
+  private static Vector3 GetStartingCameraFocus(int playerSlot) {
     if (playerSlot == 1) {
       return new Vector3(-40.0f, 0.0f, -40.0f);
     }
