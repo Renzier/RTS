@@ -10,20 +10,22 @@ The active prototype Quill objective is now centered at `(0, 0)`.
 
 The Quill no longer directly defeats players through a hold timer. Owning it keeps the resource trickle benefit, but a player still needs to defeat opponents through normal base destruction.
 
-## Start Distance Check
+## Updated Start Distance Check
 
-With the Quill at `(0, 0)`, approximate main-base distances are:
+After the eight-faction map expansion, with the Quill still at `(0, 0)`, approximate main-base distances are:
 
-- P0 Ardent Concord at `(0, -13)`: 13 units.
-- P1 Wrought at `(-17, 14)`: 22 units.
-- P2 Gharn at `(17, 14)`: 22 units.
-- P3 Seethe at `(0, 31)`: 31 units.
-- P4 Veirn at `(-29, -1)`: 29 units.
-- P5 Vaelun at `(29, -1)`: 29 units.
-- P6 Nimhara at `(0, -33)`: 33 units.
-- P7 Virii at `(-6, 5)`: 8 units.
+- P0 Ardent Concord at `(0, -55)`: 55 units.
+- P1 Wrought at `(-40, -40)`: about 57 units.
+- P2 Gharn at `(40, -40)`: about 57 units.
+- P3 Seethe at `(-58, 0)`: 58 units.
+- P4 Veirn at `(58, 0)`: 58 units.
+- P5 Vaelun at `(-40, 40)`: about 57 units.
+- P6 Nimhara at `(40, 40)`: about 57 units.
+- P7 Virii at `(0, 55)`: 55 units.
 
-P7 remains the closest because the eight-faction bootstrap was added around an older, smaller test layout. That should be treated as a map-layout follow-up, not a victory-rule shortcut.
+Each faction now has a local Salvage/Plate pair near its start. The previous P7 proximity problem is removed.
+
+Support-building placement now allows a 68-unit half-extent, leaving growth room inside the visible 72-unit boundary.
 
 ## Future Multi-Quill Direction
 
@@ -39,7 +41,7 @@ Preferred future rule:
 
 ## Map Expansion Direction
 
-The current eight-faction bootstrap needs more breathing room before objective win pressure returns.
+The eight-faction bootstrap now has enough first-pass room for local growth, but terrain remains view-only.
 
 Good next terrain work:
 

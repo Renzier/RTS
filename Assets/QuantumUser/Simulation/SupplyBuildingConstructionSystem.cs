@@ -15,7 +15,7 @@ namespace Quantum
         private static readonly FP SupplyObstacleRadius = FP.FromString("1.35");
         private static readonly FP BuilderWorkOffset = FP.FromString("1.85");
         private static readonly FP UnitBlockRadius = FP.FromString("0.85");
-        private static readonly FP MapHalfExtent = FP.FromString("38.0");
+        private static readonly FP MapHalfExtent = FP.FromString("68.0");
 
         public override void Update(Frame f)
         {

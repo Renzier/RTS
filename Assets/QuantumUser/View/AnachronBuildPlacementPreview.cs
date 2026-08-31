@@ -10,7 +10,7 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
     private const float BuildRange = 5.0f;
     private const float PlacementRadius = 1.35f;
     private const float UnitBlockRadius = 0.85f;
-    private const float MapHalfExtent = 38.0f;
+    private const float MapHalfExtent = 68.0f;
     private const float GridExtent = 6.0f;
     private const float GridSpacing = 1.5f;
     private const float GridLineThickness = 0.035f;

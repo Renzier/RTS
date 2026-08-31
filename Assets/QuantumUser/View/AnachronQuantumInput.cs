@@ -11,7 +11,7 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private const float CameraPanSpeed = 20.0f;
   private const float CameraZoomSpeed = 1.5f;
   private const float MinFieldOfView = 28.0f;
-  private const float MaxFieldOfView = 64.0f;
+  private const float MaxFieldOfView = 78.0f;
   public static float LastUpgradePressedTime { get; private set; }
   public static float LastRebuildPressedTime { get; private set; }
   public static float LastTrainWorkerPressedTime { get; private set; }
@@ -35,7 +35,7 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private bool _deconstructQueued;
   private bool _debugDamageQueued;
   private Vector3 _cameraFocus = Vector3.zero;
-  private float _fieldOfView = 42.0f;
+  private float _fieldOfView = 58.0f;
 
   private void OnEnable() {
     QuantumCallback.Subscribe(this, (CallbackPollInput callback) => PollInput(callback));

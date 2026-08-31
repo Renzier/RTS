@@ -20,69 +20,79 @@ namespace Quantum
 
         public static readonly WorkerSpawn[] Workers =
         {
-            new WorkerSpawn(1, 0, -2, -15),
-            new WorkerSpawn(2, 0, 0, -15),
-            new WorkerSpawn(3, 0, 2, -15),
-            new WorkerSpawn(4, 1, -19, 12),
-            new WorkerSpawn(5, 1, -17, 12),
-            new WorkerSpawn(6, 1, -15, 12),
-            new WorkerSpawn(7, 2, 15, 12),
-            new WorkerSpawn(8, 2, 17, 12),
-            new WorkerSpawn(9, 2, 19, 12),
-            new WorkerSpawn(10, 3, -2, 29),
-            new WorkerSpawn(11, 3, 0, 29),
-            new WorkerSpawn(12, 3, 2, 29),
-            new WorkerSpawn(13, 4, -31, -3),
-            new WorkerSpawn(14, 4, -29, -3),
-            new WorkerSpawn(15, 4, -27, -3),
-            new WorkerSpawn(16, 5, 27, -3),
-            new WorkerSpawn(17, 5, 29, -3),
-            new WorkerSpawn(18, 5, 31, -3),
-            new WorkerSpawn(19, 6, -2, -31),
-            new WorkerSpawn(20, 6, 0, -31),
-            new WorkerSpawn(21, 6, 2, -31),
-            new WorkerSpawn(22, 7, -3, 3),
-            new WorkerSpawn(23, 7, -3, 5),
-            new WorkerSpawn(24, 7, -3, 7)
+            new WorkerSpawn(1, 0, -2, -53),
+            new WorkerSpawn(2, 0, 0, -53),
+            new WorkerSpawn(3, 0, 2, -53),
+            new WorkerSpawn(4, 1, -38, -38),
+            new WorkerSpawn(5, 1, -37, -40),
+            new WorkerSpawn(6, 1, -36, -42),
+            new WorkerSpawn(7, 2, 38, -38),
+            new WorkerSpawn(8, 2, 37, -40),
+            new WorkerSpawn(9, 2, 36, -42),
+            new WorkerSpawn(10, 3, -55, -2),
+            new WorkerSpawn(11, 3, -55, 0),
+            new WorkerSpawn(12, 3, -55, 2),
+            new WorkerSpawn(13, 4, 55, -2),
+            new WorkerSpawn(14, 4, 55, 0),
+            new WorkerSpawn(15, 4, 55, 2),
+            new WorkerSpawn(16, 5, -38, 38),
+            new WorkerSpawn(17, 5, -37, 40),
+            new WorkerSpawn(18, 5, -36, 42),
+            new WorkerSpawn(19, 6, 38, 38),
+            new WorkerSpawn(20, 6, 37, 40),
+            new WorkerSpawn(21, 6, 36, 42),
+            new WorkerSpawn(22, 7, -2, 53),
+            new WorkerSpawn(23, 7, 0, 53),
+            new WorkerSpawn(24, 7, 2, 53)
         };
 
         public static readonly HeroSpawn[] Heroes =
         {
-            new HeroSpawn(100, 0, 0, -16),
-            new HeroSpawn(101, 1, -17, 11),
-            new HeroSpawn(102, 2, 17, 11),
-            new HeroSpawn(103, 3, 0, 28),
-            new HeroSpawn(104, 4, -29, -4),
-            new HeroSpawn(105, 5, 29, -4),
-            new HeroSpawn(106, 6, 0, -30),
-            new HeroSpawn(107, 7, -4, 5)
+            new HeroSpawn(100, 0, 0, -52),
+            new HeroSpawn(101, 1, -36, -36),
+            new HeroSpawn(102, 2, 36, -36),
+            new HeroSpawn(103, 3, -54, 0),
+            new HeroSpawn(104, 4, 54, 0),
+            new HeroSpawn(105, 5, -36, 36),
+            new HeroSpawn(106, 6, 36, 36),
+            new HeroSpawn(107, 7, 0, 52)
         };
 
         public static readonly AirScoutSpawn[] AirScouts =
         {
-            new AirScoutSpawn(200, 0, 4, -17)
+            new AirScoutSpawn(200, 0, 4, -52)
         };
 
         public static readonly MainBaseSpawn[] MainBases =
         {
-            new MainBaseSpawn(0, 0, -13),
-            new MainBaseSpawn(1, -17, 14),
-            new MainBaseSpawn(2, 17, 14),
-            new MainBaseSpawn(3, 0, 31),
-            new MainBaseSpawn(4, -29, -1),
-            new MainBaseSpawn(5, 29, -1),
-            new MainBaseSpawn(6, 0, -33),
-            new MainBaseSpawn(7, -6, 5)
+            new MainBaseSpawn(0, 0, -55),
+            new MainBaseSpawn(1, -40, -40),
+            new MainBaseSpawn(2, 40, -40),
+            new MainBaseSpawn(3, -58, 0),
+            new MainBaseSpawn(4, 58, 0),
+            new MainBaseSpawn(5, -40, 40),
+            new MainBaseSpawn(6, 40, 40),
+            new MainBaseSpawn(7, 0, 55)
         };
 
         public static readonly ResourceNodeSpawn[] ResourceNodes =
         {
-            new ResourceNodeSpawn(ResourceKind.Wood, 2500, -7, 1),
-            new ResourceNodeSpawn(ResourceKind.Iron, 2200, 7, 1),
-            new ResourceNodeSpawn(ResourceKind.Wood, 1800, -15, -5),
-            new ResourceNodeSpawn(ResourceKind.Iron, 1600, 15, -5),
-            new ResourceNodeSpawn(ResourceKind.Wood, 2200, -14, 18),
-            new ResourceNodeSpawn(ResourceKind.Iron, 1800, 14, 18)
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, -8, -45),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, 8, -45),
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, -47, -31),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, -31, -47),
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, 47, -31),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, 31, -47),
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, -49, -8),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, -49, 8),
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, 49, -8),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, 49, 8),
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, -47, 31),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, -31, 47),
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, 47, 31),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, 31, 47),
+            new ResourceNodeSpawn(ResourceKind.Wood, 2400, -8, 45),
+            new ResourceNodeSpawn(ResourceKind.Iron, 2000, 8, 45)
         };
 
         public readonly struct PlayerSpawn

@@ -249,7 +249,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             return;
         }
 
-        ground.transform.localScale = new Vector3(8.0f, 1.0f, 8.0f);
+        ground.transform.localScale = new Vector3(14.0f, 1.0f, 14.0f);
         renderer.material = new Material(Shader.Find("Standard"));
         renderer.material.color = GroundColor;
 
@@ -264,15 +264,19 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         GameObject root = new GameObject("AshensparViewLandmarks");
-        CreateLandmarkPrimitive(root.transform, "MereNorth", PrimitiveType.Cube, new Vector3(0.0f, -0.12f, 42.0f), new Vector3(82.0f, 0.04f, 6.0f), MereBoundaryColor);
-        CreateLandmarkPrimitive(root.transform, "MereSouth", PrimitiveType.Cube, new Vector3(0.0f, -0.12f, -42.0f), new Vector3(82.0f, 0.04f, 6.0f), MereBoundaryColor);
-        CreateLandmarkPrimitive(root.transform, "MereEast", PrimitiveType.Cube, new Vector3(42.0f, -0.12f, 0.0f), new Vector3(6.0f, 0.04f, 82.0f), MereBoundaryColor);
-        CreateLandmarkPrimitive(root.transform, "MereWest", PrimitiveType.Cube, new Vector3(-42.0f, -0.12f, 0.0f), new Vector3(6.0f, 0.04f, 82.0f), MereBoundaryColor);
+        CreateLandmarkPrimitive(root.transform, "MereNorth", PrimitiveType.Cube, new Vector3(0.0f, -0.12f, 72.0f), new Vector3(142.0f, 0.04f, 6.0f), MereBoundaryColor);
+        CreateLandmarkPrimitive(root.transform, "MereSouth", PrimitiveType.Cube, new Vector3(0.0f, -0.12f, -72.0f), new Vector3(142.0f, 0.04f, 6.0f), MereBoundaryColor);
+        CreateLandmarkPrimitive(root.transform, "MereEast", PrimitiveType.Cube, new Vector3(72.0f, -0.12f, 0.0f), new Vector3(6.0f, 0.04f, 142.0f), MereBoundaryColor);
+        CreateLandmarkPrimitive(root.transform, "MereWest", PrimitiveType.Cube, new Vector3(-72.0f, -0.12f, 0.0f), new Vector3(6.0f, 0.04f, 142.0f), MereBoundaryColor);
         CreateLandmarkPrimitive(root.transform, "QuillWaistSpire", PrimitiveType.Cylinder, new Vector3(0.0f, 2.1f, 22.0f), new Vector3(0.8f, 2.1f, 0.8f), QuillMarkerColor);
         CreateLandmarkPrimitive(root.transform, "QuillWaistRing", PrimitiveType.Cylinder, new Vector3(0.0f, 0.08f, 22.0f), new Vector3(4.4f, 0.06f, 4.4f), ShardRidgeColor);
         CreateLandmarkPrimitive(root.transform, "CentralQuillWaistRing", PrimitiveType.Cylinder, new Vector3(0.0f, 0.06f, 0.0f), new Vector3(2.8f, 0.04f, 2.8f), QuillMarkerColor);
-        CreateLandmarkPrimitive(root.transform, "ShardRidgeWest", PrimitiveType.Cube, new Vector3(-16.0f, 0.08f, 18.0f), new Vector3(8.0f, 0.16f, 1.0f), ShardRidgeColor);
-        CreateLandmarkPrimitive(root.transform, "ShardRidgeEast", PrimitiveType.Cube, new Vector3(16.0f, 0.08f, 18.0f), new Vector3(8.0f, 0.16f, 1.0f), ShardRidgeColor);
+        CreateLandmarkPrimitive(root.transform, "ShardRidgeWest", PrimitiveType.Cube, new Vector3(-26.0f, 0.08f, 18.0f), new Vector3(14.0f, 0.16f, 1.0f), ShardRidgeColor);
+        CreateLandmarkPrimitive(root.transform, "ShardRidgeEast", PrimitiveType.Cube, new Vector3(26.0f, 0.08f, 18.0f), new Vector3(14.0f, 0.16f, 1.0f), ShardRidgeColor);
+        CreateLandmarkPrimitive(root.transform, "MereChannelNorth", PrimitiveType.Cube, new Vector3(0.0f, -0.1f, 36.0f), new Vector3(10.0f, 0.035f, 18.0f), MereBoundaryColor);
+        CreateLandmarkPrimitive(root.transform, "MereChannelSouth", PrimitiveType.Cube, new Vector3(0.0f, -0.1f, -36.0f), new Vector3(10.0f, 0.035f, 18.0f), MereBoundaryColor);
+        CreateLandmarkPrimitive(root.transform, "ShardMountWest", PrimitiveType.Cube, new Vector3(-22.0f, 0.18f, 0.0f), new Vector3(4.0f, 0.36f, 18.0f), ShardRidgeColor);
+        CreateLandmarkPrimitive(root.transform, "ShardMountEast", PrimitiveType.Cube, new Vector3(22.0f, 0.18f, 0.0f), new Vector3(4.0f, 0.36f, 18.0f), ShardRidgeColor);
     }
 
     private static void CreateLandmarkPrimitive(Transform parent, string name, PrimitiveType primitiveType, Vector3 position, Vector3 scale, Color color)

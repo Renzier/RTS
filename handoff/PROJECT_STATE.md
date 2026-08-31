@@ -31,6 +31,14 @@
 
 ## Most Recent Work
 
+- Kilnfall Sprint 43 completed:
+  - Expanded the eight-faction bootstrap map so the factions no longer start on top of each other.
+  - Moved main bases into a wider ring around the central Quill: P0 `(0, -55)`, P1 `(-40, -40)`, P2 `(40, -40)`, P3 `(-58, 0)`, P4 `(58, 0)`, P5 `(-40, 40)`, P6 `(40, 40)`, and P7 `(0, 55)`.
+  - Moved each faction's three starting workers and hero next to its new base position.
+  - Added a local Salvage/Plate pair near every faction start, expanding the bootstrap resources from 6 nodes to 16 nodes.
+  - Widened support-building placement from 38 to 68 units of half-extent so players can actually grow into the larger map.
+  - Enlarged the runtime ground/view boundary and added first-pass visual channel/mountain obstacles as map landmarks only.
+  - Widened the default RTS camera FOV from 42 to 58, with max zoom-out raised to 78.
 - Quill objective correction completed:
   - Moved the active prototype Quill objective to center `(0, 0)`.
   - Disabled Quill hold-to-win so owning the Quill no longer directly defeats other players.

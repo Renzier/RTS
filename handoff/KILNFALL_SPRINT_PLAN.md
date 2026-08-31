@@ -1189,6 +1189,50 @@ Acceptance:
 - Virii can be assigned to a player in the bootstrap scenario.
 - Existing factions still work.
 
+## Objective And Map Corrections
+
+### Sprint 42: Disable Quill Hold-To-Win
+
+Status: `[x]`
+
+Implementation note, 2026-08-31: disabled `QuillObjective.VictoryEnabled`, moved the active Quill objective to `(0, 0)`, changed capture completion to restore normal objective health instead of a hidden victory timer, and updated HUD labels to `secured buff`/`contested control`. Added `handoff/QUILL_OBJECTIVE_LAYOUT_NOTE.md` for the future multi-Quill pressure direction.
+
+Goal: Prevent a player from losing only because another player starts near or captures the Quill.
+
+Scope:
+
+- Keep Quill ownership useful through the resource trickle.
+- Keep main-base destruction as the actual defeat path.
+- Record future multi-tower/base-pressure direction without implementing it yet.
+
+Acceptance:
+
+- Capturing the Quill no longer directly defeats other players.
+- HUD no longer presents Quill ownership as a match-ending hold timer.
+
+### Sprint 43: Expand Eight-Faction Map
+
+Status: `[x]`
+
+Implementation note, 2026-08-31: spread all eight faction starts into a wider ring, moved workers/heroes/AirScout near the new starts, added one local Salvage/Plate pair for every faction, widened support-building placement to a 68-unit half-extent, enlarged the runtime ground/view boundary, widened the default RTS camera FOV, and added first-pass channel/mountain landmarks as view-only map identity.
+
+Goal: Give every faction room to grow without starting on top of another faction or the central Quill.
+
+Scope:
+
+- Move eight main bases into a larger ring around the Quill.
+- Place starting workers and heroes near their faction's base.
+- Add local resource pairs near each faction.
+- Expand build placement limits to match the larger map.
+- Widen the camera default enough to read the expanded arena.
+- Keep terrain blockers visual-only until deterministic pathing blockers are intentionally added.
+
+Acceptance:
+
+- Every faction has nearby resources.
+- No faction starts inside or near the Quill capture radius.
+- Players have visible and buildable room around their starting bases.
+
 ## Domain Expansion
 
 ### Sprint 40: Air Domain Design Stub
@@ -1228,7 +1272,7 @@ Acceptance:
 - Unit can be produced or spawned.
 - It does not break ground movement/pathing.
 
-### Sprint 42: Underwater Domain Design Stub
+### Sprint 44: Underwater Domain Design Stub
 
 Status: `[ ]`
 
@@ -1244,7 +1288,7 @@ Acceptance:
 
 - A short architecture note exists.
 
-### Sprint 43: Add First Underwater Objective Prototype
+### Sprint 45: Add First Underwater Objective Prototype
 
 Status: `[ ]`
 
@@ -1259,7 +1303,7 @@ Acceptance:
 
 - Objective exists without disrupting ground RTS flow.
 
-### Sprint 44: Orbit Domain Design Stub
+### Sprint 46: Orbit Domain Design Stub
 
 Status: `[ ]`
 
