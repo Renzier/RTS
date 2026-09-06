@@ -31,7 +31,9 @@ This is the active sprint plan after the 2026-09-06 planning reset. The goal is 
 
 ### Sprint R1: Playable Hub Redesign Scope
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-09-06: replaced the old always-visible "Start As" debug switcher with a first-screen match setup overlay and reshaped the in-match HUD into a more conventional RTS shell. The setup screen lets the player choose a starting faction, enter the live RTS prototype with a Start Match button, and return to setup from the match. HUD and gameplay input are suppressed while setup is open so menu clicks do not command units behind the overlay. The live HUD now has an opaque top match/resource/status strip and one bottom tray row containing contextual commands on the left, selected-unit/building identity in the middle, and a compact Forces summary on the right. Selected units are listed in two columns by name, unit id, assignment/state, HP, and carry state where available. The old upper-left owned-unit debug dump, objective prompt, generic command-instruction panel, and top `Selectables` debug overlay are not part of normal play. Camera zoom-out was extended, and view-only ground contrast plates, lanes, start pads, and landmarks were added to make the map easier to read. Selection now enforces one class at a time, so unit groups and structures/objectives cannot both remain selected. Opponent count and map-size controls remain deferred to R2/R3.
 
 Goal: Redesign the hub so it is a playable operational screen rather than a passive/debug wrapper.
 

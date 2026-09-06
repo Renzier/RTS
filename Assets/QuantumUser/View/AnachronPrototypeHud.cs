@@ -18,6 +18,10 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private const int RowHeight = 18;
     private const int RightPanelWidth = 370;
     private const int RightPanelContentWidth = 346;
+    private const int TopBarHeight = 44;
+    private const int LeftPanelWidth = 350;
+    private const int LeftPanelContentWidth = 326;
+    private const int BottomTrayHeight = 122;
     private const int MaxTechTier = 3;
     private const int BaseWoodUpgradeCost = 200;
     private const int BaseIronUpgradeCost = 150;
@@ -59,6 +63,11 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     {
         GUI.depth = -100;
 
+        if (QuantumPhase0LocalSessionController.IsSetupOpen)
+        {
+            return;
+        }
+
         QuantumRunner runner = QuantumRunner.Default;
         if (runner == null || runner.Game == null || runner.Game.Frames == null)
         {
@@ -80,51 +89,8 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         UpdateActionNotification(frame);
         DrawActionNotification(headerStyle);
 
-        int localPlayerIndex = GetLocalPlayerIndex();
-        int rowCount = CountHudRows(frame);
-        DrawPanel(new Rect(12, 58, 430, 22 + rowCount * RowHeight));
-        GUI.Label(new Rect(24, 64, 390, RowHeight), $"P{localPlayerIndex} {GetFactionName(frame, localPlayerIndex)}", headerStyle);
-
-        int row = 1;
-        if (TryGetEconomyState(frame, localPlayerIndex, out PlayerEconomyState state))
-        {
-            string status = state.IsDefeated ? "DEFEATED" : "Active";
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{status}: S {state.Wood}  P {state.Iron}  H {state.FoodUsed}/{state.FoodCap}", labelStyle);
-            row++;
-        }
-
-        if (TryGetTechState(frame, localPlayerIndex, out PlayerTechState techState))
-        {
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"Tech: T{techState.TechTier}  {GetUpgradeProgressLabel(techState)}", labelStyle);
-            row++;
-        }
-
-        if (TryGetHeroState(frame, localPlayerIndex, out PlayerHeroState heroState))
-        {
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"Hero: {GetHeroStatusLabel(heroState)} L{heroState.HeroLevel} HP {heroState.HeroHealth}/{heroState.HeroMaxHealth} {GetHeroResultName(heroState.LastHeroResult)}", labelStyle);
-            row++;
-        }
-
-        GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{AnachronPrototypeScenario.ScenarioName}", labelStyle);
-        row += 2;
-        GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), "Units", headerStyle);
-        row++;
-
-        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
-        {
-            if (IsOwnedByLocalPlayer(frame, entity) == false)
-            {
-                continue;
-            }
-
-            GUI.Label(new Rect(24, 64 + row * RowHeight, 390, RowHeight), $"{GetShortEntityName(entity)} {GetUnitDisplayName(frame, unitIdentity)}: {GetUnitState(frame, entity)} HP {GetUnitHealth(frame, entity)} {GetAttackLabel(frame, entity)} {GetCarryLabel(frame, entity)} {GetTellLabel(frame, entity, unitIdentity.OwnerPlayer)}", labelStyle);
-            row++;
-        }
-
-        DrawSelectedBuildingPanel(frame, headerStyle, labelStyle);
-        DrawSelectedSupplyPanel(frame, headerStyle, labelStyle);
-        DrawSelectedQuillObjectivePanel(frame, headerStyle, labelStyle);
-        DrawSelectedWorkerBuildPanel(frame, headerStyle, labelStyle);
+        DrawTopStatusBar(frame, headerStyle, labelStyle);
+        DrawSelectionTray(frame, headerStyle, labelStyle);
         DrawSupplyWorldTimers(frame, labelStyle);
         DrawWorldHealthLabels(frame, labelStyle);
     }
@@ -234,6 +200,350 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
         rows += 3;
         rows += CountPlayerUnits(frame);
         return rows;
+    }
+
+    private static void DrawTopStatusBar(Frame frame, GUIStyle headerStyle, GUIStyle labelStyle)
+    {
+        int localPlayerIndex = GetLocalPlayerIndex();
+        Rect panelRect = new Rect(12, 8, Mathf.Min(Mathf.Max(Screen.width - 208, 440), 860), TopBarHeight);
+        DrawPanel(panelRect, new Color(0.015f, 0.018f, 0.023f, 1.0f));
+
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 6, 260, RowHeight), $"{AnachronPrototypeScenario.ScenarioName}", headerStyle);
+        GUI.Label(new Rect(panelRect.x + 12, panelRect.y + 24, 260, RowHeight), $"P{localPlayerIndex} {GetFactionName(frame, localPlayerIndex)}", labelStyle);
+
+        if (TryGetEconomyState(frame, localPlayerIndex, out PlayerEconomyState economyState))
+        {
+            string status = economyState.IsDefeated ? "DEFEATED" : "Active";
+            GUI.Label(new Rect(panelRect.x + 286, panelRect.y + 6, 260, RowHeight), $"Salvage {economyState.Wood}", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 286, panelRect.y + 24, 260, RowHeight), $"Plate {economyState.Iron}", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 470, panelRect.y + 6, 220, RowHeight), $"Holding {economyState.FoodUsed}/{economyState.FoodCap}", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 470, panelRect.y + 24, 220, RowHeight), $"Status: {status}", labelStyle);
+        }
+
+        if (TryGetTechState(frame, localPlayerIndex, out PlayerTechState techState))
+        {
+            GUI.Label(new Rect(panelRect.x + 660, panelRect.y + 6, 180, RowHeight), $"Tier {techState.TechTier}", labelStyle);
+            GUI.Label(new Rect(panelRect.x + 660, panelRect.y + 24, 180, RowHeight), GetUpgradeProgressLabel(techState), labelStyle);
+        }
+
+        GUI.Label(new Rect(panelRect.x + panelRect.width - 170, panelRect.y + 6, 150, RowHeight), $"Powers {CountActivePlayers(frame)}/{CountEconomyStates(frame)}", labelStyle);
+        GUI.Label(new Rect(panelRect.x + panelRect.width - 170, panelRect.y + 24, 150, RowHeight), GetQuillStatusLabel(frame), labelStyle);
+    }
+
+    private static string GetQuillStatusLabel(Frame frame)
+    {
+        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        {
+            if (IsQuillObjective(frame, entity) == false)
+            {
+                continue;
+            }
+
+            if (targetable.OwnerPlayer == QuillObjective.NeutralOwner)
+            {
+                return "Quill: Neutral";
+            }
+
+            string contest = HasEnemyInQuillRadius(frame, targetable.OwnerPlayer) ? "*" : string.Empty;
+            return $"Quill: P{targetable.OwnerPlayer}{contest}";
+        }
+
+        return "Quill: --";
+    }
+
+    private static void DrawOwnedForcePanel(Frame frame, Rect panelRect, GUIStyle headerStyle, GUIStyle labelStyle)
+    {
+        int localPlayerIndex = GetLocalPlayerIndex();
+        DrawPanel(panelRect);
+
+        CountOwnedUnits(frame, localPlayerIndex, out int workers, out int heroes, out int airScouts, out int combatReady, out int busyWorkers);
+        GUI.Label(new Rect(panelRect.x + 10, panelRect.y + 6, 248, RowHeight), "Forces", headerStyle);
+        GUI.Label(new Rect(panelRect.x + 10, panelRect.y + 26, 248, RowHeight), $"W {workers}  H {heroes}  Air {airScouts}  Ready {combatReady}", labelStyle);
+        GUI.Label(new Rect(panelRect.x + 10, panelRect.y + 42, 248, RowHeight), $"Working {busyWorkers}  Bases {CountOwnedMainBuildings(frame, localPlayerIndex)}  Support {CountOwnedSupplyBuildings(frame, localPlayerIndex)}", labelStyle);
+    }
+
+    private static void DrawSelectionTray(Frame frame, GUIStyle headerStyle, GUIStyle labelStyle)
+    {
+        Rect trayRect = new Rect(0, Screen.height - BottomTrayHeight, Screen.width, BottomTrayHeight);
+        DrawPanel(trayRect, new Color(0.018f, 0.021f, 0.026f, 0.94f));
+
+        float forceWidth = Mathf.Min(268.0f, Screen.width * 0.24f);
+        float commandWidth = Mathf.Min(300.0f, Screen.width * 0.26f);
+        Rect commandRect = new Rect(18, trayRect.y + 14, commandWidth, BottomTrayHeight - 28);
+        Rect forceRect = new Rect(Screen.width - forceWidth - 18, trayRect.y + 14, forceWidth, BottomTrayHeight - 28);
+        Rect selectedRect = new Rect(commandRect.xMax + 16, trayRect.y + 14, Mathf.Max(260.0f, forceRect.x - commandRect.xMax - 32), BottomTrayHeight - 28);
+
+        DrawPanel(selectedRect, new Color(0.035f, 0.041f, 0.05f, 0.92f));
+        DrawPanel(commandRect, new Color(0.035f, 0.041f, 0.05f, 0.92f));
+        DrawSelectedSummary(frame, selectedRect, headerStyle, labelStyle);
+        DrawContextCommands(frame, commandRect, headerStyle, labelStyle);
+        DrawOwnedForcePanel(frame, forceRect, headerStyle, labelStyle);
+    }
+
+    private static void DrawSelectedSummary(Frame frame, Rect selectedRect, GUIStyle headerStyle, GUIStyle labelStyle)
+    {
+        GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 8, selectedRect.width - 24, RowHeight), "Selected", headerStyle);
+
+        if (TryGetSelectedMainBuilding(frame, out EntityRef mainEntity, out MainBuilding mainBuilding, out int buildingTier))
+        {
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 34, selectedRect.width - 24, RowHeight), $"{GetMainBuildingDisplayName(frame, mainBuilding.OwnerPlayer)}  T{buildingTier}", labelStyle);
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 56, selectedRect.width - 24, RowHeight), $"HP {mainBuilding.Health}/{mainBuilding.MaxHealth}", labelStyle);
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 78, selectedRect.width - 24, RowHeight), GetTellLabel(frame, mainEntity, mainBuilding.OwnerPlayer), labelStyle);
+            return;
+        }
+
+        if (TryGetSelectedSupplyBuilding(frame, out EntityRef supplyEntity, out SupplyBuilding supplyBuilding))
+        {
+            string state = supplyBuilding.IsConstructing ? "Foundation" : supplyBuilding.IsDeconstructing ? "Deconstructing" : $"+{supplyBuilding.FoodProvided} Holding";
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 34, selectedRect.width - 24, RowHeight), $"{GetSupplyBuildingDisplayName(frame, supplyBuilding.OwnerPlayer)}  {state}", labelStyle);
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 56, selectedRect.width - 24, RowHeight), $"HP {supplyBuilding.Health}/{supplyBuilding.MaxHealth}", labelStyle);
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 78, selectedRect.width - 24, RowHeight), GetTellLabel(frame, supplyEntity, supplyBuilding.OwnerPlayer), labelStyle);
+            return;
+        }
+
+        if (TryGetSelectedOwnedUnit(frame, out EntityRef unitEntity, out UnitIdentity unitIdentity))
+        {
+            DrawSelectedUnitList(frame, selectedRect, labelStyle);
+            return;
+        }
+
+        if (TryGetSelectedQuillObjective(frame, out Targetable quillTargetable))
+        {
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 34, selectedRect.width - 24, RowHeight), "Quill-Waist Landmark", labelStyle);
+            GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 56, selectedRect.width - 24, RowHeight), GetQuillObjectiveStatus(frame, quillTargetable), labelStyle);
+            return;
+        }
+
+        GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 34, selectedRect.width - 24, RowHeight), "Nothing selected", labelStyle);
+    }
+
+    private static void DrawSelectedUnitList(Frame frame, Rect selectedRect, GUIStyle labelStyle)
+    {
+        int selectedUnits = CountSelectedOwnedUnits(frame);
+        const int maxColumns = 2;
+        const int maxRows = 4;
+        int maxVisible = maxColumns * maxRows;
+        int drawn = 0;
+        float columnGap = 12.0f;
+        float columnWidth = (selectedRect.width - 24.0f - columnGap) * 0.5f;
+
+        GUI.Label(new Rect(selectedRect.x + 12, selectedRect.y + 30, selectedRect.width - 24, RowHeight), $"{selectedUnits} unit{(selectedUnits == 1 ? string.Empty : "s")}", labelStyle);
+
+        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        {
+            if (unitIdentity.OwnerPlayer != GetLocalPlayerIndex() ||
+                IsSelected(frame, entity) == false ||
+                IsDeadUnit(frame, entity))
+            {
+                continue;
+            }
+
+            if (drawn >= maxVisible)
+            {
+                break;
+            }
+
+            string carry = GetCarryLabel(frame, entity);
+            string carryLabel = string.IsNullOrEmpty(carry) ? string.Empty : $"  {carry}";
+            int column = drawn % maxColumns;
+            int row = drawn / maxColumns;
+            float x = selectedRect.x + 12 + column * (columnWidth + columnGap);
+            float y = selectedRect.y + 52 + row * RowHeight;
+            GUI.Label(
+                new Rect(x, y, columnWidth, RowHeight),
+                $"{GetUnitDisplayName(frame, unitIdentity)} #{unitIdentity.UnitId}: {GetUnitState(frame, entity)}  HP {GetUnitHealth(frame, entity)}{carryLabel}",
+                labelStyle);
+            drawn++;
+        }
+
+        if (selectedUnits > maxVisible)
+        {
+            GUI.Label(new Rect(selectedRect.x + selectedRect.width - 94, selectedRect.y + 8, 82, RowHeight), $"+{selectedUnits - maxVisible} more", labelStyle);
+        }
+    }
+
+    private static void DrawContextCommands(Frame frame, Rect commandRect, GUIStyle headerStyle, GUIStyle labelStyle)
+    {
+        GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 8, commandRect.width - 24, RowHeight), "Commands", headerStyle);
+
+        if (TryGetSelectedMainBuilding(frame, out EntityRef mainEntity, out MainBuilding mainBuilding, out int buildingTier))
+        {
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 36, commandRect.width - 24, RowHeight), GetWorkerProductionLabel(frame, mainBuilding.OwnerPlayer), labelStyle);
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 58, commandRect.width - 24, RowHeight), buildingTier >= MaxTechTier ? "T: Max tier" : $"T: Upgrade to tier {buildingTier + 1}", labelStyle);
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 80, commandRect.width - 24, RowHeight), GetTellLabel(frame, mainEntity, mainBuilding.OwnerPlayer), labelStyle);
+            return;
+        }
+
+        if (TryGetSelectedSupplyBuilding(frame, out EntityRef supplyEntity, out SupplyBuilding supplyBuilding))
+        {
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 36, commandRect.width - 24, RowHeight), supplyBuilding.IsConstructing ? "X: Cancel construction" : "X: Deconstruct", labelStyle);
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 58, commandRect.width - 24, RowHeight), GetTellLabel(frame, supplyEntity, supplyBuilding.OwnerPlayer), labelStyle);
+            return;
+        }
+
+        if (TryGetSelectedOwnedWorker(frame, out EntityRef workerEntity))
+        {
+            if (TryGetWorkerBuildIntent(frame, workerEntity, out WorkerBuildIntent buildIntent) && buildIntent.IsBuilding)
+            {
+                GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 36, commandRect.width - 24, RowHeight), GetUnitState(frame, workerEntity), labelStyle);
+                GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 58, commandRect.width - 24, RowHeight), "X: Cancel assigned construction", labelStyle);
+                return;
+            }
+
+            if (AnachronQuantumInput.BuildModeActive)
+            {
+                FactionStats stats = FactionStats.ForPlayer(frame, GetLocalPlayerIndex());
+                GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 36, commandRect.width - 24, RowHeight), $"C: Place {GetSupplyBuildingDisplayName(frame, GetLocalPlayerIndex())}", labelStyle);
+                GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 58, commandRect.width - 24, RowHeight), FormatResourcePair(stats.SupplyBuildingWoodCost, stats.SupplyBuildingIronCost), labelStyle);
+                GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 80, commandRect.width - 24, RowHeight), AnachronBuildPlacementPreview.PlacementStatus, labelStyle);
+                return;
+            }
+
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 36, commandRect.width - 24, RowHeight), "B: Build support", labelStyle);
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 58, commandRect.width - 24, RowHeight), "RMB: Move, gather, repair, or attack", labelStyle);
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 80, commandRect.width - 24, RowHeight), GetCarryLabel(frame, workerEntity), labelStyle);
+            return;
+        }
+
+        if (TryGetSelectedOwnedCombatUnit(frame, out EntityRef combatEntity))
+        {
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 36, commandRect.width - 24, RowHeight), "RMB: Move or attack target", labelStyle);
+            GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 58, commandRect.width - 24, RowHeight), $"{GetUnitState(frame, combatEntity)} {GetAttackLabel(frame, combatEntity)}", labelStyle);
+            return;
+        }
+
+        GUI.Label(new Rect(commandRect.x + 12, commandRect.y + 36, commandRect.width - 24, RowHeight), "No contextual command available.", labelStyle);
+    }
+
+    private static string GetHeroSummaryLabel(Frame frame, int playerIndex)
+    {
+        if (TryGetHeroState(frame, playerIndex, out PlayerHeroState heroState) == false)
+        {
+            return "Hero: no state";
+        }
+
+        return $"Hero {GetHeroStatusLabel(heroState)} L{heroState.HeroLevel} HP {heroState.HeroHealth}/{heroState.HeroMaxHealth}";
+    }
+
+    private static void CountOwnedUnits(Frame frame, int playerIndex, out int workers, out int heroes, out int airScouts, out int combatReady, out int busyWorkers)
+    {
+        workers = 0;
+        heroes = 0;
+        airScouts = 0;
+        combatReady = 0;
+        busyWorkers = 0;
+
+        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        {
+            if (unitIdentity.OwnerPlayer != playerIndex || IsDeadUnit(frame, entity))
+            {
+                continue;
+            }
+
+            if (unitIdentity.UnitKind == UnitKind.Worker)
+            {
+                workers++;
+                if (GetUnitState(frame, entity) != "Idle")
+                {
+                    busyWorkers++;
+                }
+            }
+            else if (unitIdentity.UnitKind == UnitKind.Hero)
+            {
+                heroes++;
+            }
+            else if (unitIdentity.UnitKind == UnitKind.AirScout)
+            {
+                airScouts++;
+            }
+
+            if (TryGetAttackIntent(frame, entity, out AttackIntent attackIntent) && attackIntent.Damage > 0)
+            {
+                combatReady++;
+            }
+        }
+    }
+
+    private static int CountOwnedMainBuildings(Frame frame, int playerIndex)
+    {
+        int count = 0;
+        foreach ((EntityRef entity, MainBuilding mainBuilding) in frame.GetComponentIterator<MainBuilding>())
+        {
+            if (mainBuilding.OwnerPlayer == playerIndex && mainBuilding.Health > 0)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private static int CountOwnedSupplyBuildings(Frame frame, int playerIndex)
+    {
+        int count = 0;
+        foreach ((EntityRef entity, SupplyBuilding supplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
+        {
+            if (supplyBuilding.OwnerPlayer == playerIndex && supplyBuilding.Health > 0 && supplyBuilding.IsDeconstructing == false)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private static bool TryGetSelectedOwnedCombatUnit(Frame frame, out EntityRef combatEntity)
+    {
+        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        {
+            if (unitIdentity.OwnerPlayer == GetLocalPlayerIndex() &&
+                IsSelected(frame, entity) &&
+                IsDeadUnit(frame, entity) == false &&
+                TryGetAttackIntent(frame, entity, out AttackIntent attackIntent) &&
+                attackIntent.Damage > 0)
+            {
+                combatEntity = entity;
+                return true;
+            }
+        }
+
+        combatEntity = EntityRef.None;
+        return false;
+    }
+
+    private static bool TryGetSelectedOwnedUnit(Frame frame, out EntityRef unitEntity, out UnitIdentity unitIdentity)
+    {
+        foreach ((EntityRef entity, UnitIdentity candidateUnitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        {
+            if (candidateUnitIdentity.OwnerPlayer == GetLocalPlayerIndex() &&
+                IsSelected(frame, entity) &&
+                IsDeadUnit(frame, entity) == false)
+            {
+                unitEntity = entity;
+                unitIdentity = candidateUnitIdentity;
+                return true;
+            }
+        }
+
+        unitEntity = EntityRef.None;
+        unitIdentity = default;
+        return false;
+    }
+
+    private static int CountSelectedOwnedUnits(Frame frame)
+    {
+        int count = 0;
+        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        {
+            if (unitIdentity.OwnerPlayer == GetLocalPlayerIndex() &&
+                IsSelected(frame, entity) &&
+                IsDeadUnit(frame, entity) == false)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     private static int CountEconomyStates(Frame frame)

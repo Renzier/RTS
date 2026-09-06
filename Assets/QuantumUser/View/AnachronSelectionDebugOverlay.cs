@@ -4,6 +4,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class AnachronSelectionDebugOverlay : QuantumMonoBehaviour
 {
+    [SerializeField] private bool showDebugOverlay;
+
     private static readonly Color MarkerFill = new Color(1.0f, 0.9f, 0.2f, 0.95f);
     private static readonly Color SelectedMarkerFill = new Color(0.1f, 1.0f, 0.45f, 0.95f);
     private static readonly Color MarkerRing = new Color(0.05f, 0.05f, 0.05f, 0.9f);
@@ -15,6 +17,11 @@ public sealed class AnachronSelectionDebugOverlay : QuantumMonoBehaviour
 
     private void OnGUI()
     {
+        if (showDebugOverlay == false || QuantumPhase0LocalSessionController.IsSetupOpen)
+        {
+            return;
+        }
+
         QuantumRunner runner = QuantumRunner.Default;
         if (runner == null || runner.Game == null || runner.Game.Frames == null)
         {

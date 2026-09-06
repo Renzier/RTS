@@ -40,6 +40,9 @@ public unsafe sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviou
     private static readonly Color GroundColor = new Color(0.16f, 0.19f, 0.18f, 1.0f);
     private static readonly Color CameraSkyColor = new Color(0.05f, 0.07f, 0.09f, 1.0f);
     private static readonly Color MereBoundaryColor = new Color(0.03f, 0.16f, 0.2f, 1.0f);
+    private static readonly Color ShardPlateColor = new Color(0.19f, 0.22f, 0.20f, 1.0f);
+    private static readonly Color TravelLaneColor = new Color(0.12f, 0.15f, 0.145f, 1.0f);
+    private static readonly Color StartPadColor = new Color(0.20f, 0.235f, 0.215f, 1.0f);
     private static readonly Color ShardRidgeColor = new Color(0.22f, 0.24f, 0.22f, 1.0f);
     private static readonly Color QuillMarkerColor = new Color(0.78f, 0.68f, 0.42f, 1.0f);
     private static readonly Color QuillObjectiveColor = new Color(0.95f, 0.82f, 0.38f, 1.0f);
@@ -280,6 +283,20 @@ public unsafe sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviou
         }
 
         GameObject root = new GameObject("AshensparViewLandmarks");
+        CreateLandmarkPrimitive(root.transform, "ShardPlateNorth", PrimitiveType.Cube, new Vector3(0.0f, -0.11f, 40.0f), new Vector3(82.0f, 0.035f, 46.0f), ShardPlateColor);
+        CreateLandmarkPrimitive(root.transform, "ShardPlateSouth", PrimitiveType.Cube, new Vector3(0.0f, -0.11f, -40.0f), new Vector3(82.0f, 0.035f, 46.0f), ShardPlateColor);
+        CreateLandmarkPrimitive(root.transform, "ShardPlateWest", PrimitiveType.Cube, new Vector3(-46.0f, -0.105f, 0.0f), new Vector3(38.0f, 0.035f, 64.0f), new Color(0.145f, 0.17f, 0.165f, 1.0f));
+        CreateLandmarkPrimitive(root.transform, "ShardPlateEast", PrimitiveType.Cube, new Vector3(46.0f, -0.105f, 0.0f), new Vector3(38.0f, 0.035f, 64.0f), new Color(0.145f, 0.17f, 0.165f, 1.0f));
+        CreateLandmarkPrimitive(root.transform, "CenterCrossNorthSouth", PrimitiveType.Cube, new Vector3(0.0f, -0.095f, 0.0f), new Vector3(6.0f, 0.03f, 126.0f), TravelLaneColor);
+        CreateLandmarkPrimitive(root.transform, "CenterCrossEastWest", PrimitiveType.Cube, new Vector3(0.0f, -0.09f, 0.0f), new Vector3(126.0f, 0.03f, 6.0f), TravelLaneColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP0", PrimitiveType.Cylinder, new Vector3(0.0f, -0.075f, -55.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP1", PrimitiveType.Cylinder, new Vector3(-40.0f, -0.075f, -40.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP2", PrimitiveType.Cylinder, new Vector3(40.0f, -0.075f, -40.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP3", PrimitiveType.Cylinder, new Vector3(-58.0f, -0.075f, 0.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP4", PrimitiveType.Cylinder, new Vector3(58.0f, -0.075f, 0.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP5", PrimitiveType.Cylinder, new Vector3(-40.0f, -0.075f, 40.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP6", PrimitiveType.Cylinder, new Vector3(40.0f, -0.075f, 40.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
+        CreateLandmarkPrimitive(root.transform, "StartPadP7", PrimitiveType.Cylinder, new Vector3(0.0f, -0.075f, 55.0f), new Vector3(8.0f, 0.025f, 8.0f), StartPadColor);
         CreateLandmarkPrimitive(root.transform, "MereNorth", PrimitiveType.Cube, new Vector3(0.0f, -0.12f, 72.0f), new Vector3(142.0f, 0.04f, 6.0f), MereBoundaryColor);
         CreateLandmarkPrimitive(root.transform, "MereSouth", PrimitiveType.Cube, new Vector3(0.0f, -0.12f, -72.0f), new Vector3(142.0f, 0.04f, 6.0f), MereBoundaryColor);
         CreateLandmarkPrimitive(root.transform, "MereEast", PrimitiveType.Cube, new Vector3(72.0f, -0.12f, 0.0f), new Vector3(6.0f, 0.04f, 142.0f), MereBoundaryColor);

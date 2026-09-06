@@ -7,11 +7,11 @@ public unsafe sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private static readonly Color SelectionFill = new Color(0.1f, 0.7f, 1.0f, 0.18f);
   private static readonly Color SelectionBorder = new Color(0.1f, 0.85f, 1.0f, 0.85f);
   private static readonly Vector3 CameraOffset = new Vector3(0.0f, 10.0f, -12.0f);
-  private static readonly Quaternion CameraRotation = Quaternion.Euler(55.0f, 0.0f, 0.0f);
+  private static readonly Quaternion CameraRotation = Quaternion.Euler(70.0f, 0.0f, 0.0f);
   private const float CameraPanSpeed = 20.0f;
   private const float CameraZoomSpeed = 1.5f;
   private const float MinFieldOfView = 28.0f;
-  private const float MaxFieldOfView = 78.0f;
+  private const float MaxFieldOfView = 112.0f;
   private const float CameraPanHalfExtent = 68.0f;
   public static float LastUpgradePressedTime { get; private set; }
   public static float LastRebuildPressedTime { get; private set; }
@@ -36,7 +36,7 @@ public unsafe sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private bool _deconstructQueued;
   private bool _debugDamageQueued;
   private Vector3 _cameraFocus = Vector3.zero;
-  private float _fieldOfView = 58.0f;
+  private float _fieldOfView = 72.0f;
   private int _lastCameraPlayerSlot = -1;
 
   private void OnEnable() {
@@ -55,6 +55,11 @@ public unsafe sealed class AnachronQuantumInput : QuantumMonoBehaviour {
     SyncCameraFocusToActivePlayer();
     UpdateCameraControls();
     ConfigureRtsCamera();
+
+    if (QuantumPhase0LocalSessionController.IsSetupOpen) {
+      ClearQueuedInput();
+      return;
+    }
 
     if (UnityEngine.Input.GetMouseButtonDown(0)) {
       _dragStartScreen = UnityEngine.Input.mousePosition;
@@ -114,6 +119,12 @@ public unsafe sealed class AnachronQuantumInput : QuantumMonoBehaviour {
       return;
     }
 
+    if (QuantumPhase0LocalSessionController.IsSetupOpen) {
+      ClearQueuedInput();
+      callback.SetInput(new Quantum.Input(), DeterministicInputFlags.Repeatable);
+      return;
+    }
+
     Quantum.Input input = new Quantum.Input {
       Select = _selectHeld,
       Command = _commandHeld,
@@ -138,7 +149,24 @@ public unsafe sealed class AnachronQuantumInput : QuantumMonoBehaviour {
     _debugDamageQueued = false;
   }
 
+  private void ClearQueuedInput() {
+    _selectHeld = false;
+    _commandHeld = false;
+    _additiveSelectHeld = false;
+    _upgradeQueued = false;
+    _rebuildHeroQueued = false;
+    _trainWorkerQueued = false;
+    _buildSupplyQueued = false;
+    _deconstructQueued = false;
+    _debugDamageQueued = false;
+    BuildModeActive = false;
+  }
+
   private void OnGUI() {
+    if (QuantumPhase0LocalSessionController.IsSetupOpen) {
+      return;
+    }
+
     DrawInputStatus();
 
     if (_selectHeld == false) {

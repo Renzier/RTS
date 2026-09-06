@@ -31,6 +31,16 @@
 
 ## Most Recent Work
 
+- Sprint R1 completed on 2026-09-06:
+  - Replaced the old always-visible `Start As` debug switcher with a first-screen match setup overlay.
+  - The setup screen lets the player choose a starting faction, start the live RTS prototype, and return to setup from the match.
+  - The live HUD now uses a conventional RTS layout: opaque top match/resource/status strip and one bottom tray row with contextual commands on the left, selected-unit/building identity in the middle, and compact Forces summary on the right.
+  - Selected units are listed in two columns by name, unit id, assignment/state, HP, and carry state where available.
+  - Selection now enforces one class at a time: unit groups and structures/objectives cannot remain selected together, including drag and additive selection cases.
+  - The old upper-left owned-unit debug dump, objective prompt, generic command-instruction panel, and top `Selectables` debug overlay were removed from normal play.
+  - Camera zoom-out was extended, and view-only ground contrast plates, lanes, start pads, and landmarks were added for navigation readability.
+  - `AnachronPrototypeHud` and `AnachronQuantumInput` now stay quiet while setup is open, preventing setup clicks from issuing gameplay commands.
+  - Opponent count and map-size controls are still deferred to Sprint R2 and Sprint R3.
 - Sprint-plan reset completed on 2026-09-06:
   - The previous Kilnfall sprint plan is now considered complete for planning purposes.
   - `handoff/KILNFALL_SPRINT_PLAN.md` now contains a revised active plan focused on making the game playable.
