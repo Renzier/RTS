@@ -2,7 +2,7 @@ using Quantum;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
+public unsafe sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
 {
     private static readonly Color ValidColor = new Color(0.15f, 1.0f, 0.45f, 0.42f);
     private static readonly Color InvalidColor = new Color(1.0f, 0.15f, 0.12f, 0.42f);
@@ -23,6 +23,12 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
     private void Awake()
     {
         GameObject preview = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        Collider collider = preview.GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+            Destroy(collider);
+        }
         preview.name = "SupplyPlacementPreview";
         preview.transform.localScale = new Vector3(2.45f, 0.14f, 2.45f);
         preview.SetActive(false);
@@ -267,14 +273,11 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
 
     private static bool TryGetPosition(Frame frame, EntityRef candidateEntity, out Vector2 position)
     {
-        foreach ((EntityRef entity, Transform2D transform) in frame.GetComponentIterator<Transform2D>())
+        if (frame.Unsafe.TryGetPointer<Transform2D>(candidateEntity, out Transform2D* transform))
         {
-            if (entity == candidateEntity)
-            {
-                Vector3 unityPosition = transform.Position.ToUnityVector3();
-                position = new Vector2(unityPosition.x, unityPosition.z);
-                return true;
-            }
+            Vector3 unityPosition = transform->Position.ToUnityVector3();
+            position = new Vector2(unityPosition.x, unityPosition.z);
+            return true;
         }
 
         position = Vector2.zero;
@@ -283,12 +286,9 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
 
     private static bool IsSelected(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, Selectable selectable) in frame.GetComponentIterator<Selectable>())
+        if (frame.Unsafe.TryGetPointer<Selectable>(candidateEntity, out Selectable* selectable))
         {
-            if (entity == candidateEntity)
-            {
-                return selectable.IsSelected;
-            }
+            return selectable->IsSelected;
         }
 
         return false;
@@ -296,12 +296,9 @@ public sealed class AnachronBuildPlacementPreview : QuantumMonoBehaviour
 
     private static bool IsDeadUnit(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, UnitHealth unitHealth) in frame.GetComponentIterator<UnitHealth>())
+        if (frame.Unsafe.TryGetPointer<UnitHealth>(candidateEntity, out UnitHealth* unitHealth))
         {
-            if (entity == candidateEntity)
-            {
-                return unitHealth.IsDead;
-            }
+            return unitHealth->IsDead;
         }
 
         return false;

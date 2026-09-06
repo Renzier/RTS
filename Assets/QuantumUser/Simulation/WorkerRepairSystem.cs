@@ -252,7 +252,7 @@ namespace Quantum
             if (f.Unsafe.TryGetPointer<MoveIntent>(workerEntity, out MoveIntent* moveIntent))
             {
                 moveIntent->HasTarget = true;
-                moveIntent->MovementMode = MovementMode.QuantumNavMesh;
+                moveIntent->MovementMode = MovementMode.StraightLineFallback;
                 moveIntent->TargetWorld = targetPosition + new FPVector2(-RepairWorkOffset, -RepairWorkOffset);
             }
         }

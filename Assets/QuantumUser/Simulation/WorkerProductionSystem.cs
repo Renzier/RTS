@@ -104,7 +104,7 @@ namespace Quantum
             f.Set(entity, new MoveIntent
             {
                 HasTarget = false,
-                MovementMode = MovementMode.QuantumNavMesh,
+                MovementMode = MovementMode.StraightLineFallback,
                 TargetWorld = FPVector2.Zero
             });
 

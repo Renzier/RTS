@@ -3,7 +3,7 @@ using Quantum;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
+public unsafe sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 {
     private static readonly Color IdleColor = new Color(0.72f, 0.78f, 0.82f, 1.0f);
     private static readonly Color SelectedColor = new Color(0.1f, 0.95f, 0.45f, 1.0f);
@@ -43,6 +43,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
     private static readonly Color ShardRidgeColor = new Color(0.22f, 0.24f, 0.22f, 1.0f);
     private static readonly Color QuillMarkerColor = new Color(0.78f, 0.68f, 0.42f, 1.0f);
     private static readonly Color QuillObjectiveColor = new Color(0.95f, 0.82f, 0.38f, 1.0f);
+    private static readonly Color RootObjectiveColor = new Color(0.12f, 0.72f, 0.88f, 1.0f);
     private static readonly Color GrainLoudTint = new Color(0.32f, 0.82f, 1.0f, 1.0f);
     private static readonly Color HealthBarBackColor = new Color(0.01f, 0.012f, 0.012f, 1.0f);
     private static readonly Color HealthBarGoodColor = new Color(0.1f, 0.9f, 0.2f, 1.0f);
@@ -151,6 +152,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         GameObject primitive = GameObject.CreatePrimitive(primitiveType);
+        StripCollider(primitive);
         primitive.name = $"SelectableView_{entity}";
         primitive.transform.localScale = new Vector3(0.8f, 0.18f, 0.8f);
 
@@ -171,6 +173,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         GameObject root = new GameObject($"HealthBar_{entity}");
 
         GameObject back = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        StripCollider(back);
         back.name = "Back";
         back.transform.SetParent(root.transform, false);
         back.transform.localScale = new Vector3(UnitHealthBarWidth, HealthBarHeight, HealthBarDepth);
@@ -180,6 +183,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         backRenderer.material.color = HealthBarBackColor;
 
         GameObject fill = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        StripCollider(fill);
         fill.name = "Fill";
         fill.transform.SetParent(root.transform, false);
         fill.transform.localScale = new Vector3(UnitHealthBarWidth, HealthBarHeight, HealthBarDepth);
@@ -200,6 +204,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         GameObject primitive = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        StripCollider(primitive);
         primitive.name = $"AttackTargetMarker_{entity}";
         primitive.transform.localScale = new Vector3(0.42f, 0.16f, 0.42f);
 
@@ -218,6 +223,7 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         }
 
         GameObject primitive = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        StripCollider(primitive);
         primitive.name = $"AttackerMarker_{entity}";
         primitive.transform.localScale = new Vector3(1.35f, 0.035f, 1.35f);
 
@@ -226,6 +232,16 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         renderer.material.color = AttackerMarkerColor;
         _attackerMarkers.Add(entity, renderer);
         return renderer;
+    }
+
+    private static void StripCollider(GameObject go)
+    {
+        Collider collider = go.GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+            Destroy(collider);
+        }
     }
 
     private static void ConfigurePrototypeBattlefield()
@@ -301,25 +317,14 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static bool HasSelectionCandidate(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, SelectionCandidate candidate) in frame.GetComponentIterator<SelectionCandidate>())
-        {
-            if (entity == candidateEntity)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return frame.Has<SelectionCandidate>(candidateEntity);
     }
 
     private static bool IsSelected(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, Selectable selectable) in frame.GetComponentIterator<Selectable>())
+        if (frame.Unsafe.TryGetPointer<Selectable>(candidateEntity, out Selectable* selectable))
         {
-            if (entity == candidateEntity)
-            {
-                return selectable.IsSelected;
-            }
+            return selectable->IsSelected;
         }
 
         return false;
@@ -348,9 +353,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static Color ApplyGrainLoudTint(Frame frame, EntityRef entity, Color baseColor)
     {
-        foreach ((EntityRef grainEntity, GrainState grainState) in frame.GetComponentIterator<GrainState>())
+        if (frame.Unsafe.TryGetPointer<GrainState>(entity, out GrainState* grainState))
         {
-            if (grainEntity == entity && grainState.IsGrainLoud && grainState.GrainLoudTicksRemaining > 0)
+            if (grainState->IsGrainLoud && grainState->GrainLoudTicksRemaining > 0)
             {
                 return Color.Lerp(baseColor, GrainLoudTint, 0.45f);
             }
@@ -364,6 +369,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         if (IsQuillObjective(frame, entity))
         {
             return new Vector3(0.75f, 1.35f, 0.75f);
+        }
+
+        if (IsRootObjective(frame, entity))
+        {
+            return new Vector3(1.1f, 0.35f, 1.1f);
         }
 
         if (isDeadUnit)
@@ -418,88 +428,85 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static Vector3 GetEconomyScale(Frame frame, EntityRef entity)
     {
-        foreach ((EntityRef supplyEntity, SupplyBuilding supplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
+        if (frame.Unsafe.TryGetPointer<SupplyBuilding>(entity, out SupplyBuilding* supplyBuilding))
         {
-            if (supplyEntity == entity)
+            int factionId = GetFactionId(frame, supplyBuilding->OwnerPlayer);
+            if (factionId == FactionId.Wrought)
             {
-                int factionId = GetFactionId(frame, supplyBuilding.OwnerPlayer);
-                if (factionId == FactionId.Wrought)
+                if (supplyBuilding->IsDeconstructing)
                 {
-                    if (supplyBuilding.IsDeconstructing)
-                    {
-                        return new Vector3(1.18f, 0.72f, 1.18f);
-                    }
-
-                    return supplyBuilding.IsConstructing ? new Vector3(1.28f, 0.2f, 1.28f) : new Vector3(1.18f, 1.05f, 1.18f);
+                    return new Vector3(1.18f, 0.72f, 1.18f);
                 }
 
-                if (factionId == FactionId.Gharn)
-                {
-                    if (supplyBuilding.IsDeconstructing)
-                    {
-                        return new Vector3(1.45f, 0.36f, 1.45f);
-                    }
-
-                    return supplyBuilding.IsConstructing ? new Vector3(1.45f, 0.18f, 1.45f) : new Vector3(1.45f, 0.62f, 1.45f);
-                }
-
-                if (factionId == FactionId.Seethe)
-                {
-                    if (supplyBuilding.IsDeconstructing)
-                    {
-                        return new Vector3(1.08f, 0.54f, 1.08f);
-                    }
-
-                    return supplyBuilding.IsConstructing ? new Vector3(1.18f, 0.2f, 1.18f) : new Vector3(1.08f, 0.92f, 1.08f);
-                }
-
-                if (factionId == FactionId.Veirn)
-                {
-                    if (supplyBuilding.IsDeconstructing)
-                    {
-                        return new Vector3(0.98f, 0.82f, 0.98f);
-                    }
-
-                    return supplyBuilding.IsConstructing ? new Vector3(1.12f, 0.18f, 1.12f) : new Vector3(0.98f, 1.18f, 0.98f);
-                }
-
-                if (factionId == FactionId.Vaelun)
-                {
-                    if (supplyBuilding.IsDeconstructing)
-                    {
-                        return new Vector3(1.32f, 0.34f, 1.32f);
-                    }
-
-                    return supplyBuilding.IsConstructing ? new Vector3(1.5f, 0.14f, 1.5f) : new Vector3(1.32f, 0.5f, 1.32f);
-                }
-
-                if (factionId == FactionId.Nimhara)
-                {
-                    if (supplyBuilding.IsDeconstructing)
-                    {
-                        return new Vector3(1.22f, 0.48f, 1.22f);
-                    }
-
-                    return supplyBuilding.IsConstructing ? new Vector3(1.34f, 0.16f, 1.34f) : new Vector3(1.22f, 0.74f, 1.22f);
-                }
-
-                if (factionId == FactionId.Virii)
-                {
-                    if (supplyBuilding.IsDeconstructing)
-                    {
-                        return new Vector3(1.05f, 0.4f, 1.05f);
-                    }
-
-                    return supplyBuilding.IsConstructing ? new Vector3(1.28f, 0.12f, 1.28f) : new Vector3(1.05f, 0.64f, 1.05f);
-                }
-
-                if (supplyBuilding.IsDeconstructing)
-                {
-                    return new Vector3(1.25f, 0.42f, 1.25f);
-                }
-
-                return supplyBuilding.IsConstructing ? new Vector3(1.45f, 0.18f, 1.45f) : new Vector3(1.25f, 0.68f, 1.25f);
+                return supplyBuilding->IsConstructing ? new Vector3(1.28f, 0.2f, 1.28f) : new Vector3(1.18f, 1.05f, 1.18f);
             }
+
+            if (factionId == FactionId.Gharn)
+            {
+                if (supplyBuilding->IsDeconstructing)
+                {
+                    return new Vector3(1.45f, 0.36f, 1.45f);
+                }
+
+                return supplyBuilding->IsConstructing ? new Vector3(1.45f, 0.18f, 1.45f) : new Vector3(1.45f, 0.62f, 1.45f);
+            }
+
+            if (factionId == FactionId.Seethe)
+            {
+                if (supplyBuilding->IsDeconstructing)
+                {
+                    return new Vector3(1.08f, 0.54f, 1.08f);
+                }
+
+                return supplyBuilding->IsConstructing ? new Vector3(1.18f, 0.2f, 1.18f) : new Vector3(1.08f, 0.92f, 1.08f);
+            }
+
+            if (factionId == FactionId.Veirn)
+            {
+                if (supplyBuilding->IsDeconstructing)
+                {
+                    return new Vector3(0.98f, 0.82f, 0.98f);
+                }
+
+                return supplyBuilding->IsConstructing ? new Vector3(1.12f, 0.18f, 1.12f) : new Vector3(0.98f, 1.18f, 0.98f);
+            }
+
+            if (factionId == FactionId.Vaelun)
+            {
+                if (supplyBuilding->IsDeconstructing)
+                {
+                    return new Vector3(1.32f, 0.34f, 1.32f);
+                }
+
+                return supplyBuilding->IsConstructing ? new Vector3(1.5f, 0.14f, 1.5f) : new Vector3(1.32f, 0.5f, 1.32f);
+            }
+
+            if (factionId == FactionId.Nimhara)
+            {
+                if (supplyBuilding->IsDeconstructing)
+                {
+                    return new Vector3(1.22f, 0.48f, 1.22f);
+                }
+
+                return supplyBuilding->IsConstructing ? new Vector3(1.34f, 0.16f, 1.34f) : new Vector3(1.22f, 0.74f, 1.22f);
+            }
+
+            if (factionId == FactionId.Virii)
+            {
+                if (supplyBuilding->IsDeconstructing)
+                {
+                    return new Vector3(1.05f, 0.4f, 1.05f);
+                }
+
+                return supplyBuilding->IsConstructing ? new Vector3(1.28f, 0.12f, 1.28f) : new Vector3(1.05f, 0.64f, 1.05f);
+            }
+
+            if (supplyBuilding->IsDeconstructing)
+            {
+                return new Vector3(1.25f, 0.42f, 1.25f);
+            }
+
+            return supplyBuilding->IsConstructing ? new Vector3(1.45f, 0.18f, 1.45f) : new Vector3(1.25f, 0.68f, 1.25f);
         }
 
         int buildingTier = GetBuildingTier(frame, entity);
@@ -517,6 +524,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         if (IsQuillObjective(frame, entity))
         {
             return PrimitiveType.Cylinder;
+        }
+
+        if (IsRootObjective(frame, entity))
+        {
+            return PrimitiveType.Sphere;
         }
 
         if (isEconomyEntity)
@@ -616,6 +628,11 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             return new Vector3(0.0f, 0.85f, 0.0f);
         }
 
+        if (IsRootObjective(frame, entity))
+        {
+            return new Vector3(0.0f, 0.45f, 0.0f);
+        }
+
         if (IsAirScout(frame, entity))
         {
             return new Vector3(0.0f, 1.65f, 0.0f);
@@ -636,27 +653,26 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
             return IsSelected(frame, entity) ? SelectedColor : QuillObjectiveColor;
         }
 
+        if (IsRootObjective(frame, entity))
+        {
+            return IsSelected(frame, entity) ? SelectedColor : RootObjectiveColor;
+        }
+
         return isEconomyEntity ? economyColor : GetUnitColor(frame, entity, isDeadUnit);
     }
 
     private static bool TryGetMainBuildingOwner(Frame frame, EntityRef candidateEntity, out int ownerPlayer)
     {
-        foreach ((EntityRef entity, MainBuilding building) in frame.GetComponentIterator<MainBuilding>())
+        if (frame.Unsafe.TryGetPointer<MainBuilding>(candidateEntity, out MainBuilding* building))
         {
-            if (entity == candidateEntity)
-            {
-                ownerPlayer = building.OwnerPlayer;
-                return true;
-            }
+            ownerPlayer = building->OwnerPlayer;
+            return true;
         }
 
-        foreach ((EntityRef entity, SupplyBuilding supplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
+        if (frame.Unsafe.TryGetPointer<SupplyBuilding>(candidateEntity, out SupplyBuilding* supplyBuilding))
         {
-            if (entity == candidateEntity)
-            {
-                ownerPlayer = supplyBuilding.OwnerPlayer;
-                return true;
-            }
+            ownerPlayer = supplyBuilding->OwnerPlayer;
+            return true;
         }
 
         ownerPlayer = 0;
@@ -665,12 +681,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static int GetBuildingTier(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, BuildingTier buildingTier) in frame.GetComponentIterator<BuildingTier>())
+        if (frame.Unsafe.TryGetPointer<BuildingTier>(candidateEntity, out BuildingTier* buildingTier))
         {
-            if (entity == candidateEntity)
-            {
-                return buildingTier.Tier;
-            }
+            return buildingTier->Tier;
         }
 
         return 1;
@@ -690,8 +703,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
         float normalizedHealth = Mathf.Clamp01((float)health / maxHealth);
         bool isHero = IsHero(frame, entity);
         bool isQuillObjective = IsQuillObjective(frame, entity);
-        float barWidth = isEconomyEntity || isQuillObjective ? BaseHealthBarWidth : isHero ? HeroHealthBarWidth : UnitHealthBarWidth;
-        float yOffset = isQuillObjective ? 1.95f : isEconomyEntity ? 1.65f : isHero ? 1.05f : 0.72f;
+        bool isRootObjective = IsRootObjective(frame, entity);
+        float barWidth = isEconomyEntity || isQuillObjective || isRootObjective ? BaseHealthBarWidth : isHero ? HeroHealthBarWidth : UnitHealthBarWidth;
+        float yOffset = isQuillObjective ? 1.95f : isRootObjective ? 1.05f : isEconomyEntity ? 1.65f : isHero ? 1.05f : 0.72f;
         healthBar.Root.transform.position = worldPosition + new Vector3(0.0f, yOffset, 0.0f);
         healthBar.Root.transform.rotation = Quaternion.Euler(55.0f, 0.0f, 0.0f);
         healthBar.Root.SetActive(isDeadUnit == false || health > 0);
@@ -704,44 +718,33 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static bool TryGetHealth(Frame frame, EntityRef candidateEntity, out int health, out int maxHealth)
     {
-        foreach ((EntityRef entity, UnitHealth unitHealth) in frame.GetComponentIterator<UnitHealth>())
+        if (frame.Unsafe.TryGetPointer<UnitHealth>(candidateEntity, out UnitHealth* unitHealth))
         {
-            if (entity == candidateEntity)
-            {
-                health = unitHealth.Health;
-                maxHealth = unitHealth.MaxHealth;
-                return true;
-            }
+            health = unitHealth->Health;
+            maxHealth = unitHealth->MaxHealth;
+            return true;
         }
 
-        foreach ((EntityRef entity, MainBuilding mainBuilding) in frame.GetComponentIterator<MainBuilding>())
+        if (frame.Unsafe.TryGetPointer<MainBuilding>(candidateEntity, out MainBuilding* mainBuilding))
         {
-            if (entity == candidateEntity)
-            {
-                health = mainBuilding.Health;
-                maxHealth = mainBuilding.MaxHealth;
-                return true;
-            }
+            health = mainBuilding->Health;
+            maxHealth = mainBuilding->MaxHealth;
+            return true;
         }
 
-        foreach ((EntityRef entity, SupplyBuilding supplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
+        if (frame.Unsafe.TryGetPointer<SupplyBuilding>(candidateEntity, out SupplyBuilding* supplyBuilding))
         {
-            if (entity == candidateEntity)
-            {
-                health = supplyBuilding.Health;
-                maxHealth = supplyBuilding.MaxHealth;
-                return true;
-            }
+            health = supplyBuilding->Health;
+            maxHealth = supplyBuilding->MaxHealth;
+            return true;
         }
 
-        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        if (frame.Unsafe.TryGetPointer<Targetable>(candidateEntity, out Targetable* targetable) &&
+            (IsQuillObjective(frame, candidateEntity) || IsRootObjective(frame, candidateEntity)))
         {
-            if (entity == candidateEntity && IsQuillObjective(frame, entity))
-            {
-                health = targetable.Health;
-                maxHealth = targetable.MaxHealth;
-                return true;
-            }
+            health = targetable->Health;
+            maxHealth = targetable->MaxHealth;
+            return true;
         }
 
         health = 0;
@@ -766,12 +769,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static bool IsHero(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        if (frame.Unsafe.TryGetPointer<UnitIdentity>(candidateEntity, out UnitIdentity* unitIdentity))
         {
-            if (entity == candidateEntity)
-            {
-                return unitIdentity.UnitKind == UnitKind.Hero;
-            }
+            return unitIdentity->UnitKind == UnitKind.Hero;
         }
 
         return false;
@@ -779,12 +779,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static bool IsAirScout(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        if (frame.Unsafe.TryGetPointer<UnitIdentity>(candidateEntity, out UnitIdentity* unitIdentity))
         {
-            if (entity == candidateEntity)
-            {
-                return unitIdentity.UnitKind == UnitKind.AirScout;
-            }
+            return unitIdentity->UnitKind == UnitKind.AirScout;
         }
 
         return false;
@@ -797,12 +794,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static int GetOwnerPlayer(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, UnitIdentity unitIdentity) in frame.GetComponentIterator<UnitIdentity>())
+        if (frame.Unsafe.TryGetPointer<UnitIdentity>(candidateEntity, out UnitIdentity* unitIdentity))
         {
-            if (entity == candidateEntity)
-            {
-                return unitIdentity.OwnerPlayer;
-            }
+            return unitIdentity->OwnerPlayer;
         }
 
         return 0;
@@ -810,13 +804,23 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static bool IsQuillObjective(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, Targetable targetable) in frame.GetComponentIterator<Targetable>())
+        if (frame.Has<Targetable>(candidateEntity) &&
+            TryGetTransform(frame, candidateEntity, out Transform2D transform) &&
+            QuillObjective.IsObjectivePosition(transform.Position))
         {
-            if (entity == candidateEntity)
-            {
-                return TryGetTransform(frame, entity, out Transform2D transform) &&
-                       QuillObjective.IsObjectivePosition(transform.Position);
-            }
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsRootObjective(Frame frame, EntityRef candidateEntity)
+    {
+        if (frame.Has<Targetable>(candidateEntity) &&
+            TryGetTransform(frame, candidateEntity, out Transform2D transform) &&
+            RootObjective.IsObjectivePosition(transform.Position))
+        {
+            return true;
         }
 
         return false;
@@ -824,12 +828,9 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static bool IsDeadUnit(Frame frame, EntityRef candidateEntity)
     {
-        foreach ((EntityRef entity, UnitHealth unitHealth) in frame.GetComponentIterator<UnitHealth>())
+        if (frame.Unsafe.TryGetPointer<UnitHealth>(candidateEntity, out UnitHealth* unitHealth))
         {
-            if (entity == candidateEntity)
-            {
-                return unitHealth.IsDead;
-            }
+            return unitHealth->IsDead;
         }
 
         return false;
@@ -837,33 +838,24 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private bool TryGetEconomyColor(Frame frame, EntityRef candidateEntity, out Color color)
     {
-        foreach ((EntityRef entity, ResourceNode node) in frame.GetComponentIterator<ResourceNode>())
+        if (frame.Unsafe.TryGetPointer<ResourceNode>(candidateEntity, out ResourceNode* node))
         {
-            if (entity == candidateEntity)
-            {
-                _resourceNodeCount++;
-                color = node.ResourceKind == ResourceKind.Wood ? WoodColor : IronColor;
-                return true;
-            }
+            _resourceNodeCount++;
+            color = node->ResourceKind == ResourceKind.Wood ? WoodColor : IronColor;
+            return true;
         }
 
-        foreach ((EntityRef entity, MainBuilding building) in frame.GetComponentIterator<MainBuilding>())
+        if (frame.Unsafe.TryGetPointer<MainBuilding>(candidateEntity, out MainBuilding* building))
         {
-            if (entity == candidateEntity)
-            {
-                _mainBuildingCount++;
-                color = GetBaseColor(frame, building);
-                return true;
-            }
+            _mainBuildingCount++;
+            color = GetBaseColor(frame, *building);
+            return true;
         }
 
-        foreach ((EntityRef entity, SupplyBuilding supplyBuilding) in frame.GetComponentIterator<SupplyBuilding>())
+        if (frame.Unsafe.TryGetPointer<SupplyBuilding>(candidateEntity, out SupplyBuilding* supplyBuilding))
         {
-            if (entity == candidateEntity)
-            {
-                color = GetSupplyColor(frame, supplyBuilding);
-                return true;
-            }
+            color = GetSupplyColor(frame, *supplyBuilding);
+            return true;
         }
 
         color = default;
@@ -1154,13 +1146,10 @@ public sealed class AnachronSelectablePrimitiveView : QuantumMonoBehaviour
 
     private static bool TryGetTransform(Frame frame, EntityRef candidateEntity, out Transform2D transform)
     {
-        foreach ((EntityRef entity, Transform2D candidateTransform) in frame.GetComponentIterator<Transform2D>())
+        if (frame.Unsafe.TryGetPointer<Transform2D>(candidateEntity, out Transform2D* candidateTransform))
         {
-            if (entity == candidateEntity)
-            {
-                transform = candidateTransform;
-                return true;
-            }
+            transform = *candidateTransform;
+            return true;
         }
 
         transform = default;

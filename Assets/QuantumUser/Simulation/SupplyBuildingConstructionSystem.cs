@@ -68,7 +68,12 @@ namespace Quantum
                 {
                     RemoveSupplyNavigationObstacle(f, entity);
                     RefundDestroyedConstruction(f, entity, supplyBuilding);
+                    if (supplyBuilding.HasGrantedFood)
+                    {
+                        RemoveGrantedFood(f, supplyBuilding.OwnerPlayer, supplyBuilding.FoodProvided);
+                    }
                     ReleaseBuildersForCompletedOrDestroyedSupply(f, entity);
+                    f.Destroy(entity);
                     continue;
                 }
 
@@ -391,7 +396,7 @@ namespace Quantum
             if (f.Unsafe.TryGetPointer<MoveIntent>(builderEntity, out MoveIntent* moveIntent))
             {
                 moveIntent->HasTarget = true;
-                moveIntent->MovementMode = MovementMode.QuantumNavMesh;
+                moveIntent->MovementMode = MovementMode.StraightLineFallback;
                 moveIntent->TargetWorld = buildPoint + new FPVector2(-BuilderWorkOffset, -BuilderWorkOffset);
             }
         }

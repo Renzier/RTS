@@ -24,6 +24,11 @@ namespace Quantum
                 ClearGatherIntent(f, entity);
                 ClearAttackIntent(f, entity);
                 ClearBuildIntent(f, entity);
+
+                if (f.Unsafe.TryGetPointer<UnitIdentity>(entity, out UnitIdentity* unitIdentity) && unitIdentity->UnitKind != UnitKind.Hero)
+                {
+                    f.Destroy(entity);
+                }
             }
         }
 

@@ -3,7 +3,7 @@ using Quantum;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
+public unsafe sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   private static readonly Color SelectionFill = new Color(0.1f, 0.7f, 1.0f, 0.18f);
   private static readonly Color SelectionBorder = new Color(0.1f, 0.85f, 1.0f, 0.85f);
   private static readonly Vector3 CameraOffset = new Vector3(0.0f, 10.0f, -12.0f);
@@ -243,10 +243,8 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
         continue;
       }
 
-      foreach ((EntityRef selectableEntity, Selectable selectable) in frame.GetComponentIterator<Selectable>()) {
-        if (selectableEntity == entity && selectable.IsSelected) {
-          return true;
-        }
+      if (frame.Unsafe.TryGetPointer<Selectable>(entity, out Selectable* selectable) && selectable->IsSelected) {
+        return true;
       }
     }
 
@@ -269,10 +267,8 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
         continue;
       }
 
-      foreach ((EntityRef selectableEntity, Selectable selectable) in frame.GetComponentIterator<Selectable>()) {
-        if (selectableEntity == entity && selectable.IsSelected) {
-          return true;
-        }
+      if (frame.Unsafe.TryGetPointer<Selectable>(entity, out Selectable* selectable) && selectable->IsSelected) {
+        return true;
       }
     }
 
@@ -280,10 +276,8 @@ public sealed class AnachronQuantumInput : QuantumMonoBehaviour {
   }
 
   private static bool IsDeadUnit(Frame frame, EntityRef candidateEntity) {
-    foreach ((EntityRef entity, UnitHealth unitHealth) in frame.GetComponentIterator<UnitHealth>()) {
-      if (entity == candidateEntity) {
-        return unitHealth.IsDead;
-      }
+    if (frame.Unsafe.TryGetPointer<UnitHealth>(candidateEntity, out UnitHealth* unitHealth)) {
+      return unitHealth->IsDead;
     }
 
     return false;

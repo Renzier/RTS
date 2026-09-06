@@ -3,7 +3,7 @@ using Quantum;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public sealed class AnachronEconomyPrimitiveView : QuantumMonoBehaviour
+public unsafe sealed class AnachronEconomyPrimitiveView : QuantumMonoBehaviour
 {
     private static readonly Color WoodColor = new Color(0.15f, 0.65f, 0.2f, 1.0f);
     private static readonly Color IronColor = new Color(0.55f, 0.58f, 0.62f, 1.0f);
@@ -55,6 +55,12 @@ public sealed class AnachronEconomyPrimitiveView : QuantumMonoBehaviour
         }
 
         GameObject primitive = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        Collider collider = primitive.GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+            Destroy(collider);
+        }
         primitive.name = $"EconomyView_{entity}";
         primitive.transform.localScale = new Vector3(1.25f, 0.75f, 1.25f);
 
@@ -66,24 +72,14 @@ public sealed class AnachronEconomyPrimitiveView : QuantumMonoBehaviour
 
     private static bool TryGetEconomyColor(Frame frame, EntityRef entity, out Color color)
     {
-        foreach ((EntityRef nodeEntity, ResourceNode node) in frame.GetComponentIterator<ResourceNode>())
+        if (frame.Unsafe.TryGetPointer<ResourceNode>(entity, out ResourceNode* node))
         {
-            if (nodeEntity != entity)
-            {
-                continue;
-            }
-
-            color = node.ResourceKind == ResourceKind.Wood ? WoodColor : IronColor;
+            color = node->ResourceKind == ResourceKind.Wood ? WoodColor : IronColor;
             return true;
         }
 
-        foreach ((EntityRef buildingEntity, MainBuilding building) in frame.GetComponentIterator<MainBuilding>())
+        if (frame.Has<MainBuilding>(entity))
         {
-            if (buildingEntity != entity)
-            {
-                continue;
-            }
-
             color = MainBuildingColor;
             return true;
         }

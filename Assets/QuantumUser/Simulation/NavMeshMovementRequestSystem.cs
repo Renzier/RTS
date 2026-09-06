@@ -13,6 +13,16 @@ namespace Quantum
             NavMesh navMesh = GetDefaultNavMesh(f);
             if (navMesh == null)
             {
+                foreach ((EntityRef entity, MoveIntent intent) in f.GetComponentIterator<MoveIntent>())
+                {
+                    if (intent.HasTarget && intent.MovementMode == MovementMode.QuantumNavMesh)
+                    {
+                        MoveIntent fallbackIntent = intent;
+                        fallbackIntent.MovementMode = MovementMode.StraightLineFallback;
+                        f.Set(entity, fallbackIntent);
+                    }
+                }
+
                 SetCommandDebug(f, false, MoveCommandResult.NoNavMesh, FPVector2.Zero);
                 return;
             }

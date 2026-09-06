@@ -98,7 +98,7 @@ namespace Quantum
                         attackIntent->IsInRange = false;
 
                         moveIntent->HasTarget = true;
-                        moveIntent->MovementMode = MovementMode.QuantumNavMesh;
+                        moveIntent->MovementMode = MovementMode.StraightLineFallback;
                         moveIntent->TargetWorld = GetAttackApproachPosition(f, entity, attackIntent->AttackRange, attackTarget.TargetRadius, attackTargetPosition) + GetFormationOffset(selectedMoveIndex);
                         selectedMoveIndex++;
                         continue;
@@ -129,7 +129,7 @@ namespace Quantum
                     gatherIntent->TargetWorld = resourceNodePosition;
 
                     moveIntent->HasTarget = true;
-                    moveIntent->MovementMode = MovementMode.QuantumNavMesh;
+                    moveIntent->MovementMode = MovementMode.StraightLineFallback;
                     moveIntent->TargetWorld = resourceNodePosition + GetFormationOffset(selectedMoveIndex);
                     selectedMoveIndex++;
                     continue;
@@ -147,7 +147,7 @@ namespace Quantum
                 }
 
                 moveIntent->HasTarget = true;
-                moveIntent->MovementMode = GetMovementMode(f, entity);
+                moveIntent->MovementMode = MovementMode.StraightLineFallback;
                 moveIntent->TargetWorld = moveTarget;
                 selectedMoveIndex++;
             }

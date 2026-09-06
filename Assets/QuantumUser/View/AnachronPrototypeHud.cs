@@ -32,6 +32,28 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
     private float _lastSeenDebugDamagePressTime;
     private string _actionNotificationText = string.Empty;
     private float _actionNotificationUntil;
+    private GUIStyle _labelStyle;
+    private GUIStyle _headerStyle;
+
+    private void EnsureStyles()
+    {
+        if (_labelStyle == null)
+        {
+            _labelStyle = new GUIStyle(GUI.skin.label)
+            {
+                normal = { textColor = TextColor }
+            };
+        }
+
+        if (_headerStyle == null)
+        {
+            _headerStyle = new GUIStyle(GUI.skin.label)
+            {
+                normal = { textColor = HeaderTextColor },
+                fontStyle = FontStyle.Bold
+            };
+        }
+    }
 
     private void OnGUI()
     {
@@ -51,12 +73,9 @@ public sealed class AnachronPrototypeHud : QuantumMonoBehaviour
 
         DrawMatchBanner(frame);
 
-        GUIStyle labelStyle = new GUIStyle(GUI.skin.label);
-        labelStyle.normal.textColor = TextColor;
-
-        GUIStyle headerStyle = new GUIStyle(GUI.skin.label);
-        headerStyle.normal.textColor = HeaderTextColor;
-        headerStyle.fontStyle = FontStyle.Bold;
+        EnsureStyles();
+        GUIStyle labelStyle = _labelStyle;
+        GUIStyle headerStyle = _headerStyle;
 
         UpdateActionNotification(frame);
         DrawActionNotification(headerStyle);

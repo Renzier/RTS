@@ -150,7 +150,7 @@ namespace Quantum
             }
 
             moveIntent->HasTarget = true;
-            moveIntent->MovementMode = MovementMode.QuantumNavMesh;
+            moveIntent->MovementMode = MovementMode.StraightLineFallback;
             moveIntent->TargetWorld = targetWorld;
         }
 

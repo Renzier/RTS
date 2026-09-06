@@ -10,10 +10,10 @@ namespace Quantum
             systems.Add(new SelectionIntentSystem());
             systems.Add(new SelectionSystem());
             systems.Add(new MoveCommandIntentSystem());
-            systems.Add(new StraightLineMovementSystem());
             systems.Add(new WorkerDepositSystem());
             systems.Add(new AttackTargetingSystem());
             systems.Add(new NavMeshMovementRequestSystem());
+            systems.Add(new StraightLineMovementSystem());
             systems.Add(new WorkerGatherSystem());
             systems.Add(new AttackDamageSystem());
             systems.Add(new UnitDeathSystem());

@@ -4,40 +4,26 @@ namespace Quantum
     {
         public override void Update(Frame f)
         {
-            for (int playerIndex = 0; playerIndex < f.MaxPlayerCount; playerIndex++)
+            int configuredPlayer = GetConfiguredInputPlayer(f);
+            Input* input = f.GetPlayerInput(configuredPlayer);
+            if (input == null)
             {
-                Input* input = f.GetPlayerInput(playerIndex);
-
-                if (input == null)
-                {
-                    continue;
-                }
-
-                bool selectHeld = input->Select.IsDown;
-                bool commandHeld = input->Command.IsDown;
-                bool additiveSelectHeld = input->AdditiveSelect.IsDown;
-                bool dragSelectHeld = input->DragSelect.IsDown;
-                bool hasUpgradeIntent = input->UpgradeIntent != 0;
-
-                if (!selectHeld && !commandHeld && !additiveSelectHeld && !dragSelectHeld && !hasUpgradeIntent)
-                {
-                    continue;
-                }
-
-                f.Global->LastInputPlayer = GetConfiguredInputPlayer(f);
-                f.Global->LastCommandIntent = input->CommandIntent;
-                f.Global->LastUpgradeIntent = input->UpgradeIntent;
-                f.Global->LastSelectHeld = selectHeld;
-                f.Global->LastCommandHeld = commandHeld;
-                f.Global->LastAdditiveSelectHeld = additiveSelectHeld;
-                f.Global->LastDragSelectHeld = dragSelectHeld;
-                f.Global->LastPointerScreen = input->PointerScreen;
-                f.Global->LastDragStartScreen = input->DragStartScreen;
-                f.Global->LastDragEndScreen = input->DragEndScreen;
-                f.Global->LastPointerWorld = input->PointerWorld;
-                f.Global->LastDragStartWorld = input->DragStartWorld;
-                f.Global->LastDragEndWorld = input->DragEndWorld;
+                return;
             }
+
+            f.Global->LastInputPlayer = configuredPlayer;
+            f.Global->LastCommandIntent = input->CommandIntent;
+            f.Global->LastUpgradeIntent = input->UpgradeIntent;
+            f.Global->LastSelectHeld = input->Select.IsDown;
+            f.Global->LastCommandHeld = input->Command.IsDown;
+            f.Global->LastAdditiveSelectHeld = input->AdditiveSelect.IsDown;
+            f.Global->LastDragSelectHeld = input->DragSelect.IsDown;
+            f.Global->LastPointerScreen = input->PointerScreen;
+            f.Global->LastDragStartScreen = input->DragStartScreen;
+            f.Global->LastDragEndScreen = input->DragEndScreen;
+            f.Global->LastPointerWorld = input->PointerWorld;
+            f.Global->LastDragStartWorld = input->DragStartWorld;
+            f.Global->LastDragEndWorld = input->DragEndWorld;
         }
 
         private static int GetConfiguredInputPlayer(Frame f)
