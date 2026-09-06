@@ -31,6 +31,11 @@
 
 ## Most Recent Work
 
+- Sprint-plan reset completed on 2026-09-06:
+  - The previous Kilnfall sprint plan is now considered complete for planning purposes.
+  - `handoff/KILNFALL_SPRINT_PLAN.md` now contains a revised active plan focused on making the game playable.
+  - New active sprint order: playable hub redesign, start-screen faction count, variable map size, controllable buildings/units, AI opponent pressure, water layer, space layer, and eight-faction performance.
+  - Old incomplete backlog items are historical unless explicitly reselected.
 - Kilnfall Sprint 48 completed:
   - Added `handoff/ORBIT_DOMAIN_STUB.md`.
   - Chose the same layer-based deterministic `MovementDomain` model for Orbit/anchor play.

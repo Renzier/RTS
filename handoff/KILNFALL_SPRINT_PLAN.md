@@ -6,6 +6,8 @@ This plan breaks the Kilnfall conversion into small, low-risk sprints. Each spri
 
 First Hand update, 2026-08-23: authenticated internal source review confirmed that the current small-sprint approach is still correct, but later work needs explicit gates for Photon Quantum adaptation of MovementDomain, Grain/Cast/Seal data contracts, and Ardent Concord as the pathfinder faction. Keep Sprints 1-8 as low-risk presentation conversion.
 
+Sprint-plan reset, 2026-09-06: the previous sprint plan is now considered complete for planning purposes. Future work should follow the revised playable-game plan below instead of continuing the old numbered backlog. Preserve the completed sprint history as project record, but treat any old incomplete sprint that conflicts with the revised plan as replaced.
+
 ## Sprint Rules
 
 - One sprint equals one feature or one contained change.
@@ -22,6 +24,160 @@ Status key:
 - `[~]` In progress
 - `[x]` Complete
 - `[!]` Blocked or needs decision
+
+## Revised Active Plan: Playable Multi-Layer RTS
+
+This is the active sprint plan after the 2026-09-06 planning reset. The goal is no longer to keep polishing a prototype checklist; the goal is to make the hub and match loop actually playable, scalable, and pressured by opponent behavior.
+
+### Sprint R1: Playable Hub Redesign Scope
+
+Status: `[ ]`
+
+Goal: Redesign the hub so it is a playable operational screen rather than a passive/debug wrapper.
+
+Scope:
+
+- Define the hub's first real player actions: start match, choose faction, choose opponent count, choose map size, and return after a match.
+- Identify which hub elements are menu/UI only and which are deterministic game setup inputs.
+- Keep implementation small enough to land without reworking the whole scene stack.
+
+Likely files:
+
+- `Assets/QuantumUser/View/AnachronPrototypeHud.cs`
+- `Assets/QuantumUser/View/AnachronQuantumInput.cs`
+- New or existing scene/bootstrap view files once located.
+
+Acceptance:
+
+- A player can understand how to start a playable match from the hub.
+- Debug-only controls are either hidden, renamed, or moved behind an explicit debug section.
+- The hub has a clear path into a match using the selected options.
+
+### Sprint R2: Start Screen Match Setup
+
+Status: `[ ]`
+
+Goal: Add a start screen that chooses how many factions are active on the board at once, from 2 to 8.
+
+Scope:
+
+- Add active faction count selection: 2, 3, 4, 5, 6, 7, or 8.
+- Preserve "Start As" faction selection, constrained to valid active slots.
+- Pass selected setup into deterministic bootstrap instead of relying on always-on eight-faction startup.
+
+Acceptance:
+
+- Starting with 2 factions creates only 2 active competitors.
+- Starting with 8 factions creates all 8 competitors.
+- Inactive factions do not spawn bases, units, economy state, or AI work.
+
+### Sprint R3: Variable Map Size Setup
+
+Status: `[ ]`
+
+Goal: Make map size selectable from the start menu, including small and super-large maps.
+
+Scope:
+
+- Add map size presets, likely Small, Standard, Large, and Super Large.
+- Scale faction start locations, camera bounds, placement bounds, initial resources, and neutral objectives from the chosen size.
+- Keep deterministic map setup in simulation-owned or setup-owned data.
+
+Acceptance:
+
+- Small maps put players close enough for fast fighting.
+- Super-large maps give 8 factions room without overlap.
+- Camera pan/zoom and build placement bounds match the selected map.
+
+### Sprint R4: Controllable Buildings And Units Baseline
+
+Status: `[ ]`
+
+Goal: Make the current buildings and units feel intentionally controllable, not just technically selectable.
+
+Scope:
+
+- Audit selection, command, production, construction, attack, repair, and gather controls.
+- Add missing command affordances for existing unit/building roles before creating more content.
+- Make owned units and structures readable at a glance in the HUD.
+
+Acceptance:
+
+- Player can select units/buildings, issue expected commands, produce workers, build support, gather resources, repair, and attack.
+- Command failures surface clear HUD feedback.
+- The control loop is playable without reading source notes.
+
+### Sprint R5: AI Opponent Pressure
+
+Status: `[ ]`
+
+Goal: Make non-player factions attack, defend, expand, and try to win.
+
+Scope:
+
+- Add deterministic AI goals for gather, build, produce, scout/attack, defend, and target enemy main bases.
+- Scale AI activation from the selected active faction count.
+- Keep AI simple and readable before adding personality.
+
+Acceptance:
+
+- AI factions do not idle forever.
+- AI can destroy a player's main base if ignored.
+- AI reacts enough that a match has pressure and an end condition.
+
+### Sprint R6: Water Layer Prototype
+
+Status: `[ ]`
+
+Goal: Add a water section the player can dive into while land play continues.
+
+Scope:
+
+- Implement first underwater layer navigation/view transition.
+- Add at least one underwater objective or unit interaction tied to the Mere/root layer.
+- Keep land simulation active while viewing or commanding underwater play.
+
+Acceptance:
+
+- Player can move between land view and underwater view.
+- Underwater state continues while land units/buildings continue operating.
+- Underwater layer has a real gameplay reason to exist, even if minimal.
+
+### Sprint R7: Space Layer Prototype
+
+Status: `[ ]`
+
+Goal: Add a space/orbit layer the player can scroll out to while land and water continue playing.
+
+Scope:
+
+- Implement first orbit view transition from zoom/scroll or explicit layer control.
+- Add at least one orbital objective, support action, or command-disruption interaction.
+- Keep ground and underwater simulation active while viewing orbit.
+
+Acceptance:
+
+- Player can reach orbit from normal play.
+- Orbit contains live gameplay state instead of a static backdrop.
+- Land, water, and orbit continue updating together.
+
+### Sprint R8: Eight-Faction Performance Pass
+
+Status: `[ ]`
+
+Goal: Keep the game smooth when playing with 8 players and active AI units.
+
+Scope:
+
+- Establish a repeatable 8-faction stress scene or setup preset.
+- Profile simulation tick cost, Unity view object count, HUD refreshes, selection scans, pathing requests, and AI loops.
+- Add throttling, pooling, caching, bounded searches, or lower-frequency updates where needed.
+
+Acceptance:
+
+- 8 active factions with AI remain responsive on the target development machine.
+- HUD and view scripts do not allocate or rebuild expensive state every frame without need.
+- Any remaining bottlenecks are documented with next actions.
 
 ## Foundation Conversion
 
@@ -1530,20 +1686,17 @@ Acceptance:
 
 ## Recommended Immediate Order
 
-Use this order first:
+Replaced on 2026-09-06.
 
-1. Sprint 1: Rename Prototype Faction Display Names.
-2. Sprint 2: Rename Unit Display Labels.
-3. Sprint 3: Rename Main Building Labels.
-4. Sprint 4: Rename Supply Building Labels.
-5. Sprint 5: Rename Resource Display Language.
-6. Sprint 6: Update Faction Colors.
-7. Sprint 7: Update Primitive Silhouettes.
-8. Sprint 8: Update Construction Visual States.
-9. Sprint 50: Add Smoke Test Checklist.
-10. Sprint 9: Rename Prototype Scenario Concept.
-11. Sprint 28: Quantum MovementDomain Architecture Note. `[x]`
-12. Sprint 29: Ardent Concord Pathfinder Scope Note. `[x]`
-13. Sprint 30: Grain/Cast/Seal Data Contract Note. `[x]`
+Use the revised active plan at the top of this document:
 
-After that, choose between map identity work, pathing stability, first Ardent Concord mechanics, or faction expansion strategy. Domain expansion and Virii implementation now have the required architecture/data-contract notes, but should still start with small proof sprints.
+1. Sprint R1: Playable Hub Redesign Scope.
+2. Sprint R2: Start Screen Match Setup.
+3. Sprint R3: Variable Map Size Setup.
+4. Sprint R4: Controllable Buildings And Units Baseline.
+5. Sprint R5: AI Opponent Pressure.
+6. Sprint R6: Water Layer Prototype.
+7. Sprint R7: Space Layer Prototype.
+8. Sprint R8: Eight-Faction Performance Pass.
+
+The old sprint history remains useful as project context, but the next implementation work should start from Sprint R1 unless the user explicitly chooses a different revised sprint.
