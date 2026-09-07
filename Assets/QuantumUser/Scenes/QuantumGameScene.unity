@@ -214,6 +214,10 @@ MonoBehaviour:
   seed: 1
   startAs: 0
   activeFactionCount: 8
+  startMode: 0
+  playerName: Player
+  roomName: anachron-prototype
+  region:
 --- !u!1 &90597650
 GameObject:
   m_ObjectHideFlags: 0

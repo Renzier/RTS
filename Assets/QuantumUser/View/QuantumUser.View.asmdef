@@ -2,6 +2,7 @@
   "name": "QuantumUser.View",
   "rootNamespace": "",
   "references": [
+    "Photon.Realtime",
     "Quantum.Unity",
     "Quantum.Simulation"
   ],

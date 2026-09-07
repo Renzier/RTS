@@ -16,6 +16,7 @@
 - Use Quantum fixed-point types and deterministic APIs in simulation code.
 - `.qtn` schema edits require Quantum CodeGen before Unity compile expectations are meaningful.
 - Keep the local Quantum debug runner available for fast offline iteration, but future scalable match features should be compatible with an authoritative Photon Quantum online session.
+- Current Photon AppId policy: the disposable development Quantum AppId may be tracked while the repo remains private. Split dev/staging/production Photon apps and keep non-dev AppIds out of git before broader sharing or release.
 
 ## Completed Baseline
 
@@ -32,6 +33,15 @@
 
 ## Most Recent Work
 
+- Sprint R3 started on 2026-09-07:
+  - Added Local/Online match mode selection to the existing setup screen.
+  - Preserved `QuantumRunnerLocalDebug` as the local/offline path and only enables it for local started matches.
+  - Added online player name, room name, and region fields.
+  - Added an Anachron-specific Photon Realtime matchmaking and Quantum multiplayer startup path.
+  - Online starts publish seed and active faction count as Photon room properties, then apply those room properties before Quantum session startup.
+  - Online starts add the selected `Start As` slot as the local Quantum player slot instead of always adding slot 0.
+  - Manual Unity testing confirmed the missing-AppId guard, then confirmed online Photon connection/session start after a Quantum AppId was configured.
+  - Manual regression pass confirmed local mode, two clients in the same room with different selected player slots, second-client unit movement, and standalone client quit controls.
 - Online architecture reset completed on 2026-09-07:
   - Paused the previous R3-next sprint order before variable map size, AI, water, and orbit work became too expensive to migrate.
   - Reframed the active sprint plan around a server-ready Photon Quantum online session path.

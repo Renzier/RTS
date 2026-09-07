@@ -10,6 +10,8 @@ Sprint-plan reset, 2026-09-06: the previous sprint plan is now considered comple
 
 Online architecture reset, 2026-09-07: pause the previous R3-next sequence and insert Photon Quantum online/session architecture before heavier map, AI, water, and orbit work. The current local prototype remains valuable as an offline debug path, but future scalable systems should assume an authoritative online match session can own setup, input, simulation, and verified state.
 
+Photon AppId decision, 2026-09-07: use Option C for now. The repo may track the disposable development Photon Quantum AppId to keep early online testing frictionless while the project remains private. Before broader sharing, public release, staging, or production deployment, split Photon apps by environment and keep non-dev AppIds out of git.
+
 ## Sprint Rules
 
 - One sprint equals one feature or one contained change.
@@ -79,7 +81,9 @@ Acceptance:
 
 ### Sprint R3: Online Session Prototype
 
-Status: `[ ]`
+Status: `[~]`
+
+Implementation note, 2026-09-07: added the first Anachron online-start path to the existing setup controller. The setup screen now supports Local and Online match modes, stores player/room/region fields for online starts, preserves the local debug runner for offline play, and starts an online Photon/Quantum session through the Photon Realtime matchmaking flow. Online starts publish seed and active faction count as Photon room properties and apply room properties before Quantum session startup so joiners align with the room's basic setup. The selected Start As slot is added as the local Quantum player slot instead of forcing slot 0. Manual Unity testing confirmed the missing-AppId guard, online Photon connection/session start after a Quantum AppId was configured, two clients in the same room with different player slots, second-client unit movement, and standalone client quit controls.
 
 Goal: Add a first online match path so clients can connect to a Photon/Quantum session instead of only running the local debug runner.
 
