@@ -6,7 +6,7 @@
 - Engine stack: Unity 6 view layer + Photon Quantum deterministic simulation.
 - Repo status: Git repository on local `main`, tracking GitHub remote `origin/main`.
 - GitHub remote: `https://github.com/Renzier/RTS.git`
-- Core design: micro-heavy RTS prototype with up to three players, Tech/Fantasy/Hybrid factions, workers, heroes, resources, tech tiers, main base defeat, and supply construction.
+- Core design: micro-heavy RTS prototype with up to eight Kilnfall factions, workers, heroes, resources, tech tiers, main base defeat, supply construction, early air scouting, and planned water/orbit layers.
 
 ## Non-Negotiable Architecture
 
@@ -15,6 +15,7 @@
 - Avoid nondeterministic Unity APIs in simulation code.
 - Use Quantum fixed-point types and deterministic APIs in simulation code.
 - `.qtn` schema edits require Quantum CodeGen before Unity compile expectations are meaningful.
+- Keep the local Quantum debug runner available for fast offline iteration, but future scalable match features should be compatible with an authoritative Photon Quantum online session.
 
 ## Completed Baseline
 
@@ -31,6 +32,12 @@
 
 ## Most Recent Work
 
+- Online architecture reset completed on 2026-09-07:
+  - Paused the previous R3-next sprint order before variable map size, AI, water, and orbit work became too expensive to migrate.
+  - Reframed the active sprint plan around a server-ready Photon Quantum online session path.
+  - Preserved the current local debug runner as the offline development path.
+  - New active sprint order: online session prototype, synced match setup contract, deterministic AI opponent pressure, variable map size, controllable units/buildings, water layer, space layer, and eight-faction online performance.
+  - No code, schema, CodeGen, scene, simulation, or view behavior changed.
 - Sprint R1 completed on 2026-09-06:
   - Replaced the old always-visible `Start As` debug switcher with a first-screen match setup overlay.
   - The setup screen lets the player choose a starting faction, start the live RTS prototype, and return to setup from the match.
@@ -40,7 +47,7 @@
   - The old upper-left owned-unit debug dump, objective prompt, generic command-instruction panel, and top `Selectables` debug overlay were removed from normal play.
   - Camera zoom-out was extended, and view-only ground contrast plates, lanes, start pads, and landmarks were added for navigation readability.
   - `AnachronPrototypeHud` and `AnachronQuantumInput` now stay quiet while setup is open, preventing setup clicks from issuing gameplay commands.
-  - Opponent count and map-size controls are still deferred to Sprint R2 and Sprint R3.
+  - Further setup controls are now deferred to the server-ready sprint sequence.
 - Sprint R2 completed on 2026-09-06:
   - Added a 2-8 Active Factions selector to the setup screen.
   - Start slots outside the selected active faction count are disabled, and the selected slot is clamped back into range when needed.

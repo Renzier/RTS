@@ -1,0 +1,48 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# Unity generated files
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity crash/output artifacts
+sysinfo.txt
+*.stackdump
+
+# Build artifacts
+*.apk
+*.aab
+*.app
+
+# Logs
+*.log
+
+# OS/editor noise
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*.swo
+
+# IDE folders
+.idea/
+.vscode/

@@ -8,6 +8,8 @@ First Hand update, 2026-08-23: authenticated internal source review confirmed th
 
 Sprint-plan reset, 2026-09-06: the previous sprint plan is now considered complete for planning purposes. Future work should follow the revised playable-game plan below instead of continuing the old numbered backlog. Preserve the completed sprint history as project record, but treat any old incomplete sprint that conflicts with the revised plan as replaced.
 
+Online architecture reset, 2026-09-07: pause the previous R3-next sequence and insert Photon Quantum online/session architecture before heavier map, AI, water, and orbit work. The current local prototype remains valuable as an offline debug path, but future scalable systems should assume an authoritative online match session can own setup, input, simulation, and verified state.
+
 ## Sprint Rules
 
 - One sprint equals one feature or one contained change.
@@ -25,15 +27,15 @@ Status key:
 - `[x]` Complete
 - `[!]` Blocked or needs decision
 
-## Revised Active Plan: Playable Multi-Layer RTS
+## Revised Active Plan: Server-Ready Multi-Layer RTS
 
-This is the active sprint plan after the 2026-09-06 planning reset. The goal is no longer to keep polishing a prototype checklist; the goal is to make the hub and match loop actually playable, scalable, and pressured by opponent behavior.
+This is the active sprint plan after the 2026-09-07 online architecture reset. The goal is to keep the local playable prototype intact while proving an authoritative Photon Quantum online session path before adding heavier AI, variable maps, water, orbit, and eight-faction stress.
 
 ### Sprint R1: Playable Hub Redesign Scope
 
 Status: `[x]`
 
-Implementation note, 2026-09-06: replaced the old always-visible "Start As" debug switcher with a first-screen match setup overlay and reshaped the in-match HUD into a more conventional RTS shell. The setup screen lets the player choose a starting faction, enter the live RTS prototype with a Start Match button, and return to setup from the match. HUD and gameplay input are suppressed while setup is open so menu clicks do not command units behind the overlay. The live HUD now has an opaque top match/resource/status strip and one bottom tray row containing contextual commands on the left, selected-unit/building identity in the middle, and a compact Forces summary on the right. Selected units are listed in two columns by name, unit id, assignment/state, HP, and carry state where available. The old upper-left owned-unit debug dump, objective prompt, generic command-instruction panel, and top `Selectables` debug overlay are not part of normal play. Camera zoom-out was extended, and view-only ground contrast plates, lanes, start pads, and landmarks were added to make the map easier to read. Selection now enforces one class at a time, so unit groups and structures/objectives cannot both remain selected. Opponent count and map-size controls remain deferred to R2/R3.
+Implementation note, 2026-09-06: replaced the old always-visible "Start As" debug switcher with a first-screen match setup overlay and reshaped the in-match HUD into a more conventional RTS shell. The setup screen lets the player choose a starting faction, enter the live RTS prototype with a Start Match button, and return to setup from the match. HUD and gameplay input are suppressed while setup is open so menu clicks do not command units behind the overlay. The live HUD now has an opaque top match/resource/status strip and one bottom tray row containing contextual commands on the left, selected-unit/building identity in the middle, and a compact Forces summary on the right. Selected units are listed in two columns by name, unit id, assignment/state, HP, and carry state where available. The old upper-left owned-unit debug dump, objective prompt, generic command-instruction panel, and top `Selectables` debug overlay are not part of normal play. Camera zoom-out was extended, and view-only ground contrast plates, lanes, start pads, and landmarks were added to make the map easier to read. Selection now enforces one class at a time, so unit groups and structures/objectives cannot both remain selected. Further setup controls remain deferred to later server-ready sprints.
 
 Goal: Redesign the hub so it is a playable operational screen rather than a passive/debug wrapper.
 
@@ -75,25 +77,88 @@ Acceptance:
 - Starting with 8 factions creates all 8 competitors.
 - Inactive factions do not spawn bases, units, economy state, or AI work.
 
-### Sprint R3: Variable Map Size Setup
+### Sprint R3: Online Session Prototype
 
 Status: `[ ]`
 
-Goal: Make map size selectable from the start menu, including small and super-large maps.
+Goal: Add a first online match path so clients can connect to a Photon/Quantum session instead of only running the local debug runner.
+
+Scope:
+
+- Preserve `QuantumPhase0LocalSessionController` as the local/offline debug path.
+- Add a new online session controller or mode selector that can create/join a Photon room and start a Quantum session.
+- Pass seed, selected player slot, and active faction count through the online session path without relying on each client inventing local `PlayerPrefs` state.
+- Keep Unity scripts responsible only for session UI, connection flow, view, and input submission; gameplay truth stays in Quantum simulation.
+
+Acceptance:
+
+- Local Start Match still works through the existing local debug runner.
+- Online mode can create or join a room from the start screen or a clearly separated connection panel.
+- Two clients can enter the same match and control different player slots.
+- Active faction count and seed are shared by the match session, not independently chosen after join.
+- Inactive factions still do not spawn bases, units, economy state, or AI work online.
+
+### Sprint R4: Synced Match Setup Contract
+
+Status: `[ ]`
+
+Goal: Make all match setup options explicit, serializable, and owned by the host/session before adding more setup complexity.
+
+Scope:
+
+- Define the canonical setup contract for local and online starts: seed, player slots, active faction count, human/AI slot assignment, and future map size.
+- Move setup validation into shared helpers rather than scattering clamp/default rules through view scripts.
+- Make the start screen display whether the match is Local or Online and whether each active faction is Human, AI, or Open.
+- Document which setup values belong in `RuntimeConfig`, which belong in `RuntimePlayer`, and which are room/lobby metadata only.
+
+Acceptance:
+
+- Local and online starts use the same validated setup values.
+- Host/session setup changes are reflected for clients before match start.
+- A player cannot start in an inactive or already-claimed slot.
+- The code has one obvious place to extend setup for map size, AI, water, and orbit options.
+
+### Sprint R5: AI Opponent Pressure
+
+Status: `[ ]`
+
+Goal: Make non-human factions attack, defend, expand, and try to win inside the deterministic Quantum simulation.
+
+Scope:
+
+- Add deterministic AI goals for gather, build, produce, scout/attack, defend, and target enemy main bases.
+- Scale AI activation from the synchronized active faction count and human/AI slot assignment.
+- Keep AI simple and readable before adding personality.
+- Keep AI decisions in `Assets/QuantumUser/Simulation`, not Unity view scripts or external services.
+
+Acceptance:
+
+- AI factions do not idle forever.
+- AI can destroy a player's main base if ignored.
+- AI behaves the same in local and online session modes for the same seed/setup.
+- AI reacts enough that a match has pressure and an end condition.
+
+### Sprint R6: Variable Map Size Setup
+
+Status: `[ ]`
+
+Goal: Make map size selectable from the start menu and synchronized through the match setup contract.
 
 Scope:
 
 - Add map size presets, likely Small, Standard, Large, and Super Large.
 - Scale faction start locations, camera bounds, placement bounds, initial resources, and neutral objectives from the chosen size.
 - Keep deterministic map setup in simulation-owned or setup-owned data.
+- Ensure selected map size behaves identically in local and online sessions.
 
 Acceptance:
 
 - Small maps put players close enough for fast fighting.
 - Super-large maps give 8 factions room without overlap.
 - Camera pan/zoom and build placement bounds match the selected map.
+- Clients joining the same online match see the same map layout for the same setup.
 
-### Sprint R4: Controllable Buildings And Units Baseline
+### Sprint R7: Controllable Buildings And Units Baseline
 
 Status: `[ ]`
 
@@ -104,32 +169,16 @@ Scope:
 - Audit selection, command, production, construction, attack, repair, and gather controls.
 - Add missing command affordances for existing unit/building roles before creating more content.
 - Make owned units and structures readable at a glance in the HUD.
+- Confirm all player commands enter through Quantum input/commands and are valid in local and online modes.
 
 Acceptance:
 
 - Player can select units/buildings, issue expected commands, produce workers, build support, gather resources, repair, and attack.
 - Command failures surface clear HUD feedback.
 - The control loop is playable without reading source notes.
+- The same controls work when connected to an online session.
 
-### Sprint R5: AI Opponent Pressure
-
-Status: `[ ]`
-
-Goal: Make non-player factions attack, defend, expand, and try to win.
-
-Scope:
-
-- Add deterministic AI goals for gather, build, produce, scout/attack, defend, and target enemy main bases.
-- Scale AI activation from the selected active faction count.
-- Keep AI simple and readable before adding personality.
-
-Acceptance:
-
-- AI factions do not idle forever.
-- AI can destroy a player's main base if ignored.
-- AI reacts enough that a match has pressure and an end condition.
-
-### Sprint R6: Water Layer Prototype
+### Sprint R8: Water Layer Prototype
 
 Status: `[ ]`
 
@@ -140,14 +189,16 @@ Scope:
 - Implement first underwater layer navigation/view transition.
 - Add at least one underwater objective or unit interaction tied to the Mere/root layer.
 - Keep land simulation active while viewing or commanding underwater play.
+- Keep underwater state deterministic and synchronized for online matches.
 
 Acceptance:
 
 - Player can move between land view and underwater view.
 - Underwater state continues while land units/buildings continue operating.
 - Underwater layer has a real gameplay reason to exist, even if minimal.
+- Online clients agree on underwater state for the same match.
 
-### Sprint R7: Space Layer Prototype
+### Sprint R9: Space Layer Prototype
 
 Status: `[ ]`
 
@@ -158,28 +209,31 @@ Scope:
 - Implement first orbit view transition from zoom/scroll or explicit layer control.
 - Add at least one orbital objective, support action, or command-disruption interaction.
 - Keep ground and underwater simulation active while viewing orbit.
+- Keep orbit state deterministic and synchronized for online matches.
 
 Acceptance:
 
 - Player can reach orbit from normal play.
 - Orbit contains live gameplay state instead of a static backdrop.
 - Land, water, and orbit continue updating together.
+- Online clients agree on orbit state for the same match.
 
-### Sprint R8: Eight-Faction Performance Pass
+### Sprint R10: Eight-Faction Online Performance Pass
 
 Status: `[ ]`
 
-Goal: Keep the game smooth when playing with 8 players and active AI units.
+Goal: Keep the game smooth when playing with 8 players, active AI units, and multi-layer simulation through the online session path.
 
 Scope:
 
-- Establish a repeatable 8-faction stress scene or setup preset.
-- Profile simulation tick cost, Unity view object count, HUD refreshes, selection scans, pathing requests, and AI loops.
-- Add throttling, pooling, caching, bounded searches, or lower-frequency updates where needed.
+- Establish repeatable local and online 8-faction stress presets.
+- Profile simulation tick cost, network/session overhead, Unity view object count, HUD refreshes, selection scans, pathing requests, and AI loops.
+- Add throttling, pooling, caching, bounded searches, lower-frequency updates, or deterministic AI budgets where needed.
 
 Acceptance:
 
 - 8 active factions with AI remain responsive on the target development machine.
+- Online session play remains responsive enough to validate the architecture.
 - HUD and view scripts do not allocate or rebuild expensive state every frame without need.
 - Any remaining bottlenecks are documented with next actions.
 
