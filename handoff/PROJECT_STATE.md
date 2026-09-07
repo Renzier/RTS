@@ -41,6 +41,12 @@
   - Camera zoom-out was extended, and view-only ground contrast plates, lanes, start pads, and landmarks were added for navigation readability.
   - `AnachronPrototypeHud` and `AnachronQuantumInput` now stay quiet while setup is open, preventing setup clicks from issuing gameplay commands.
   - Opponent count and map-size controls are still deferred to Sprint R2 and Sprint R3.
+- Sprint R2 completed on 2026-09-06:
+  - Added a 2-8 Active Factions selector to the setup screen.
+  - Start slots outside the selected active faction count are disabled, and the selected slot is clamped back into range when needed.
+  - Runtime config now carries `Phase0ActiveFactionCount`.
+  - Deterministic bootstrap now spawns only active player states, workers, heroes, air scouts, main bases, and each active start's local Salvage/Plate resource pair.
+  - Neutral Quill and Root objectives still spawn for every match.
 - Sprint-plan reset completed on 2026-09-06:
   - The previous Kilnfall sprint plan is now considered complete for planning purposes.
   - `handoff/KILNFALL_SPRINT_PLAN.md` now contains a revised active plan focused on making the game playable.

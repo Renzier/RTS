@@ -57,7 +57,9 @@ Acceptance:
 
 ### Sprint R2: Start Screen Match Setup
 
-Status: `[ ]`
+Status: `[x]`
+
+Implementation note, 2026-09-06: added a 2-8 Active Factions selector to the setup screen. Start slots above the selected active count are disabled, and the selected player slot is clamped back into range if the faction count is reduced. The selected active count is stored in runtime config and used by deterministic bootstrap to spawn only active player states, workers, heroes, air scouts, main bases, and each active start's local Salvage/Plate resource pair. Neutral Quill and Root objectives remain active in every match size.
 
 Goal: Add a start screen that chooses how many factions are active on the board at once, from 2 to 8.
 

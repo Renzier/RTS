@@ -17,16 +17,22 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
 
   [SerializeField] private int seed = 1;
   [SerializeField] private StartPlayerSlot startAs = StartPlayerSlot.P0ArdentConcord;
+  [SerializeField] private int activeFactionCount = 8;
   private const string StartPlayerSlotPreferenceKey = "Anachron.StartPlayerSlot";
+  private const string ActiveFactionCountPreferenceKey = "Anachron.ActiveFactionCount";
   private const string MatchStartedPreferenceKey = "Anachron.MatchStarted";
+  private const int MinActiveFactionCount = 2;
   private const int MaxStartPlayerSlot = 7;
+  private const int MaxActiveFactionCount = MaxStartPlayerSlot + 1;
 
   private QuantumRunnerLocalDebug _localDebugRunner;
   public static int ActivePlayerSlot { get; private set; }
   public static bool IsSetupOpen { get; private set; }
 
   private void Awake() {
+    activeFactionCount = Mathf.Clamp(PlayerPrefs.GetInt(ActiveFactionCountPreferenceKey, activeFactionCount), MinActiveFactionCount, MaxActiveFactionCount);
     startAs = (StartPlayerSlot)Mathf.Clamp(PlayerPrefs.GetInt(StartPlayerSlotPreferenceKey, (int)startAs), 0, MaxStartPlayerSlot);
+    ClampStartPlayerToActiveFactions();
     ActivePlayerSlot = (int)startAs;
     IsSetupOpen = PlayerPrefs.GetInt(MatchStartedPreferenceKey, 0) == 0;
 
@@ -45,6 +51,7 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
     runtimeConfig.Seed = seed;
     runtimeConfig.Phase0Seed = seed;
     runtimeConfig.Phase0PlayerSlot = (int)startAs;
+    runtimeConfig.Phase0ActiveFactionCount = activeFactionCount;
     return runtimeConfig;
   }
 
@@ -75,7 +82,7 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
     DrawPanel(new Rect(0, 0, Screen.width, Screen.height), new Color(0.01f, 0.012f, 0.016f, 0.94f));
 
     float width = Mathf.Min(520.0f, Screen.width - 48.0f);
-    float height = 418.0f;
+    float height = 470.0f;
     Rect panelRect = new Rect((Screen.width - width) * 0.5f, Mathf.Max(32.0f, (Screen.height - height) * 0.5f), width, height);
     DrawPanel(panelRect, new Color(0.05f, 0.058f, 0.07f, 0.96f));
 
@@ -92,40 +99,72 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
     };
 
     GUI.Label(new Rect(panelRect.x + 24, panelRect.y + 18, width - 48, 34), "Ashenspar Quill-Waist", titleStyle);
-    GUI.Label(new Rect(panelRect.x + 28, panelRect.y + 62, width - 56, 42), "Choose your starting faction, then enter the live RTS prototype. Opponent count and map size arrive in the next setup sprints.", labelStyle);
-    GUI.Label(new Rect(panelRect.x + 28, panelRect.y + 112, width - 56, 20), "Start As");
+    GUI.Label(new Rect(panelRect.x + 28, panelRect.y + 62, width - 56, 42), "Set the match roster before deployment.", labelStyle);
+    GUI.Label(new Rect(panelRect.x + 28, panelRect.y + 112, width - 56, 20), "Active Factions");
+
+    float factionButtonGap = 6.0f;
+    float factionButtonWidth = (width - 56.0f - factionButtonGap * 6.0f) / 7.0f;
+    for (int count = MinActiveFactionCount; count <= MaxActiveFactionCount; count++) {
+      Rect countRect = new Rect(
+        panelRect.x + 28.0f + (count - MinActiveFactionCount) * (factionButtonWidth + factionButtonGap),
+        panelRect.y + 140.0f,
+        factionButtonWidth,
+        24.0f);
+      DrawFactionCountChoice(countRect, count);
+    }
+
+    GUI.Label(new Rect(panelRect.x + 28, panelRect.y + 174, width - 56, 20), "Start As");
 
     float columnGap = 16.0f;
     float choiceWidth = (width - 72.0f) * 0.5f;
     float leftX = panelRect.x + 28.0f;
     float rightX = leftX + choiceWidth + columnGap;
 
-    DrawStartChoice(new Rect(leftX, panelRect.y + 140, choiceWidth, 24), StartPlayerSlot.P0ArdentConcord, "P0 Ardent Concord");
-    DrawStartChoice(new Rect(rightX, panelRect.y + 140, choiceWidth, 24), StartPlayerSlot.P1Wrought, "P1 Wrought");
-    DrawStartChoice(new Rect(leftX, panelRect.y + 170, choiceWidth, 24), StartPlayerSlot.P2Gharn, "P2 Gharn");
-    DrawStartChoice(new Rect(rightX, panelRect.y + 170, choiceWidth, 24), StartPlayerSlot.P3Seethe, "P3 Seethe");
-    DrawStartChoice(new Rect(leftX, panelRect.y + 200, choiceWidth, 24), StartPlayerSlot.P4Veirn, "P4 Veirn");
-    DrawStartChoice(new Rect(rightX, panelRect.y + 200, choiceWidth, 24), StartPlayerSlot.P5Vaelun, "P5 Vaelun");
-    DrawStartChoice(new Rect(leftX, panelRect.y + 230, choiceWidth, 24), StartPlayerSlot.P6Nimhara, "P6 Nimhara");
-    DrawStartChoice(new Rect(rightX, panelRect.y + 230, choiceWidth, 24), StartPlayerSlot.P7Virii, "P7 Virii");
+    DrawStartChoice(new Rect(leftX, panelRect.y + 202, choiceWidth, 24), StartPlayerSlot.P0ArdentConcord, "P0 Ardent Concord");
+    DrawStartChoice(new Rect(rightX, panelRect.y + 202, choiceWidth, 24), StartPlayerSlot.P1Wrought, "P1 Wrought");
+    DrawStartChoice(new Rect(leftX, panelRect.y + 232, choiceWidth, 24), StartPlayerSlot.P2Gharn, "P2 Gharn");
+    DrawStartChoice(new Rect(rightX, panelRect.y + 232, choiceWidth, 24), StartPlayerSlot.P3Seethe, "P3 Seethe");
+    DrawStartChoice(new Rect(leftX, panelRect.y + 262, choiceWidth, 24), StartPlayerSlot.P4Veirn, "P4 Veirn");
+    DrawStartChoice(new Rect(rightX, panelRect.y + 262, choiceWidth, 24), StartPlayerSlot.P5Vaelun, "P5 Vaelun");
+    DrawStartChoice(new Rect(leftX, panelRect.y + 292, choiceWidth, 24), StartPlayerSlot.P6Nimhara, "P6 Nimhara");
+    DrawStartChoice(new Rect(rightX, panelRect.y + 292, choiceWidth, 24), StartPlayerSlot.P7Virii, "P7 Virii");
 
-    GUI.Label(new Rect(panelRect.x + 28, panelRect.y + 270, width - 56, 42), $"Selected: {GetStartPlayerLabel(startAs)}", labelStyle);
+    GUI.Label(new Rect(panelRect.x + 28, panelRect.y + 332, width - 56, 42), $"Selected: {GetStartPlayerLabel(startAs)} in a {activeFactionCount}-faction match", labelStyle);
 
-    if (GUI.Button(new Rect(panelRect.x + 28, panelRect.y + 324, width - 56, 34), "Start Match")) {
+    if (GUI.Button(new Rect(panelRect.x + 28, panelRect.y + 384, width - 56, 34), "Start Match")) {
       PlayerPrefs.SetInt(StartPlayerSlotPreferenceKey, (int)startAs);
+      PlayerPrefs.SetInt(ActiveFactionCountPreferenceKey, activeFactionCount);
       PlayerPrefs.SetInt(MatchStartedPreferenceKey, 1);
       PlayerPrefs.Save();
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    if (GUI.Button(new Rect(panelRect.x + 28, panelRect.y + 366, width - 56, 24), "Reset To Ardent Concord")) {
+    if (GUI.Button(new Rect(panelRect.x + 28, panelRect.y + 426, width - 56, 24), "Reset To Ardent Concord")) {
       SetStartPlayer(StartPlayerSlot.P0ArdentConcord);
     }
   }
 
-  private void DrawStartChoice(Rect rect, StartPlayerSlot slot, string label) {
-    string buttonLabel = startAs == slot ? $"{label} - selected" : label;
+  private void DrawFactionCountChoice(Rect rect, int count) {
+    string buttonLabel = activeFactionCount == count ? $"{count}*" : count.ToString();
     if (GUI.Button(rect, buttonLabel) == false) {
+      return;
+    }
+
+    activeFactionCount = Mathf.Clamp(count, MinActiveFactionCount, MaxActiveFactionCount);
+    ClampStartPlayerToActiveFactions();
+    ActivePlayerSlot = (int)startAs;
+    PlayerPrefs.SetInt(ActiveFactionCountPreferenceKey, activeFactionCount);
+    PlayerPrefs.SetInt(StartPlayerSlotPreferenceKey, (int)startAs);
+    PlayerPrefs.Save();
+  }
+
+  private void DrawStartChoice(Rect rect, StartPlayerSlot slot, string label) {
+    bool wasEnabled = GUI.enabled;
+    GUI.enabled = wasEnabled && (int)slot < activeFactionCount;
+    string buttonLabel = startAs == slot ? $"{label} - selected" : label;
+    bool wasClicked = GUI.Button(rect, buttonLabel);
+    GUI.enabled = wasEnabled;
+    if (wasClicked == false) {
       return;
     }
 
@@ -134,9 +173,17 @@ public sealed class QuantumPhase0LocalSessionController : MonoBehaviour {
 
   private void SetStartPlayer(StartPlayerSlot slot) {
     startAs = slot;
+    ClampStartPlayerToActiveFactions();
     ActivePlayerSlot = (int)startAs;
-    PlayerPrefs.SetInt(StartPlayerSlotPreferenceKey, (int)slot);
+    PlayerPrefs.SetInt(StartPlayerSlotPreferenceKey, (int)startAs);
     PlayerPrefs.Save();
+  }
+
+  private void ClampStartPlayerToActiveFactions() {
+    int maxAllowedSlot = Mathf.Clamp(activeFactionCount - 1, 0, MaxStartPlayerSlot);
+    if ((int)startAs > maxAllowedSlot) {
+      startAs = (StartPlayerSlot)maxAllowedSlot;
+    }
   }
 
   private static string GetStartPlayerLabel(StartPlayerSlot slot) {

@@ -6,39 +6,97 @@ namespace Quantum
     {
         public override void OnInit(Frame f)
         {
+            int activeFactionCount = GetActiveFactionCount(f);
+
             foreach (AnachronPrototypeScenario.PlayerSpawn player in AnachronPrototypeScenario.Players)
             {
+                if (IsActivePlayer(player.PlayerIndex, activeFactionCount) == false)
+                {
+                    continue;
+                }
+
                 CreatePlayerState(f, player);
             }
 
             foreach (AnachronPrototypeScenario.WorkerSpawn worker in AnachronPrototypeScenario.Workers)
             {
+                if (IsActivePlayer(worker.OwnerPlayer, activeFactionCount) == false)
+                {
+                    continue;
+                }
+
                 CreateTestUnit(f, worker);
             }
 
             foreach (AnachronPrototypeScenario.HeroSpawn hero in AnachronPrototypeScenario.Heroes)
             {
+                if (IsActivePlayer(hero.OwnerPlayer, activeFactionCount) == false)
+                {
+                    continue;
+                }
+
                 EntityRef heroEntity = CreateHero(f, hero);
                 LinkHeroState(f, hero.OwnerPlayer, heroEntity);
             }
 
             foreach (AnachronPrototypeScenario.AirScoutSpawn airScout in AnachronPrototypeScenario.AirScouts)
             {
+                if (IsActivePlayer(airScout.OwnerPlayer, activeFactionCount) == false)
+                {
+                    continue;
+                }
+
                 CreateAirScout(f, airScout);
             }
 
             foreach (AnachronPrototypeScenario.MainBaseSpawn mainBase in AnachronPrototypeScenario.MainBases)
             {
+                if (IsActivePlayer(mainBase.OwnerPlayer, activeFactionCount) == false)
+                {
+                    continue;
+                }
+
                 CreateMainBuilding(f, mainBase);
             }
 
-            foreach (AnachronPrototypeScenario.ResourceNodeSpawn resourceNode in AnachronPrototypeScenario.ResourceNodes)
+            for (int i = 0; i < AnachronPrototypeScenario.ResourceNodes.Length; i++)
             {
-                CreateResourceNode(f, resourceNode);
+                if (IsActivePlayer(i / 2, activeFactionCount) == false)
+                {
+                    continue;
+                }
+
+                CreateResourceNode(f, AnachronPrototypeScenario.ResourceNodes[i]);
             }
 
             CreateQuillObjective(f);
             CreateRootObjective(f);
+        }
+
+        private static int GetActiveFactionCount(Frame f)
+        {
+            int configuredCount = f.RuntimeConfig.Phase0ActiveFactionCount;
+            if (configuredCount == 0)
+            {
+                return AnachronPrototypeScenario.Players.Length;
+            }
+
+            if (configuredCount < 2)
+            {
+                return 2;
+            }
+
+            if (configuredCount > AnachronPrototypeScenario.Players.Length)
+            {
+                return AnachronPrototypeScenario.Players.Length;
+            }
+
+            return configuredCount;
+        }
+
+        private static bool IsActivePlayer(int playerIndex, int activeFactionCount)
+        {
+            return playerIndex >= 0 && playerIndex < activeFactionCount;
         }
 
         private static void CreatePlayerState(Frame f, AnachronPrototypeScenario.PlayerSpawn player)

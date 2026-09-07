@@ -168,6 +168,7 @@ MonoBehaviour:
         Value: 246634129878635950
     Phase0Seed: 0
     Phase0PlayerSlot: 0
+    Phase0ActiveFactionCount: 0
   UseRandomSeed: 0
   SessionConfig: {fileID: 0}
   LocalPlayers: []
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 1
   startAs: 0
+  activeFactionCount: 8
 --- !u!1 &90597650
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc6311d43784f4abb9c06c979e1ad20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showDebugOverlay: 0
 --- !u!114 &356352199
 MonoBehaviour:
   m_ObjectHideFlags: 0
